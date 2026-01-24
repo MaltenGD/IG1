@@ -1,4 +1,5 @@
 #include "Entity.h"
+using color = glm::vec4;
 class SingleColorEntity :
     public Abs_Entity
 {
@@ -7,7 +8,7 @@ private:
 
 
 public:
-    SingleColorEntity(glm::vec4 = {1,1,1,1});
+    SingleColorEntity(glm::vec4 color = {1,1,1,1});
     glm::vec4 getColor() const
     {
         return mColor;

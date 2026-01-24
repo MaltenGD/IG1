@@ -5,6 +5,6 @@ class RegularPolygon :
 {
 
     public: 
-        RegularPolygon(GLuint numVertex, GLdouble radius);
+        RegularPolygon(GLuint numVertex, GLdouble radius, glm::vec4 color = {1,1,1,1});
 };
 

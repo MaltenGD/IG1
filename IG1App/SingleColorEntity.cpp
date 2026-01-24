@@ -7,8 +7,8 @@ using namespace glm;
 
 SingleColorEntity::SingleColorEntity(glm::vec4 newColor) {
 
-	setColor(newColor);
 	mShader = Shader::get("simple");
+	setColor(newColor);
 }
 
 void SingleColorEntity::render(const glm::mat4& modelViewMat) const
