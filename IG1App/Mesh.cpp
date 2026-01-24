@@ -1,4 +1,5 @@
 #include "Mesh.h"
+#include <glm/gtc/constants.hpp>
 
 using namespace std;
 using namespace glm;
@@ -116,13 +117,15 @@ Mesh* Mesh::generateRegularPolygon(GLuint numVertex, GLdouble radius)
 {
 	Mesh* ret = new Mesh();
 
+	ret->mPrimitive = GL_LINE_LOOP;
+
 	ret->mNumVertices = numVertex;
 
 	ret->vVertices.reserve(numVertex);
 
-	const GLdouble PI = 3.14159;
+	constexpr GLdouble PI = glm::pi<GLdouble>();
 
-	GLdouble rotationFactor = PI / numVertex;
+	GLdouble rotationFactor = 2*PI / numVertex;
 
 	GLdouble actualRotation = PI * 0.5;
 
@@ -136,7 +139,7 @@ Mesh* Mesh::generateRegularPolygon(GLuint numVertex, GLdouble radius)
 		//actualVertex.x = X;
 		//actualVertex.y = Y;
 		//actualVertex.z = 0;
-		//TODO: quitar esto si funciona as .
+		//TODO: quitar esto si funciona así .
 
 		ret->vVertices.emplace_back(X, Y, 0);
 
