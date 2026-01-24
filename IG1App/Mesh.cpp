@@ -7,9 +7,9 @@ using namespace glm;
 constexpr GLuint NONE = numeric_limits<GLuint>::max();
 
 Mesh::Mesh()
- : mVAO(NONE)
- , mVBO(NONE)
- , mCBO(NONE)
+	: mVAO(NONE)
+	, mVBO(NONE)
+	, mCBO(NONE)
 {
 }
 
@@ -22,9 +22,9 @@ void
 Mesh::draw() const
 {
 	glDrawArrays(
-	  mPrimitive,
-	  0,
-	  size()); // primitive graphic, first index and number of elements to be rendered
+		mPrimitive,
+		0,
+		size()); // primitive graphic, first index and number of elements to be rendered
 }
 
 void
@@ -110,4 +110,43 @@ Mesh::createRGBAxes(GLdouble l)
 	mesh->vColors.emplace_back(0.0, 0.0, 1.0, 1.0);
 
 	return mesh;
+}
+
+Mesh* Mesh::generateRegularPolygon(GLuint numVertex, GLdouble radius)
+{
+	Mesh* ret = new Mesh();
+
+	ret->mNumVertices = numVertex;
+
+	ret->vVertices.reserve(numVertex);
+
+	const GLdouble PI = 3.14159;
+
+	GLdouble rotationFactor = PI / numVertex;
+
+	GLdouble actualRotation = PI * 0.5;
+
+	//glm::vec3 actualVertex;
+
+	for (size_t i = 0; i < numVertex; ++i)
+	{
+		GLdouble X = radius * glm::cos(actualRotation);
+		GLdouble Y = radius * glm::sin(actualRotation);
+		//
+		//actualVertex.x = X;
+		//actualVertex.y = Y;
+		//actualVertex.z = 0;
+		//TODO: quitar esto si funciona as .
+
+		ret->vVertices.emplace_back(X, Y, 0);
+
+		actualRotation += rotationFactor;
+
+
+
+	}
+
+	return ret;
+
+
 }
