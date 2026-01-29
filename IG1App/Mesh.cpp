@@ -226,7 +226,7 @@ Mesh* Mesh::generateCube(GLdouble length)
 {
 	Mesh* ret = new Mesh();
 
-	ret->mPrimitive = GL_LINE_STRIP;
+	ret->mPrimitive = GL_TRIANGLE_STRIP;
 
 	//TODO: preguntar si podemos crear metodos en mesh que modifiquen una mesh y le agreguen vertices, ejemplo: ret->addFace(lenght, angle, origin)
 	ret->mNumVertices = 4;
