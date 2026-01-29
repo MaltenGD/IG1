@@ -28,6 +28,11 @@ Mesh::draw() const
 		size()); // primitive graphic, first index and number of elements to be rendered
 }
 
+void Mesh::rotateDeg(GLdouble radius,GLint degrees)
+{
+	// rotation
+}
+
 void
 Mesh::load()
 {
@@ -113,12 +118,12 @@ Mesh::createRGBAxes(GLdouble l)
 	return mesh;
 }
 
-Mesh* Mesh::generateRegularPolygon(GLuint numVertex, GLdouble radius)
+Mesh* Mesh::generateRegularPolygon(GLuint numVertex, GLdouble radius, GLint Xpos, GLint Ypos)
 {
 	Mesh* ret = new Mesh();
 
 	ret->mPrimitive = GL_LINE_LOOP;
-
+	
 	ret->mNumVertices = numVertex;
 
 	ret->vVertices.reserve(numVertex);
@@ -141,7 +146,7 @@ Mesh* Mesh::generateRegularPolygon(GLuint numVertex, GLdouble radius)
 		//actualVertex.z = 0;
 		//TODO: quitar esto si funciona así .
 
-		ret->vVertices.emplace_back(X, Y, 0);
+		ret->vVertices.emplace_back(X + Xpos, Y + Ypos, 0.0);
 
 		actualRotation += rotationFactor;
 
@@ -153,3 +158,93 @@ Mesh* Mesh::generateRegularPolygon(GLuint numVertex, GLdouble radius)
 
 
 }
+
+//Apartado 7
+Mesh* Mesh::createRGBTriangle(GLdouble radius, GLint Xpos, GLint Ypos)
+{
+	Mesh* ret = Mesh::generateRegularPolygon(3, radius, Xpos, Ypos);
+	//TODO: preguntar si es buena idea y/o necesario establecer un radio en el constructor.
+
+	ret->mPrimitive = GL_TRIANGLES;
+
+	ret->vColors.reserve(3);
+	//Todo: Preguntar si más es eficiente guardar variables como ret->vColors en referencias "auto&" ejemplo: auto& vColors = ret->vColors;
+
+	//ROJO
+	ret->vColors.emplace_back(1, 0, 0, 1);
+
+	//VERDE
+	ret->vColors.emplace_back(0, 1, 0, 1);
+
+	//AZUL
+	ret->vColors.emplace_back(0, 0, 1, 1);
+
+	return ret;
+}
+//Apartado 8
+Mesh* Mesh::generateRectangle(GLdouble w, GLdouble h)
+{
+	Mesh* ret = new Mesh();
+
+	ret->mPrimitive = GL_TRIANGLE_STRIP;
+
+	ret->mNumVertices = 4;
+
+	ret->vVertices.reserve(ret->mNumVertices);
+
+	ret->vVertices.emplace_back(-w, h, 0);
+	ret->vVertices.emplace_back(w, h, 0);
+	ret->vVertices.emplace_back(-w, -h, 0);
+	ret->vVertices.emplace_back(w, -h, 0);
+
+	return ret;
+}
+
+//Apartado 8
+Mesh* Mesh::createRGBRectangle(GLdouble w, GLdouble h)
+{
+	Mesh* ret = Mesh::generateRectangle(w, h);
+
+	ret->vColors.reserve(4);
+
+	//ROJO (vértice 0: inferior izquierda)
+	ret->vColors.emplace_back(1, 0, 0, 1);
+
+	//VERDE (vértice 1: inferior derecha)
+	ret->vColors.emplace_back(0, 1, 0, 1);
+
+	//VERDE (vértice 2: superior izquierda)
+	ret->vColors.emplace_back(0, 1, 0, 1);
+
+	//AZUL (vértice 3: superior derecha)
+	ret->vColors.emplace_back(0, 0, 1, 1);
+
+	return ret;
+}
+
+Mesh* Mesh::generateCube(GLdouble length)
+{
+	Mesh* ret = new Mesh();
+
+	ret->mPrimitive = GL_LINE_STRIP;
+
+	//TODO: preguntar si podemos crear metodos en mesh que modifiquen una mesh y le agreguen vertices, ejemplo: ret->addFace(lenght, angle, origin)
+	ret->mNumVertices = 4;
+
+	ret->vVertices.reserve(ret->mNumVertices);
+
+
+	//Cara inferior
+	ret->vVertices.emplace_back(0, 0, 0); // Origen del cubo
+	ret->vVertices.emplace_back(length, 0, 0);
+	ret->vVertices.emplace_back(0, 0, length);
+	ret->vVertices.emplace_back(length, 0, length);
+
+
+	return ret;
+
+}
+
+
+
+

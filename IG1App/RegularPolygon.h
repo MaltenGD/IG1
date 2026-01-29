@@ -1,10 +1,9 @@
-#pragma once
 #include "SingleColorEntity.h"
 class RegularPolygon :
     public SingleColorEntity
 {
 
     public: 
-        RegularPolygon(GLuint numVertex, GLdouble radius, glm::vec4 color = {1,1,1,1});
+        RegularPolygon(GLuint numVertex, GLdouble radius, glm::vec4 color);
 };
 

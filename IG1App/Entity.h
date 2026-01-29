@@ -3,6 +3,8 @@
 
 #include <GL/glew.h>
 #include <glm/glm.hpp>
+#include <glm/gtc/matrix_transform.hpp>  // Para metodos como glm::rotate o glm::translate.
+#include <glm/gtc/constants.hpp>
 
 #include "Mesh.h"
 #include "Shader.h"
@@ -19,6 +21,7 @@ public:
 	Abs_Entity& operator=(const Abs_Entity& e) = delete; // no copy assignment
 
 	virtual void render(const glm::mat4& modelViewMat) const = 0; // abstract method
+	virtual void update();
 
 	// modeling matrix
 	glm::mat4 const& modelMat() const { return mModelMat; };

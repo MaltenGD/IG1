@@ -6,12 +6,23 @@
 
 #include <vector>
 
+
+
 class Mesh
 {
 public:
+	static Mesh* generateRegularPolygon(GLuint numVertex, GLdouble radius, GLint Xpos = 0, GLint Ypos = 0);
+
+	static Mesh* generateRectangle(GLdouble w, GLdouble h);
+
 	static Mesh* createRGBAxes(GLdouble l); // creates a new 3D-RGB axes mesh
 
-	static Mesh* generateRegularPolygon(GLuint numVertex, GLdouble radius);
+	static Mesh* createRGBTriangle(GLdouble radius, GLint Xpos, GLint Ypos);
+
+	static Mesh* createRGBRectangle(GLdouble w, GLdouble h);
+
+	static Mesh* generateCube(GLdouble length);
+
 
 	Mesh();
 	virtual ~Mesh();
@@ -24,6 +35,8 @@ public:
 	GLuint size() const { return mNumVertices; }; // number of elements
 	std::vector<glm::vec3> const& vertices() const { return vVertices; };
 	std::vector<glm::vec4> const& colors() const { return vColors; };
+
+	void rotateDeg(GLdouble radius,GLint degrees);
 
 	void load();
 	void unload();

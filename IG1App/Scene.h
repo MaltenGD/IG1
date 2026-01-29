@@ -20,6 +20,7 @@ public:
 
 	virtual void init() = 0; 
 
+	virtual void update();
 	void render(Camera const& cam) const;
 
 	// load or unload scene data into the GPU

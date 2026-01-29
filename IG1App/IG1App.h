@@ -62,6 +62,10 @@ protected:
 	GLFWwindow* mWindow = nullptr; // window's handle
 	int mWinW = 800;               // window's width
 	int mWinH = 600;               // window's height
+
+	const GLfloat FRAME_DURATION = 1;
+	bool mUpdateEnabled = false;
+	GLdouble mNextUpdate; // No necesita inicializarse ya que su valor varía cada frame
 };
 
 inline Viewport const&

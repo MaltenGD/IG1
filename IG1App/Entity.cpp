@@ -17,6 +17,8 @@ Abs_Entity::~Abs_Entity()
 	mMesh = nullptr;
 }
 
+void Abs_Entity::update() {}
+
 void
 Abs_Entity::load()
 {

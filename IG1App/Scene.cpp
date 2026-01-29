@@ -48,6 +48,9 @@ Scene::resetGL()
 	glDisable(GL_DEPTH_TEST);     // disable Depth test
 }
 
+void Scene::update() {}
+
+
 void
 Scene::render(Camera const& cam) const
 {

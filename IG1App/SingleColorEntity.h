@@ -1,5 +1,4 @@
 #include "Entity.h"
-using color = glm::vec4;
 class SingleColorEntity :
     public Abs_Entity
 {

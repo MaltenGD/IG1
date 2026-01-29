@@ -1,5 +1,12 @@
 #include "IG1App.h"
+
+#include "Scene0.h"
+
 #include "Scene1.h"
+
+#include "Scene2.h"
+
+#include "Scene3.h"
 
 #include <iostream>
 
@@ -31,17 +38,52 @@ IG1App::run() // enters the main event processing loop
 	if (mWindow == 0) // if not intilialized
 		init();
 
-	// IG1App main loop
+
+	// IG1App main loop (NO auto update)
 	while (!glfwWindowShouldClose(mWindow)) {
 		// Redisplay the window if needed
-		if (mNeedsRedisplay) {
+
+		if (mUpdateEnabled) {
+			GLdouble preUpdateTime = glfwGetTime(); // glfwGetTimes devuelve los segundos en formato Segs.decimales (Ej : 12.230)
+
+			// Se actualizan las entidades
+			mScenes[mCurrentScene]->update();
+
+			// Se renderiza/actualiza la pantalla
 			display();
-			mNeedsRedisplay = false;
+
+			//Se calcula el nuevo tiempo tras el computo anterior
+			GLdouble postUpdateTime = glfwGetTime();
+
+			//Si la variación de tiempo es menor que FrameDuration se hace un delay del resto, en caso contrario se continua con el bucle
+			mNextUpdate = postUpdateTime - preUpdateTime;
+
+
+
+			if (mNextUpdate < FRAME_DURATION) glfwWaitEventsTimeout(mNextUpdate);
+
+			
+
+		}
+		else {
+
+			if (mNeedsRedisplay) {
+				display();
+				mNeedsRedisplay = false;
+			}
+
+			// Stop and wait for new events
+			glfwWaitEvents();
+
 		}
 
-		// Stop and wait for new events
-		glfwWaitEvents();
+		
+
+
+
 	}
+
+	
 
 	destroy();
 }
@@ -56,10 +98,19 @@ IG1App::init()
 	// allocate memory and resources
 	mViewPort = new Viewport(mWinW, mWinH);
 	mCamera = new Camera(mViewPort);
+	mScenes.push_back(new Scene0); // Escena vacía (solo tiene RGBAXES) que sirve para tener las escenas X en el indice X de mScenes
 	mScenes.push_back(new Scene1);
+	mScenes.push_back(new Scene2);
+	mScenes.push_back(new Scene3);
+
+
+
 
 	mCamera->set2D();
-	mScenes[0]->init();
+	for (Scene* escena : mScenes)
+	{
+		escena->init();
+	}
 	mScenes[mCurrentScene]->load();
 }
 
@@ -164,6 +215,9 @@ IG1App::key(unsigned int key)
 		case 'o':
 			mCamera->set2D();
 			break;
+		case 'u':
+			mUpdateEnabled = !mUpdateEnabled;
+			break;
 		default:
 			if (key >= '0' && key <= '9') {
 				if (changeScene(key - '0')) break;
@@ -194,21 +248,21 @@ IG1App::specialkey(int key, int scancode, int action, int mods)
 			break;
 		case GLFW_KEY_RIGHT:
 			if (mods == GLFW_MOD_CONTROL)
-				mCamera->pitch(-1); // rotates -1 on the X axis
+				mCamera->pitch(-5); // rotates -1 on the X axis
 			else
-				mCamera->pitch(1); // rotates 1 on the X axis
+				mCamera->pitch(5); // rotates 1 on the X axis
 			break;
 		case GLFW_KEY_LEFT:
 			if (mods == GLFW_MOD_CONTROL)
-				mCamera->yaw(1); // rotates 1 on the Y axis
+				mCamera->yaw(5); // rotates 1 on the Y axis
 			else
-				mCamera->yaw(-1); // rotate -1 on the Y axis
+				mCamera->yaw(-5); // rotate -1 on the Y axis
 			break;
 		case GLFW_KEY_UP:
-			mCamera->roll(1); // rotates 1 on the Z axis
+			mCamera->roll(5); // rotates 1 on the Z axis
 			break;
 		case GLFW_KEY_DOWN:
-			mCamera->roll(-1); // rotates -1 on the Z axis
+			mCamera->roll(-5); // rotates -1 on the Z axis
 			break;
 		default:
 			need_redisplay = false;
@@ -220,8 +274,9 @@ IG1App::specialkey(int key, int scancode, int action, int mods)
 }
 
 bool
-IG1App::changeScene(size_t sceneNr)
+IG1App::changeScene(size_t sceneNr) // sceneNr es el numero del teclado que se pulsa
 {
+
 	// Check whether the scene exists
 	if (sceneNr >= mScenes.size())
 		return false;
