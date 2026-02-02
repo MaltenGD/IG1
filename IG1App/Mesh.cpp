@@ -226,20 +226,63 @@ Mesh* Mesh::generateCube(GLdouble length)
 {
 	Mesh* ret = new Mesh();
 
-	ret->mPrimitive = GL_TRIANGLE_STRIP;
+	ret->mPrimitive = GL_TRIANGLES;
 
 	//TODO: preguntar si podemos crear metodos en mesh que modifiquen una mesh y le agreguen vertices, ejemplo: ret->addFace(lenght, angle, origin)
-	ret->mNumVertices = 4;
+	ret->mNumVertices = 36;
 
 	ret->vVertices.reserve(ret->mNumVertices);
 
 
 	//Cara inferior
-	ret->vVertices.emplace_back(0, 0, 0); // Origen del cubo
-	ret->vVertices.emplace_back(length, 0, 0);
-	ret->vVertices.emplace_back(0, 0, length);
-	ret->vVertices.emplace_back(length, 0, length);
+	ret->vVertices.emplace_back(0, 0, 0); // 1
+	ret->vVertices.emplace_back(length, 0, 0); // 2
+	ret->vVertices.emplace_back(0, 0, length); // 3
 
+	ret->vVertices.emplace_back(length, 0, 0); // 2
+	ret->vVertices.emplace_back(0, 0, length); // 3
+	ret->vVertices.emplace_back(length, 0, length); // 4
+
+	ret->vVertices.emplace_back(0, 0, length); // 3
+	ret->vVertices.emplace_back(length, 0, length); // 4
+	ret->vVertices.emplace_back(length, length, length); // 5
+
+	ret->vVertices.emplace_back(0, 0, length); // 3
+	ret->vVertices.emplace_back(length, length, length); // 5
+	ret->vVertices.emplace_back(0, length, length); // 8
+
+	ret->vVertices.emplace_back(0, length, length); // 8
+	ret->vVertices.emplace_back(length, length, length); // 5
+	ret->vVertices.emplace_back(0, length, 0); // 7
+
+	ret->vVertices.emplace_back(length, length, length); // 5
+	ret->vVertices.emplace_back(0, length, 0); // 7
+	ret->vVertices.emplace_back(length, length, 0); // 6
+
+
+	ret->vVertices.emplace_back(0, 0, 0); // 1
+	ret->vVertices.emplace_back(0, 0, length); // 3
+	ret->vVertices.emplace_back(0, length, 0); // 7
+
+	ret->vVertices.emplace_back(0, 0, length); // 3
+	ret->vVertices.emplace_back(0, length, 0); // 7
+	ret->vVertices.emplace_back(0, length, length); // 8
+
+	ret->vVertices.emplace_back(length, 0, 0); // 2
+	ret->vVertices.emplace_back(length, 0, length); // 4
+	ret->vVertices.emplace_back(length, length, 0); // 6
+
+	ret->vVertices.emplace_back(length, 0, length); // 4
+	ret->vVertices.emplace_back(length, length, 0); // 6
+	ret->vVertices.emplace_back(length, length, length); // 5
+
+	ret->vVertices.emplace_back(0, 0, 0); // 1
+	ret->vVertices.emplace_back(length, 0, 0); // 2
+	ret->vVertices.emplace_back(length, length, 0); // 6
+
+	ret->vVertices.emplace_back(0, 0, 0); // 1
+	ret->vVertices.emplace_back(length, length, 0); // 6
+	ret->vVertices.emplace_back(0, length, 0); // 7
 
 	return ret;
 
