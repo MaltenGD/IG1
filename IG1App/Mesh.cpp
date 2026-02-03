@@ -234,55 +234,79 @@ Mesh* Mesh::generateCube(GLdouble length)
 	ret->vVertices.reserve(ret->mNumVertices);
 
 
-	//Cara inferior
+	/// 1 . {0,0,0}
+	/// 2 . {length,0,0}
+	/// 3 . {length, 0 , length}
+	/// 4 . {0,0, length}
+	/// 5 . {length, length, length}
+	/// 6 . {0, length, length}
+	/// 7 . {0,length,0}
+	/// 8 . {length, length, 0}
+
+	
+
+
+	// Triángulos de Cara proyectada en Y y X . Estos triangulos deben ser visibles
+
+	ret->vVertices.emplace_back(0, 0, length); // 4
+	ret->vVertices.emplace_back(length, length, length); // 5
+	ret->vVertices.emplace_back(0, length, length); // 6
+	
+	ret->vVertices.emplace_back(0, 0, length); // 4
+	ret->vVertices.emplace_back(length, 0, length); // 3
+	ret->vVertices.emplace_back(length, length, length); // 5
+
+	// Triángulos de Cara proyectada en Z y Y. Estos triangulos deben ser visibles
+
+
+	ret->vVertices.emplace_back(length, 0, length); // 3
+	ret->vVertices.emplace_back(length, 0, 0); // 2
+	ret->vVertices.emplace_back(length, length, length); // 5
+
+	ret->vVertices.emplace_back(length, length, length); // 5
+	ret->vVertices.emplace_back(length, 0, 0); // 2
+	ret->vVertices.emplace_back(length, length, 0); // 8
+
+
+	// Triángulo de Cara proyectada en Z y X . Estos triangulos deben ser visibles
+
+	ret->vVertices.emplace_back(length, length, length); // 5
+	ret->vVertices.emplace_back(0, length, 0); // 7
+	ret->vVertices.emplace_back(0, length, length); // 6
+
+	ret->vVertices.emplace_back(length, length, length); // 5
+	ret->vVertices.emplace_back(length, length, 0); // 8
+	ret->vVertices.emplace_back(0, length, 0); // 7
+
+	//Triangulos de Cara inferior, tambien proyectados en Z y X (escondidos)
+
 	ret->vVertices.emplace_back(0, 0, 0); // 1
 	ret->vVertices.emplace_back(length, 0, 0); // 2
-	ret->vVertices.emplace_back(0, 0, length); // 3
+	ret->vVertices.emplace_back(length, 0, length); // 3
 
-	ret->vVertices.emplace_back(length, 0, 0); // 2
-	ret->vVertices.emplace_back(0, 0, length); // 3
-	ret->vVertices.emplace_back(length, 0, length); // 4
+	ret->vVertices.emplace_back(0, 0, length); // 4
+	ret->vVertices.emplace_back(0, 0, 0); // 1
+	ret->vVertices.emplace_back(length, 0, length); // 3
 
-	ret->vVertices.emplace_back(0, 0, length); // 3
-	ret->vVertices.emplace_back(length, 0, length); // 4
-	ret->vVertices.emplace_back(length, length, length); // 5
+	// Triángulos de Cara proyectada en Z y Y. Estos triangulos deben estar escondidos
 
-	ret->vVertices.emplace_back(0, 0, length); // 3
-	ret->vVertices.emplace_back(length, length, length); // 5
-	ret->vVertices.emplace_back(0, length, length); // 8
-
-	ret->vVertices.emplace_back(0, length, length); // 8
-	ret->vVertices.emplace_back(length, length, length); // 5
+	ret->vVertices.emplace_back(0, 0, length); // 4
+	ret->vVertices.emplace_back(0, length, length); // 6
 	ret->vVertices.emplace_back(0, length, 0); // 7
 
-	ret->vVertices.emplace_back(length, length, length); // 5
+	ret->vVertices.emplace_back(0, 0, length); // 4
 	ret->vVertices.emplace_back(0, length, 0); // 7
-	ret->vVertices.emplace_back(length, length, 0); // 6
+	ret->vVertices.emplace_back(0, 0, 0); // 1
 
+	// Triángulos de Cara proyectada en Y y X . Estos triangulos deben estar escondidos
 
 	ret->vVertices.emplace_back(0, 0, 0); // 1
-	ret->vVertices.emplace_back(0, 0, length); // 3
 	ret->vVertices.emplace_back(0, length, 0); // 7
-
-	ret->vVertices.emplace_back(0, 0, length); // 3
-	ret->vVertices.emplace_back(0, length, 0); // 7
-	ret->vVertices.emplace_back(0, length, length); // 8
-
-	ret->vVertices.emplace_back(length, 0, 0); // 2
-	ret->vVertices.emplace_back(length, 0, length); // 4
-	ret->vVertices.emplace_back(length, length, 0); // 6
-
-	ret->vVertices.emplace_back(length, 0, length); // 4
-	ret->vVertices.emplace_back(length, length, 0); // 6
-	ret->vVertices.emplace_back(length, length, length); // 5
+	ret->vVertices.emplace_back(length, length, 0); // 8
 
 	ret->vVertices.emplace_back(0, 0, 0); // 1
+	ret->vVertices.emplace_back(length, length, 0); // 8
 	ret->vVertices.emplace_back(length, 0, 0); // 2
-	ret->vVertices.emplace_back(length, length, 0); // 6
-
-	ret->vVertices.emplace_back(0, 0, 0); // 1
-	ret->vVertices.emplace_back(length, length, 0); // 6
-	ret->vVertices.emplace_back(0, length, 0); // 7
 
 	return ret;
 
