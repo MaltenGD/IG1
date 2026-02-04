@@ -312,6 +312,77 @@ Mesh* Mesh::generateCube(GLdouble length)
 
 }
 
+Mesh* Mesh::generateRGBCubeTriangles(GLdouble length)
+{
+	Mesh* ret = Mesh::generateCube(length);
+
+	ret->vColors.reserve(36);
+
+	// Triángulos de Cara proyectada en Y y X . TRIANGULOS ROJOS
+
+	ret->vColors.emplace_back(1, 0, 0, 1);
+	ret->vColors.emplace_back(1, 0, 0, 1);
+	ret->vColors.emplace_back(1, 0, 0, 1);
+
+	ret->vColors.emplace_back(1, 0, 0, 1);
+	ret->vColors.emplace_back(1, 0, 0, 1);
+	ret->vColors.emplace_back(1, 0, 0, 1);
+	
+
+	// Triángulos de Cara proyectada en Z y Y. TRIANGULOS VERDES
+
+
+	ret->vColors.emplace_back(0, 1, 0, 1);
+	ret->vColors.emplace_back(0, 1, 0, 1);
+	ret->vColors.emplace_back(0, 1, 0, 1);
+
+	ret->vColors.emplace_back(0, 1, 0, 1);
+	ret->vColors.emplace_back(0, 1, 0, 1);
+	ret->vColors.emplace_back(0, 1, 0, 1);
+
+
+	// Triángulo de Cara proyectada en Z y X . TRIANGULOS AZULES
+
+	ret->vColors.emplace_back(0, 0, 1, 1);
+	ret->vColors.emplace_back(0, 0, 1, 1);
+	ret->vColors.emplace_back(0, 0, 1, 1);
+
+	ret->vColors.emplace_back(0, 0, 1, 1);
+	ret->vColors.emplace_back(0, 0, 1, 1);
+	ret->vColors.emplace_back(0, 0, 1, 1);
+
+	//Triangulos de Cara inferior, tambien proyectados en Z y X , TRIANGULOS AZULES
+
+	ret->vColors.emplace_back(0, 0, 1, 1);
+	ret->vColors.emplace_back(0, 0, 1, 1);
+	ret->vColors.emplace_back(0, 0, 1, 1);
+
+	ret->vColors.emplace_back(0, 0, 1, 1);
+	ret->vColors.emplace_back(0, 0, 1, 1);
+	ret->vColors.emplace_back(0, 0, 1, 1);
+
+	// Triángulos de Cara proyectada en Z y Y. Estos triangulos deben estar escondidos, TRIANGULOS VERDES
+
+	ret->vColors.emplace_back(0, 1, 0, 1);
+	ret->vColors.emplace_back(0, 1, 0, 1);
+	ret->vColors.emplace_back(0, 1, 0, 1);
+
+	ret->vColors.emplace_back(0, 1, 0, 1);
+	ret->vColors.emplace_back(0, 1, 0, 1);
+	ret->vColors.emplace_back(0, 1, 0, 1);
+
+	// Triángulos de Cara proyectada en Y y X . Estos triangulos deben estar escondidos, TRIANGULOS ROJOS
+
+	ret->vColors.emplace_back(1, 0, 0, 1);
+	ret->vColors.emplace_back(1, 0, 0, 1);
+	ret->vColors.emplace_back(1, 0, 0, 1);
+
+	ret->vColors.emplace_back(1, 0, 0, 1);
+	ret->vColors.emplace_back(1, 0, 0, 1);
+	ret->vColors.emplace_back(1, 0, 0, 1);
+
+	return ret;
+}
 
 
 
