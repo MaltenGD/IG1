@@ -1,6 +1,6 @@
 #include "RGBTriangle.h"
 
-RGBTriangle::RGBTriangle(GLdouble radius, GLint Xpos, GLint Ypos ,GLfloat circleDiameter) : mSelfAngleDeg(0.0), circleDiameter(circleDiameter)
+RGBTriangle::RGBTriangle(GLdouble radius, GLint Xpos, GLint Ypos ,GLfloat circleDiameter) : circleDiameter(circleDiameter)
 {
 	mMesh = Mesh::createRGBTriangle(radius,Xpos, Ypos);
 }

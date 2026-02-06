@@ -12,3 +12,11 @@ Scene3::init()
 	
 
 }
+
+void Scene3::update()
+{
+	for (auto& entity : gObjects)
+	{
+		entity->update();
+	}
+}

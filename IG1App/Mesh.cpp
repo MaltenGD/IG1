@@ -130,27 +130,19 @@ Mesh* Mesh::generateRegularPolygon(GLuint numVertex, GLdouble radius, GLint Xpos
 
 	constexpr GLdouble PI = glm::pi<GLdouble>();
 
-	GLdouble rotationFactor = 2*PI / numVertex;
+	const GLdouble rotationFactor = 2*PI / numVertex;
 
-	GLdouble actualRotation = PI * 0.5;
+	GLdouble actualRotation = PI * 0.5; // Empieza en Pi medios (Pi/2)
 
-	//glm::vec3 actualVertex;
 
 	for (size_t i = 0; i < numVertex; ++i)
 	{
 		GLdouble X = radius * glm::cos(actualRotation);
 		GLdouble Y = radius * glm::sin(actualRotation);
-		//
-		//actualVertex.x = X;
-		//actualVertex.y = Y;
-		//actualVertex.z = 0;
-		//TODO: quitar esto si funciona así .
 
 		ret->vVertices.emplace_back(X + Xpos, Y + Ypos, 0.0);
 
 		actualRotation += rotationFactor;
-
-
 
 	}
 
