@@ -60,7 +60,7 @@ IG1App::run() // enters the main event processing loop
 
 
 
-			if (mNextUpdate < FRAME_DURATION) glfwWaitEventsTimeout(mNextUpdate);
+			if (mNextUpdate < FRAME_DURATION) glfwWaitEventsTimeout(FRAME_DURATION - mNextUpdate);
 
 			
 
