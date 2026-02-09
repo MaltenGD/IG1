@@ -17,12 +17,16 @@ IG1App IG1App::s_ig1app; // default constructor (constructor with no parameters)
 
 // Print OpenGL errors and warnings
 void GLAPIENTRY debugCallback(GLenum source, GLenum type, GLuint id, GLenum severity,
-                   GLsizei length, const GLchar* message, const void* userParam)
+	GLsizei length, const GLchar* message, const void* userParam)
 {
-	const char* prefix = (type == GL_DEBUG_TYPE_ERROR)
-		? "\x1b[31m[ERROR]\x1b[0m "
-		: "\x1b[33m[WARNING]\x1b[0m ";
-	cout << prefix << message << endl;
+
+	if (severity != GL_DEBUG_SEVERITY_NOTIFICATION)
+	{
+		const char* prefix = (type == GL_DEBUG_TYPE_ERROR)
+			? "\x1b[31m[ERROR]\x1b[0m "
+			: "\x1b[33m[WARNING]\x1b[0m ";
+		cout << prefix << message << endl;
+	}
 }
 
 void
@@ -35,6 +39,43 @@ IG1App::close()
 void
 IG1App::run() // enters the main event processing loop
 {
+	//if (mWindow == 0) // if not intilialized
+	//	init();
+
+	//// IG1App main loop
+	//while (!glfwWindowShouldClose(mWindow))
+	//{
+
+	//	if (mUpdateEnabled)
+	//	{
+	//		if (glfwGetTime() >= mNextUpdate)
+	//		{
+	//			//std::cout << glfwGetTime() << std::endl;
+	//			mScenes[mCurrentScene]->update();
+	//			mNextUpdate += FRAME_DURATION;
+	//			mNeedsRedisplay = true; // fuk
+	//		}
+	//	}
+	//	// Redisplay the window if needed
+	//	if (mNeedsRedisplay)
+	//	{
+	//		display();
+	//		mNeedsRedisplay = false;
+	//	}
+
+	//	// Stop and wait for new events
+	//	if (mUpdateEnabled)
+	//	{
+	//		double care = mNextUpdate - glfwGetTime();
+	//		if (care < 0) care = 0;
+	//		glfwWaitEventsTimeout(care);
+	//	}
+	//	else glfwWaitEvents();
+
+	//}
+
+	//destroy();
+
 	if (mWindow == 0) // if not intilialized
 		init();
 
@@ -57,8 +98,6 @@ IG1App::run() // enters the main event processing loop
 
 			//Si la variación de tiempo es menor que FrameDuration se hace un delay del resto, en caso contrario se continua con el bucle
 			mNextUpdate = postUpdateTime - preUpdateTime;
-
-
 
 			if (mNextUpdate < FRAME_DURATION) glfwWaitEventsTimeout(FRAME_DURATION - mNextUpdate);
 

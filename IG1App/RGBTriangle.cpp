@@ -18,6 +18,6 @@ void RGBTriangle::update()
     //Esto hace que el triángulo rote alrededor de la circunferencia
     mModelMat = glm::translate(mModelMat, glm::vec3(triangleXpos, triangleYpos, 0.0f));
 
-    //Esto hace que rote sobre sí mismo (-angulo para que sea en sentido de las agujas del reloj)
+    //Esto hace que rote sobre s?mismo (-angulo para que sea en sentido de las agujas del reloj)
     mModelMat = glm::rotate(mModelMat, glm::radians(-mSelfAngleDeg), glm::vec3(0, 0, 1.0));
 }

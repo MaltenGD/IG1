@@ -302,6 +302,23 @@ Mesh* Mesh::generateCube(GLdouble length)
 
 	return ret;
 
+	// Version de He con GL_TRIANGLE_STRIP
+	//cube->vVertices.emplace_back(length, length, length); // 1
+	//cube->vVertices.emplace_back(0, length, length);      // 2
+	//cube->vVertices.emplace_back(length, 0, length);      // 3
+	//cube->vVertices.emplace_back(0, 0, length);           // 4
+	//cube->vVertices.emplace_back(0, 0, 0);                // 5
+	//cube->vVertices.emplace_back(0, length, length);      // 6
+	//cube->vVertices.emplace_back(0, length, 0);           // 7
+	//cube->vVertices.emplace_back(length, length, 0);      // 8
+	//cube->vVertices.emplace_back(0, 0, 0);                // 9
+	//cube->vVertices.emplace_back(length, 0, 0);           // 10
+	//cube->vVertices.emplace_back(length, 0, length);      // 11
+	//cube->vVertices.emplace_back(length, length, 0);      // 12
+	//cube->vVertices.emplace_back(length, length, length); // 13
+	//cube->vVertices.emplace_back(0, length, length);      // 14
+	//cube->vVertices.emplace_back(length, length, 0);      // 15
+	//cube->vVertices.emplace_back(length, length, length); // 16
 }
 
 Mesh* Mesh::generateRGBCubeTriangles(GLdouble length)
@@ -374,6 +391,26 @@ Mesh* Mesh::generateRGBCubeTriangles(GLdouble length)
 	ret->vColors.emplace_back(1, 0, 0, 1);
 
 	return ret;
+
+
+	// Version de He con GL_TRIANGLE_STRIP
+	//cube->vColors.emplace_back(red);   // 1
+	//cube->vColors.emplace_back(red);   // 2
+	//cube->vColors.emplace_back(red);   // 3
+	//cube->vColors.emplace_back(red);   // 4
+	//cube->vColors.emplace_back(green); // 5
+	//cube->vColors.emplace_back(blue);  // 6
+	//cube->vColors.emplace_back(blue);  // 7
+	//cube->vColors.emplace_back(blue);  // 8
+	//cube->vColors.emplace_back(red);   // 9
+	//cube->vColors.emplace_back(green); // 10
+	//cube->vColors.emplace_back(green); // 11, sobreescribe
+	//cube->vColors.emplace_back(green); // 12
+	//cube->vColors.emplace_back(green); // 13
+	//cube->vColors.emplace_back(blue);  // 14
+	//cube->vColors.emplace_back(blue);  // 15
+	//cube->vColors.emplace_back(blue);  // 16
+	//cube->vColors.emplace_back(blue);  // 16
 }
 
 

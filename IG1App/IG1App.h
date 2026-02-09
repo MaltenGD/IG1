@@ -9,6 +9,8 @@
 #include "Scene.h"
 #include "Viewport.h"
 
+constexpr GLdouble FRAME_DURATION = GLdouble(1)/GLdouble(120);
+
 class IG1App
 {
 public:
@@ -63,7 +65,7 @@ protected:
 	int mWinW = 800;               // window's width
 	int mWinH = 600;               // window's height
 
-	const GLfloat FRAME_DURATION = 1;
+	//const GLfloat FRAME_DURATION = 1;
 	bool mUpdateEnabled = false;
 	GLdouble mNextUpdate; // No necesita inicializarse ya que su valor varía cada frame
 };
