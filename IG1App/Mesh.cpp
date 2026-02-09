@@ -160,7 +160,7 @@ Mesh* Mesh::createRGBTriangle(GLdouble radius, GLint Xpos, GLint Ypos)
 	ret->mPrimitive = GL_TRIANGLES;
 
 	ret->vColors.reserve(3);
-	//Todo: Preguntar si más es eficiente guardar variables como ret->vColors en referencias "auto&" ejemplo: auto& vColors = ret->vColors;
+	//Todo: Preguntar si mï¿½s es eficiente guardar variables como ret->vColors en referencias "auto&" ejemplo: auto& vColors = ret->vColors;
 
 	//ROJO
 	ret->vColors.emplace_back(1, 0, 0, 1);
@@ -199,16 +199,16 @@ Mesh* Mesh::createRGBRectangle(GLdouble w, GLdouble h)
 
 	ret->vColors.reserve(4);
 
-	//ROJO (vértice 0: inferior izquierda)
+	//ROJO (vï¿½rtice 0: inferior izquierda)
 	ret->vColors.emplace_back(1, 0, 0, 1);
 
-	//VERDE (vértice 1: inferior derecha)
+	//VERDE (vï¿½rtice 1: inferior derecha)
 	ret->vColors.emplace_back(0, 1, 0, 1);
 
-	//VERDE (vértice 2: superior izquierda)
+	//VERDE (vï¿½rtice 2: superior izquierda)
 	ret->vColors.emplace_back(0, 1, 0, 1);
 
-	//AZUL (vértice 3: superior derecha)
+	//AZUL (vï¿½rtice 3: superior derecha)
 	ret->vColors.emplace_back(0, 0, 1, 1);
 
 	return ret;
@@ -238,7 +238,7 @@ Mesh* Mesh::generateCube(GLdouble length)
 	
 
 
-	// Triángulos de Cara proyectada en Y y X . Estos triangulos deben ser visibles
+	// Triï¿½ngulos de Cara proyectada en Y y X . Estos triangulos deben ser visibles
 
 	ret->vVertices.emplace_back(0, 0, length); // 4
 	ret->vVertices.emplace_back(length, length, length); // 5
@@ -248,7 +248,7 @@ Mesh* Mesh::generateCube(GLdouble length)
 	ret->vVertices.emplace_back(length, 0, length); // 3
 	ret->vVertices.emplace_back(length, length, length); // 5
 
-	// Triángulos de Cara proyectada en Z y Y. Estos triangulos deben ser visibles
+	// Triï¿½ngulos de Cara proyectada en Z y Y. Estos triangulos deben ser visibles
 
 
 	ret->vVertices.emplace_back(length, 0, length); // 3
@@ -260,7 +260,7 @@ Mesh* Mesh::generateCube(GLdouble length)
 	ret->vVertices.emplace_back(length, length, 0); // 8
 
 
-	// Triángulo de Cara proyectada en Z y X . Estos triangulos deben ser visibles
+	// Triï¿½ngulo de Cara proyectada en Z y X . Estos triangulos deben ser visibles
 
 	ret->vVertices.emplace_back(length, length, length); // 5
 	ret->vVertices.emplace_back(0, length, 0); // 7
@@ -280,7 +280,7 @@ Mesh* Mesh::generateCube(GLdouble length)
 	ret->vVertices.emplace_back(0, 0, 0); // 1
 	ret->vVertices.emplace_back(length, 0, length); // 3
 
-	// Triángulos de Cara proyectada en Z y Y. Estos triangulos deben estar escondidos
+	// Triï¿½ngulos de Cara proyectada en Z y Y. Estos triangulos deben estar escondidos
 
 	ret->vVertices.emplace_back(0, 0, length); // 4
 	ret->vVertices.emplace_back(0, length, length); // 6
@@ -290,7 +290,7 @@ Mesh* Mesh::generateCube(GLdouble length)
 	ret->vVertices.emplace_back(0, length, 0); // 7
 	ret->vVertices.emplace_back(0, 0, 0); // 1
 
-	// Triángulos de Cara proyectada en Y y X . Estos triangulos deben estar escondidos
+	// Triï¿½ngulos de Cara proyectada en Y y X . Estos triangulos deben estar escondidos
 
 	ret->vVertices.emplace_back(0, 0, 0); // 1
 	ret->vVertices.emplace_back(0, length, 0); // 7
@@ -310,7 +310,7 @@ Mesh* Mesh::generateRGBCubeTriangles(GLdouble length)
 
 	ret->vColors.reserve(36);
 
-	// Triángulos de Cara proyectada en Y y X . TRIANGULOS ROJOS
+	// Triï¿½ngulos de Cara proyectada en Y y X . TRIANGULOS ROJOS
 
 	ret->vColors.emplace_back(1, 0, 0, 1);
 	ret->vColors.emplace_back(1, 0, 0, 1);
@@ -321,7 +321,7 @@ Mesh* Mesh::generateRGBCubeTriangles(GLdouble length)
 	ret->vColors.emplace_back(1, 0, 0, 1);
 	
 
-	// Triángulos de Cara proyectada en Z y Y. TRIANGULOS VERDES
+	// Triï¿½ngulos de Cara proyectada en Z y Y. TRIANGULOS VERDES
 
 
 	ret->vColors.emplace_back(0, 1, 0, 1);
@@ -333,7 +333,7 @@ Mesh* Mesh::generateRGBCubeTriangles(GLdouble length)
 	ret->vColors.emplace_back(0, 1, 0, 1);
 
 
-	// Triángulo de Cara proyectada en Z y X . TRIANGULOS AZULES
+	// Triï¿½ngulo de Cara proyectada en Z y X . TRIANGULOS AZULES
 
 	ret->vColors.emplace_back(0, 0, 1, 1);
 	ret->vColors.emplace_back(0, 0, 1, 1);
@@ -353,7 +353,7 @@ Mesh* Mesh::generateRGBCubeTriangles(GLdouble length)
 	ret->vColors.emplace_back(0, 0, 1, 1);
 	ret->vColors.emplace_back(0, 0, 1, 1);
 
-	// Triángulos de Cara proyectada en Z y Y. Estos triangulos deben estar escondidos, TRIANGULOS VERDES
+	// Triï¿½ngulos de Cara proyectada en Z y Y. Estos triangulos deben estar escondidos, TRIANGULOS VERDES
 
 	ret->vColors.emplace_back(0, 1, 0, 1);
 	ret->vColors.emplace_back(0, 1, 0, 1);
@@ -363,7 +363,7 @@ Mesh* Mesh::generateRGBCubeTriangles(GLdouble length)
 	ret->vColors.emplace_back(0, 1, 0, 1);
 	ret->vColors.emplace_back(0, 1, 0, 1);
 
-	// Triángulos de Cara proyectada en Y y X . Estos triangulos deben estar escondidos, TRIANGULOS ROJOS
+	// Triï¿½ngulos de Cara proyectada en Y y X . Estos triangulos deben estar escondidos, TRIANGULOS ROJOS
 
 	ret->vColors.emplace_back(1, 0, 0, 1);
 	ret->vColors.emplace_back(1, 0, 0, 1);
