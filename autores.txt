@@ -1,0 +1,6 @@
+AUTORES:
+HE DENG
+OLIVER GARCIA AGUADO
+
+Partes opcionales realizadas:
+Se aporta una implementación incompleta del apartado 17 (opcional) en la cual el cubo rota alrededor del eje X
