@@ -73,7 +73,18 @@
     <Import Project="..\IGProjects.props" />
   </ImportGroup>
   <PropertyGroup Label="UserMacros" />
-  <PropertyGroup />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <IncludePath>$(ProjectDir)Entity;$(ProjectDir);$(IncludePath)</IncludePath>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <IncludePath>$(ProjectDir)Entity;$(ProjectDir);$(IncludePath)</IncludePath>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Scene 1 Debug|x64'">
+    <IncludePath>$(ProjectDir)Entity;$(ProjectDir);$(IncludePath)</IncludePath>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Scene 2 Debug|x64'">
+    <IncludePath>$(ProjectDir)Entity;$(ProjectDir);$(IncludePath)</IncludePath>
+  </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <ClCompile>
       <WarningLevel>Level3</WarningLevel>
@@ -116,15 +127,15 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClInclude Include="Camera.h" />
-    <ClInclude Include="Cube.h" />
+    <ClInclude Include="Entity\Cube.h" />
     <ClInclude Include="Entity.h" />
     <ClInclude Include="IG1App.h" />
     <ClInclude Include="Mesh.h" />
     <ClInclude Include="Image.h" />
-    <ClInclude Include="RegularPolygon.h" />
-    <ClInclude Include="RGBCube.h" />
-    <ClInclude Include="RGBRectangle.h" />
-    <ClInclude Include="RGBTriangle.h" />
+    <ClInclude Include="Entity\RegularPolygon.h" />
+    <ClInclude Include="Entity\RGBCube.h" />
+    <ClInclude Include="Entity\RGBRectangle.h" />
+    <ClInclude Include="Entity\RGBTriangle.h" />
     <ClInclude Include="Scene.h" />
     <ClInclude Include="Scene0.h" />
     <ClInclude Include="Scene1.h" />
@@ -137,16 +148,16 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Camera.cpp" />
-    <ClCompile Include="Cube.cpp" />
+    <ClCompile Include="Entity\Cube.cpp" />
     <ClCompile Include="Entity.cpp" />
     <ClCompile Include="IG1App.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="Mesh.cpp" />
     <ClCompile Include="Image.cpp" />
-    <ClCompile Include="RegularPolygon.cpp" />
-    <ClCompile Include="RGBCube.cpp" />
-    <ClCompile Include="RGBRectangle.cpp" />
-    <ClCompile Include="RGBTriangle.cpp" />
+    <ClCompile Include="Entity\RegularPolygon.cpp" />
+    <ClCompile Include="Entity\RGBCube.cpp" />
+    <ClCompile Include="Entity\RGBRectangle.cpp" />
+    <ClCompile Include="Entity\RGBTriangle.cpp" />
     <ClCompile Include="Scene.cpp" />
     <ClCompile Include="Scene0.cpp" />
     <ClCompile Include="Scene1.cpp" />

@@ -84,41 +84,30 @@ IG1App::run() // enters the main event processing loop
 	while (!glfwWindowShouldClose(mWindow)) {
 		// Redisplay the window if needed
 
+		GLdouble preUpdateTime = glfwGetTime(); // glfwGetTimes devuelve los segundos en formato Segs.decimales (Ej : 12.230)
 		if (mUpdateEnabled) {
-			GLdouble preUpdateTime = glfwGetTime(); // glfwGetTimes devuelve los segundos en formato Segs.decimales (Ej : 12.230)
 
 			// Se actualizan las entidades
 			mScenes[mCurrentScene]->update();
 
 			// Se renderiza/actualiza la pantalla
-			display();
-
+			//display();
+			mNeedsRedisplay = true;
 			//Se calcula el nuevo tiempo tras el computo anterior
 			GLdouble postUpdateTime = glfwGetTime();
 
 			//Si la variación de tiempo es menor que FrameDuration se hace un delay del resto, en caso contrario se continua con el bucle
 			mNextUpdate = postUpdateTime - preUpdateTime;
-
-			if (mNextUpdate < FRAME_DURATION) glfwWaitEventsTimeout(FRAME_DURATION - mNextUpdate);
-
-			
-
-		}
-		else {
-
-			if (mNeedsRedisplay) {
-				display();
-				mNeedsRedisplay = false;
-			}
-
-			// Stop and wait for new events
-			glfwWaitEvents();
-
 		}
 
-		
+		if (mNeedsRedisplay) {
+			display();
+			mNeedsRedisplay = false;
+		}
 
-
+		if (mNextUpdate < FRAME_DURATION) glfwWaitEventsTimeout(FRAME_DURATION - mNextUpdate);
+		// Stop and wait for new events
+		else glfwWaitEvents();	
 
 	}
 
