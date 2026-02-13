@@ -413,5 +413,10 @@ Mesh* Mesh::generateRGBCubeTriangles(GLdouble length)
 	//cube->vColors.emplace_back(blue);  // 16
 }
 
+Mesh* Mesh::generateRectangleTextCor(GLdouble w, GLdouble h)
+{
+	return nullptr;
+}
+
 
 

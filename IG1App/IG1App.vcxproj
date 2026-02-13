@@ -74,16 +74,16 @@
   </ImportGroup>
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
-    <IncludePath>$(ProjectDir)Entity;$(ProjectDir);$(IncludePath)</IncludePath>
+    <IncludePath>$(ProjectDir)Entity;$(ProjectDir);$(ProjectDir)Scene;$(IncludePath)</IncludePath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
-    <IncludePath>$(ProjectDir)Entity;$(ProjectDir);$(IncludePath)</IncludePath>
+    <IncludePath>$(ProjectDir)Entity;$(ProjectDir);$(ProjectDir)Scene;$(IncludePath)</IncludePath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Scene 1 Debug|x64'">
-    <IncludePath>$(ProjectDir)Entity;$(ProjectDir);$(IncludePath)</IncludePath>
+    <IncludePath>$(ProjectDir)Entity;$(ProjectDir);$(ProjectDir)Scene;$(IncludePath)</IncludePath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Scene 2 Debug|x64'">
-    <IncludePath>$(ProjectDir)Entity;$(ProjectDir);$(IncludePath)</IncludePath>
+    <IncludePath>$(ProjectDir)Entity;$(ProjectDir);$(ProjectDir)Scene;$(IncludePath)</IncludePath>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <ClCompile>
@@ -127,8 +127,10 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClInclude Include="Camera.h" />
+    <ClInclude Include="EntityWithTexture.h" />
     <ClInclude Include="Entity\Cube.h" />
     <ClInclude Include="Entity.h" />
+    <ClInclude Include="Entity\Ground.h" />
     <ClInclude Include="IG1App.h" />
     <ClInclude Include="Mesh.h" />
     <ClInclude Include="Image.h" />
@@ -137,10 +139,11 @@
     <ClInclude Include="Entity\RGBRectangle.h" />
     <ClInclude Include="Entity\RGBTriangle.h" />
     <ClInclude Include="Scene.h" />
-    <ClInclude Include="Scene0.h" />
-    <ClInclude Include="Scene1.h" />
-    <ClInclude Include="Scene2.h" />
-    <ClInclude Include="Scene3.h" />
+    <ClInclude Include="Scene\Scene4.h" />
+    <ClInclude Include="Scene\Scene0.h" />
+    <ClInclude Include="Scene\Scene1.h" />
+    <ClInclude Include="Scene\Scene2.h" />
+    <ClInclude Include="Scene\Scene3.h" />
     <ClInclude Include="Shader.h" />
     <ClInclude Include="SingleColorEntity.h" />
     <ClInclude Include="Texture.h" />
@@ -148,8 +151,10 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Camera.cpp" />
+    <ClCompile Include="EntityWithTexture.cpp" />
     <ClCompile Include="Entity\Cube.cpp" />
     <ClCompile Include="Entity.cpp" />
+    <ClCompile Include="Entity\Ground.cpp" />
     <ClCompile Include="IG1App.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="Mesh.cpp" />
@@ -159,10 +164,11 @@
     <ClCompile Include="Entity\RGBRectangle.cpp" />
     <ClCompile Include="Entity\RGBTriangle.cpp" />
     <ClCompile Include="Scene.cpp" />
-    <ClCompile Include="Scene0.cpp" />
-    <ClCompile Include="Scene1.cpp" />
-    <ClCompile Include="Scene2.cpp" />
-    <ClCompile Include="Scene3.cpp" />
+    <ClCompile Include="Scene\Scene4.cpp" />
+    <ClCompile Include="Scene\Scene0.cpp" />
+    <ClCompile Include="Scene\Scene1.cpp" />
+    <ClCompile Include="Scene\Scene2.cpp" />
+    <ClCompile Include="Scene\Scene3.cpp" />
     <ClCompile Include="Shader.cpp" />
     <ClCompile Include="SingleColorEntity.cpp" />
     <ClCompile Include="Texture.cpp" />

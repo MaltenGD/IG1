@@ -25,6 +25,8 @@ public:
 
 	static Mesh* generateRGBCubeTriangles(GLdouble length);
 
+	static Mesh* generateRectangleTextCor(GLdouble w, GLdouble h);
+
 
 	Mesh();
 	virtual ~Mesh();
