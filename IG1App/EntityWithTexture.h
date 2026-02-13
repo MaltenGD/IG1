@@ -3,7 +3,7 @@
 #pragma once
 class EntityWithTexture : public Abs_Entity
 {
-private:
+protected:
 
 	Texture* mTexture;
 	bool mModulate;

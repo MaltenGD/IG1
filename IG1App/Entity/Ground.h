@@ -1,7 +1,8 @@
 #pragma once
-#include "EntityWithTexture.h"
+//#include "EntityWithTexture.h"
+#include "Entity.h"
 
-class Ground : public EntityWithTexture
+class Ground : public EntityWithColors
 {
 public:
     Ground(GLdouble length, const char* shader);

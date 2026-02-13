@@ -21,6 +21,7 @@ void EntityWithTexture::render(const glm::mat4& modelViewMat) const
             mMesh->render();
             mTexture->unbind();
         }
+        else  mMesh->render();
         
 
     }

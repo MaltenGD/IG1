@@ -51,6 +51,9 @@ protected:
 	GLuint mNumVertices = 0; // number of elements ( = vVertices.size())
 	std::vector<glm::vec3> vVertices; // vertex array
 	std::vector<glm::vec4> vColors;   // color array
+	std::vector<glm::vec2> vTexCoords; // vector de coordenadas
+	// de textura
+
 	virtual void draw() const;
 
 	GLuint mVAO;  // vertex array object

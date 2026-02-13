@@ -184,10 +184,10 @@ Mesh* Mesh::generateRectangle(GLdouble w, GLdouble h)
 
 	ret->vVertices.reserve(ret->mNumVertices);
 
-	ret->vVertices.emplace_back(-w, h, 0);
-	ret->vVertices.emplace_back(w, h, 0);
 	ret->vVertices.emplace_back(-w, -h, 0);
+	ret->vVertices.emplace_back(-w, h, 0);
 	ret->vVertices.emplace_back(w, -h, 0);
+	ret->vVertices.emplace_back(w, h, 0);
 
 	return ret;
 }
@@ -415,6 +415,13 @@ Mesh* Mesh::generateRGBCubeTriangles(GLdouble length)
 
 Mesh* Mesh::generateRectangleTextCor(GLdouble w, GLdouble h)
 {
+	Mesh* ret = Mesh::generateRectangle(w, h);
+
+	ret->vTexCoords.emplace_back(0, 0);
+	ret->vTexCoords.emplace_back(0, 1);
+	ret->vTexCoords.emplace_back(1, 0);
+	ret->vTexCoords.emplace_back(1, 1);
+
 	return nullptr;
 }
 
