@@ -25,7 +25,13 @@ public:
 
 	static Mesh* generateRGBCubeTriangles(GLdouble length);
 
-	static Mesh* generateRectangleTextCor(GLdouble w, GLdouble h);
+	static Mesh* generateRectangleTexCor(GLdouble w, GLdouble h, GLuint rw = 1, GLuint rh = 1);
+
+	static Mesh* generateBoxOutline(GLdouble length);
+
+	static Mesh* generateBoxOutlineTexCor(GLdouble length);
+
+	static Mesh* generateStar3D(GLdouble re, GLuint np, GLdouble h);
 
 
 	Mesh();
@@ -61,6 +67,7 @@ protected:
 private:
 	GLuint mVBO;  // vertex buffer object
 	GLuint mCBO;  // color buffer object
+	GLuint mTCO; 
 };
 
 #endif //_H_Scene_H_

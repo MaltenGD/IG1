@@ -21,6 +21,7 @@ IG1App IG1App::s_ig1app; // default constructor (constructor with no parameters)
 void GLAPIENTRY debugCallback(GLenum source, GLenum type, GLuint id, GLenum severity,
 	GLsizei length, const GLchar* message, const void* userParam)
 {
+	if (id == 131204) return;
 
 	if (severity != GL_DEBUG_SEVERITY_NOTIFICATION)
 	{

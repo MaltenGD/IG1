@@ -24,6 +24,9 @@ Texture::init()
 void
 Texture::bind()
 {
+	glActiveTexture(GL_TEXTURE0); // Para evitar el warning 
+	//"[WARNING] Texture state usage warning: The texture object (0) bound to texture image unit 0 
+	// does not have a defined base level and cannot be used for texture mapping."
 	glBindTexture(GL_TEXTURE_2D, mId);
 }
 

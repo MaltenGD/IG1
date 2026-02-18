@@ -48,6 +48,7 @@ Mesh::load()
 		glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, sizeof(vec3), nullptr);
 		glEnableVertexAttribArray(0);
 
+		//Para los colores
 		if (vColors.size() > 0) {             // upload colors
 			glGenBuffers(1, &mCBO);
 
@@ -55,6 +56,19 @@ Mesh::load()
 			glBufferData(GL_ARRAY_BUFFER, vColors.size() * sizeof(vec4), vColors.data(), GL_STATIC_DRAW);
 			glVertexAttribPointer(1, 4, GL_FLOAT, GL_FALSE, sizeof(vec4), nullptr);
 			glEnableVertexAttribArray(1);
+		}
+
+		// Para las texturas
+		if (vTexCoords.size() > 0)
+		{
+			glGenBuffers(1, &mTCO);
+			glBindBuffer(GL_ARRAY_BUFFER, mTCO);
+			glBufferData(GL_ARRAY_BUFFER,
+				vTexCoords.size() * sizeof(vec2),
+				vTexCoords.data(), GL_STATIC_DRAW);
+			glVertexAttribPointer(2, 2, GL_FLOAT, GL_FALSE,
+				sizeof(vec2), nullptr);
+			glEnableVertexAttribArray(2);
 		}
 	}
 }
@@ -72,6 +86,8 @@ Mesh::unload()
 			glDeleteBuffers(1, &mCBO);
 			mCBO = NONE;
 		}
+
+		if (mTCO != NONE) glDeleteBuffers(1, &mTCO);
 	}
 }
 
@@ -413,16 +429,116 @@ Mesh* Mesh::generateRGBCubeTriangles(GLdouble length)
 	//cube->vColors.emplace_back(blue);  // 16
 }
 
-Mesh* Mesh::generateRectangleTextCor(GLdouble w, GLdouble h)
+Mesh* Mesh::generateRectangleTexCor(GLdouble w, GLdouble h, GLuint rw, GLuint rh)
 {
 	Mesh* ret = Mesh::generateRectangle(w, h);
 
-	ret->vTexCoords.emplace_back(0, 0);
-	ret->vTexCoords.emplace_back(0, 1);
-	ret->vTexCoords.emplace_back(1, 0);
-	ret->vTexCoords.emplace_back(1, 1);
+	ret->vTexCoords.reserve(ret->mNumVertices);
 
-	return nullptr;
+	ret->vTexCoords.emplace_back(0, 0);
+	ret->vTexCoords.emplace_back(0, rh);
+	ret->vTexCoords.emplace_back(rw, 0);
+	ret->vTexCoords.emplace_back(rw, rh);
+
+
+	return ret;
+}
+
+Mesh* Mesh::generateBoxOutline(GLdouble length)
+{
+	Mesh* ret = new Mesh();
+
+	ret->mPrimitive = GL_TRIANGLE_STRIP;
+
+	ret->mNumVertices = 10;
+
+	ret->vVertices.reserve(ret->mNumVertices);
+
+	ret->vVertices.emplace_back(0, 0, 0); // 1 o 9
+	ret->vVertices.emplace_back(0, length, 0); // 2 o 10
+	ret->vVertices.emplace_back(length, 0, 0); // 3
+	ret->vVertices.emplace_back(length, length, 0); // 4
+	ret->vVertices.emplace_back(length, 0, length); // 5
+	ret->vVertices.emplace_back(length, length, length); // 6
+	ret->vVertices.emplace_back(0, 0, length); // 7
+	ret->vVertices.emplace_back(0, length, length); // 8
+	ret->vVertices.emplace_back(0, 0, 0); // 1 o 9
+	ret->vVertices.emplace_back(0, length, 0); // 2 o 10
+
+	return ret;
+
+
+}
+
+Mesh* Mesh::generateBoxOutlineTexCor(GLdouble length)
+{
+	Mesh* ret = Mesh::generateBoxOutline(length);
+
+	ret->vTexCoords.reserve(ret->mNumVertices);
+
+	ret->vTexCoords.emplace_back(0, 0); // vértice 1
+	ret->vTexCoords.emplace_back(0, 1); // vértice 2
+	ret->vTexCoords.emplace_back(1, 0); // vértice 3
+	ret->vTexCoords.emplace_back(1, 1); // vértice 4
+	ret->vTexCoords.emplace_back(2, 0); // vértice 5
+	ret->vTexCoords.emplace_back(2, 1); // vértice 6
+	ret->vTexCoords.emplace_back(3, 0); // vértice 7
+	ret->vTexCoords.emplace_back(3, 1); // vértice 8
+	ret->vTexCoords.emplace_back(4, 0); // vértice 9
+	ret->vTexCoords.emplace_back(4, 1); // vértice 10
+
+	return ret;
+}
+
+Mesh* Mesh::generateStar3D(GLdouble re, GLuint np, GLdouble h)
+{
+	Mesh* ret = new Mesh();
+
+	ret->mPrimitive = GL_TRIANGLE_FAN;
+
+	ret->vVertices.reserve((np * 2) + 2); // el origen de la estrella , np puntos exteriores, np puntos interiores y el ultimo para cerrar la estrella
+
+	ret->vVertices.emplace_back(0, 0, 0);
+
+	constexpr GLdouble PI = glm::pi<GLdouble>();
+
+	const GLdouble rotationFactor = PI / np;
+
+	GLdouble actualRotation = PI * 0.5; // Empieza en Pi medios (Pi/2)
+
+	size_t numPuntas = np;
+
+	float outerRadius = re;
+	float innerRadius = outerRadius / 2;
+
+	for (size_t i = 0; i < numPuntas; ++i)
+	{
+		// Por cada bucle (por cada punta de la estrella) se dibuja un vertice exterior y uno interior
+
+		// Primero el punto exterior
+		GLdouble outerPointX = outerRadius * glm::cos(actualRotation);
+		GLdouble outerPointY = outerRadius * glm::sin(actualRotation);
+
+		ret->vVertices.emplace_back(outerPointX, outerPointY, h); // la altura (h) determina la posición del plano en el eje Z
+
+		// Se actualiza la rotación para el punto interior
+		actualRotation += rotationFactor;
+
+		GLdouble innerPointX = innerRadius * glm::cos(actualRotation);
+		GLdouble innerPointY = innerRadius * glm::sin(actualRotation);
+
+		ret->vVertices.emplace_back(innerPointX, innerPointY, h);
+
+		//Vuelvo a actualizar el angulo para el siguiente punto
+		actualRotation += rotationFactor;
+
+	}
+
+	// Cierro la estrella con el mismo vertice con el que empezó.
+	ret->vVertices.emplace_back(ret->vVertices[1]);
+
+	return ret;
+
 }
 
 
