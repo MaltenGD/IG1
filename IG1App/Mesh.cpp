@@ -56,6 +56,17 @@ Mesh::load()
 			glVertexAttribPointer(1, 4, GL_FLOAT, GL_FALSE, sizeof(vec4), nullptr);
 			glEnableVertexAttribArray(1);
 		}
+
+		if (vTexCoords.size() > 0) {
+			glGenBuffers(1, &mTCO);
+			glBindBuffer(GL_ARRAY_BUFFER, mTCO);
+			glBufferData(GL_ARRAY_BUFFER,
+				vTexCoords.size() * sizeof(vec2),
+				vTexCoords.data(), GL_STATIC_DRAW);
+			glVertexAttribPointer(2, 2, GL_FLOAT, GL_FALSE,
+				sizeof(vec2), nullptr);
+			glEnableVertexAttribArray(2);
+		}
 	}
 }
 
@@ -72,6 +83,8 @@ Mesh::unload()
 			glDeleteBuffers(1, &mCBO);
 			mCBO = NONE;
 		}
+
+		if (mTCO != NONE) glDeleteBuffers(1, &mTCO);
 	}
 }
 
@@ -413,16 +426,32 @@ Mesh* Mesh::generateRGBCubeTriangles(GLdouble length)
 	//cube->vColors.emplace_back(blue);  // 16
 }
 
-Mesh* Mesh::generateRectangleTextCor(GLdouble w, GLdouble h)
+Mesh* Mesh::generateRectangleTextCor(GLdouble w, GLdouble h, GLuint rw, GLuint rh)
 {
 	Mesh* ret = Mesh::generateRectangle(w, h);
 
+	ret->vTexCoords.reserve(ret->mNumVertices);
 	ret->vTexCoords.emplace_back(0, 0);
-	ret->vTexCoords.emplace_back(0, 1);
-	ret->vTexCoords.emplace_back(1, 0);
-	ret->vTexCoords.emplace_back(1, 1);
+	ret->vTexCoords.emplace_back(0, rh);
+	ret->vTexCoords.emplace_back(rw, 0);
+	ret->vTexCoords.emplace_back(rw, rh);
 
 	return ret;
+}
+
+Mesh* Mesh::generateBoxOutline(GLdouble length)
+{
+	Mesh* ret = new Mesh();
+	ret->mPrimitive = GL_TRIANGLE_STRIP;
+
+	GLdouble l = length / 2;
+	
+	ret->vVertices.emplace_back(-l,-l,l);
+	ret->vVertices.emplace_back(-l,l,l);
+	ret->vVertices.emplace_back(l,-l,l);
+
+
+	return nullptr;
 }
 
 

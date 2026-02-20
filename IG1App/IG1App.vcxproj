@@ -126,6 +126,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="BoxOutline.h" />
     <ClInclude Include="Camera.h" />
     <ClInclude Include="EntityWithTexture.h" />
     <ClInclude Include="Entity\Cube.h" />
@@ -150,6 +151,7 @@
     <ClInclude Include="Viewport.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="BoxOutline.cpp" />
     <ClCompile Include="Camera.cpp" />
     <ClCompile Include="EntityWithTexture.cpp" />
     <ClCompile Include="Entity\Cube.cpp" />

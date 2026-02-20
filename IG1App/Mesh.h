@@ -25,7 +25,9 @@ public:
 
 	static Mesh* generateRGBCubeTriangles(GLdouble length);
 
-	static Mesh* generateRectangleTextCor(GLdouble w, GLdouble h);
+	static Mesh* generateRectangleTextCor(GLdouble w, GLdouble h, GLuint rw = 4, GLuint rh = 4);
+
+	static Mesh* generateBoxOutline(GLdouble length);
 
 
 	Mesh();
@@ -57,6 +59,7 @@ protected:
 	virtual void draw() const;
 
 	GLuint mVAO;  // vertex array object
+	GLuint mTCO;
 
 private:
 	GLuint mVBO;  // vertex buffer object

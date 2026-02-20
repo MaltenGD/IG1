@@ -4,10 +4,18 @@ using namespace glm;
 
 EntityWithTexture::EntityWithTexture(const char* texture,const char* shader) :
     mModulate(false),
-    mTexture(new Texture())
+    mTexture(nullptr)
 {
-    mTexture->load(std::string(texture));
+    //mTexture = new Texture();
+    //mTexture->load(texture);
 	mShader = Shader::get(shader);
+}
+
+EntityWithTexture::EntityWithTexture(Texture* texture, const char* shader):
+    mModulate(false),
+    mTexture(texture)
+{
+    mShader = Shader::get(shader);
 }
 
 EntityWithTexture::~EntityWithTexture()
@@ -28,9 +36,9 @@ void EntityWithTexture::render(const glm::mat4& modelViewMat) const
 
         mShader->use();
         upload(aMat);
-        mShader->setUniform("modulate", mModulate);
         if (mTexture != nullptr)
         {
+            mShader->setUniform("modulate", mModulate);
             mTexture->bind();
             mMesh->render();
             mTexture->unbind();
