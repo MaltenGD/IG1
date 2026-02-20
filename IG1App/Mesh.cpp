@@ -495,49 +495,84 @@ Mesh* Mesh::generateStar3D(GLdouble re, GLuint np, GLdouble h)
 	Mesh* ret = new Mesh();
 
 	ret->mPrimitive = GL_TRIANGLE_FAN;
+	ret->mNumVertices = (np * 2) + 2;
+	ret->vVertices.reserve(ret->mNumVertices);
 
-	ret->vVertices.reserve((np * 2) + 2); // el origen de la estrella , np puntos exteriores, np puntos interiores y el ultimo para cerrar la estrella
+	float ri = re / 2;
+	float x, y, xi, yi, angleIni = 0;
+	constexpr GLdouble PI = glm::pi<GLdouble>();
+	float angleToSum = 2* PI / float(ret->mNumVertices - 2);
+
+	float angleIniInter = angleToSum;
 
 	ret->vVertices.emplace_back(0, 0, 0);
 
-	constexpr GLdouble PI = glm::pi<GLdouble>();
+	for (int i = 0; i < (ret->mNumVertices - 2) / 2; i++) {
+		// circunferencia grande
+		x = re * cos(angleIni);
+		y = re * sin(angleIni);
 
-	const GLdouble rotationFactor = PI / np;
+		// circunferencia pequeña
+		xi = ri * cos(angleIniInter);
+		yi = ri * sin(angleIniInter);
 
-	GLdouble actualRotation = PI * 0.5; // Empieza en Pi medios (Pi/2)
+		ret->vVertices.emplace_back(x, y, h);
+		ret->vVertices.emplace_back(xi, yi, h);
 
-	size_t numPuntas = np;
-
-	float outerRadius = re;
-	float innerRadius = outerRadius / 2;
-
-	for (size_t i = 0; i < numPuntas; ++i)
-	{
-		// Por cada bucle (por cada punta de la estrella) se dibuja un vertice exterior y uno interior
-
-		// Primero el punto exterior
-		GLdouble outerPointX = outerRadius * glm::cos(actualRotation);
-		GLdouble outerPointY = outerRadius * glm::sin(actualRotation);
-
-		ret->vVertices.emplace_back(outerPointX, outerPointY, h); // la altura (h) determina la posición del plano en el eje Z
-
-		// Se actualiza la rotación para el punto interior
-		actualRotation += rotationFactor;
-
-		GLdouble innerPointX = innerRadius * glm::cos(actualRotation);
-		GLdouble innerPointY = innerRadius * glm::sin(actualRotation);
-
-		ret->vVertices.emplace_back(innerPointX, innerPointY, h);
-
-		//Vuelvo a actualizar el angulo para el siguiente punto
-		actualRotation += rotationFactor;
-
+		angleIni += angleToSum * 2;
+		angleIniInter += angleToSum * 2;
 	}
 
-	// Cierro la estrella con el mismo vertice con el que empezó.
-	ret->vVertices.emplace_back(ret->vVertices[1]);
+	x = re * cos(angleIni);
+	y = re * sin(angleIni);
+	ret->vVertices.emplace_back(x, y, h);
 
 	return ret;
+
+	//ret->mPrimitive = GL_TRIANGLE_FAN;
+
+	//ret->vVertices.reserve((np * 2) + 2); // el origen de la estrella , np puntos exteriores, np puntos interiores y el ultimo para cerrar la estrella
+
+		//ret->vVertices.emplace_back(0, 0, 0);
+
+		//constexpr GLdouble PI = glm::pi<GLdouble>();
+
+		//const GLdouble rotationFactor = PI / np;
+
+		//GLdouble actualRotation = PI * 0.5; // Empieza en Pi medios (Pi/2)
+
+		//size_t numPuntas = np;
+
+		//float outerRadius = re;
+		//float innerRadius = outerRadius / 2;
+
+		//for (size_t i = 0; i < numPuntas; ++i)
+		//{
+		//	// Por cada bucle (por cada punta de la estrella) se dibuja un vertice exterior y uno interior
+
+		//	// Primero el punto exterior
+		//	GLdouble outerPointX = outerRadius * glm::cos(actualRotation);
+		//	GLdouble outerPointY = outerRadius * glm::sin(actualRotation);
+
+		//	ret->vVertices.emplace_back(outerPointX, outerPointY, h); // la altura (h) determina la posición del plano en el eje Z
+
+		//	// Se actualiza la rotación para el punto interior
+		//	actualRotation += rotationFactor;
+
+		//	GLdouble innerPointX = innerRadius * glm::cos(actualRotation);
+		//	GLdouble innerPointY = innerRadius * glm::sin(actualRotation);
+
+		//	ret->vVertices.emplace_back(innerPointX, innerPointY, h);
+
+		//	//Vuelvo a actualizar el angulo para el siguiente punto
+		//	actualRotation += rotationFactor;
+
+		//}
+
+		//// Cierro la estrella con el mismo vertice con el que empezó.
+		//ret->vVertices.emplace_back(ret->vVertices[1]);
+
+		//return ret;
 
 }
 
