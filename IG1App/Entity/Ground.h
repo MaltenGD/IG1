@@ -5,7 +5,7 @@
 class Ground : public EntityWithTexture
 {
 public:
-    Ground(GLdouble length, const char* shader);
-    void render(const glm::mat4& modelViewMat) const override;
+    Ground(GLdouble length, const char* texture);
+    //void render(const glm::mat4& modelViewMat) const override;
 };
 

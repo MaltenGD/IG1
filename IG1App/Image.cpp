@@ -10,6 +10,8 @@
 #define STB_IMAGE_WRITE_IMPLEMENTATION
 #include "stb_image_write.h"
 
+constexpr const char* IMAGE_ROOT = "../assets/image/";
+
 using namespace std;
 
 Image::Image()

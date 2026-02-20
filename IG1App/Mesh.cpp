@@ -422,7 +422,7 @@ Mesh* Mesh::generateRectangleTextCor(GLdouble w, GLdouble h)
 	ret->vTexCoords.emplace_back(1, 0);
 	ret->vTexCoords.emplace_back(1, 1);
 
-	return nullptr;
+	return ret;
 }
 
 

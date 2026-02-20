@@ -9,8 +9,9 @@ protected:
 	bool mModulate;
 public:
 
-	EntityWithTexture(const char* shader);
-
+	EntityWithTexture(const char* texture,const char* shader = "texture");
+	~EntityWithTexture();
+	void setTexture(Texture* tex);
 	virtual void render(const glm::mat4& modelViewMat) const override;
 
 };
