@@ -576,5 +576,31 @@ Mesh* Mesh::generateStar3D(GLdouble re, GLuint np, GLdouble h)
 
 }
 
+Mesh* Mesh::generateStar3DTexCor(GLdouble re, GLuint np, GLdouble h)
+{
+	Mesh* ret = Mesh::generateStar3D(re,np,h);
+
+	ret->vTexCoords.reserve(ret->mNumVertices);
+
+	return ret;
+	//for (int i = 0; i < (ret->mNumVertices - 2) / 2; i++) {
+	//	// circunferencia grande
+	//	x = re * cos(angleIni);
+	//	y = re * sin(angleIni);
+
+	//	// circunferencia pequeña
+	//	xi = ri * cos(angleIniInter);
+	//	yi = ri * sin(angleIniInter);
+
+	//	ret->vVertices.emplace_back(x, y, h);
+	//	ret->vVertices.emplace_back(xi, yi, h);
+
+	//	angleIni += angleToSum * 2;
+	//	angleIniInter += angleToSum * 2;
+	//}
+
+	
+}
+
 
 
