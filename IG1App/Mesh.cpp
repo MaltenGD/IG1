@@ -486,7 +486,7 @@ Mesh* Mesh::generateStar3D(GLdouble re, GLuint np, GLdouble h)
 	Mesh* ret = new Mesh();
 
 	ret->mPrimitive = GL_TRIANGLE_FAN;
-	ret->mNumVertices = np + 1;
+	ret->mNumVertices = (2 * np) + 2;
 
 	GLdouble ri = re / 2;
 
@@ -495,11 +495,11 @@ Mesh* Mesh::generateStar3D(GLdouble re, GLuint np, GLdouble h)
 
 	constexpr GLdouble PI = glm::pi<GLdouble>();
 
-	const GLdouble rotationFactor = 2 * PI / (ret->mNumVertices - 1);
+	const GLdouble rotationFactor = 2 * PI / (ret->mNumVertices/2 - 1);
 
 	GLdouble actualRotation = PI * 0.5; // Empieza en Pi medios (Pi/2)
 
-	for (int i = 0; i < ret->mNumVertices - 1; ++i)
+	for (int i = 0; i < ret->mNumVertices / 2 ; ++i)
 	{
 		GLdouble x = 0, y = 0;
 
@@ -517,7 +517,7 @@ Mesh* Mesh::generateStar3D(GLdouble re, GLuint np, GLdouble h)
 		actualRotation += rotationFactor;
 	}
 
-	ret->vVertices.emplace_back(re * cos(PI * 0.5),re * sin(PI * 0.5), h);
+	//ret->vVertices.emplace_back(ret->vVertices[1]);
 
 	return ret;
 }
