@@ -132,6 +132,7 @@
     <ClInclude Include="Entity\Cube.h" />
     <ClInclude Include="Entity.h" />
     <ClInclude Include="Entity\Ground.h" />
+    <ClInclude Include="GlassParapet.h" />
     <ClInclude Include="IG1App.h" />
     <ClInclude Include="Mesh.h" />
     <ClInclude Include="Image.h" />
@@ -158,6 +159,7 @@
     <ClCompile Include="Entity\Cube.cpp" />
     <ClCompile Include="Entity.cpp" />
     <ClCompile Include="Entity\Ground.cpp" />
+    <ClCompile Include="GlassParapet.cpp" />
     <ClCompile Include="IG1App.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="Mesh.cpp" />

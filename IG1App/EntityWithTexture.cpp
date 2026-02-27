@@ -7,7 +7,7 @@ EntityWithTexture::EntityWithTexture(const char* texture,const char* shader) :
     mTexture(new Texture())
 {
     //mTexture = new Texture();
-    mTexture->load(texture);
+    mTexture->load(texture,128);
 	mShader = Shader::get(shader);
 }
 

@@ -16,15 +16,17 @@ void Star3D::render(const glm::mat4& modelViewMat) const
 		if (mTexture != nullptr)
 		{
 			mTexture->bind();   // delante
+
 			mShader->setUniform("modulate", mModulate);
 			upload(aMat);
 			mMesh->render();
 
 			glm::mat4 new_model = glm::scale(mModelMat, glm::vec3(1, 1, -1));
-			mShader->setUniform("modulate", mModulate);
+
 			aMat = modelViewMat * new_model;
 			upload(aMat);
 			mMesh->render();
+
 			mTexture->unbind();
 		}
 		else mMesh->render();

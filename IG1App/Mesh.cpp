@@ -553,30 +553,6 @@ Mesh* Mesh::generateStar3DTexCor(GLdouble re, GLuint np, GLdouble h)
 
 	ret->vTexCoords.emplace_back(ret->vTexCoords[1]);
 
-	//ret->vTexCoords.emplace_back(0, 1);
-	//ret->vTexCoords.emplace_back(0, 1);
-
-
-	//ret->vTexCoords.emplace_back(0, mid);
-	//ret->vTexCoords.emplace_back(0, 1); //morado
-
-	//ret->vTexCoords.emplace_back(0, mid);
-	//ret->vTexCoords.emplace_back(0, 0);
-
-	//ret->vTexCoords.emplace_back(0, mid); // azul oscuro
-	//ret->vTexCoords.emplace_back(0, 1);
-
-	//ret->vTexCoords.emplace_back(0, mid);
-	//ret->vTexCoords.emplace_back(0, 0);
-	//ret->vTexCoords.emplace_back(0, mid);
-
-	//ret->vTexCoords.emplace_back(1, 0);
-	//ret->vTexCoords.emplace_back(1, mid);
-	//ret->vTexCoords.emplace_back(1, 1);
-	//ret->vTexCoords.emplace_back(mid, 1);
-
-	//ret->vTexCoords.emplace_back(0, mid);
-	//ret->vTexCoords.emplace_back(0, 0);
 	return ret;
 }
 
