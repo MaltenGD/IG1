@@ -1,7 +1,7 @@
 #include "GlassParapet.h"
 #include "Mesh.h"
 using namespace glm;
-GlassParapet::GlassParapet(GLdouble length, const char* texture, GLint alpha) :
+GlassParapet::GlassParapet(GLdouble length, const char* texture, GLubyte alpha) :
 	EntityWithTexture(texture,alpha)
 {
 	mMesh = Mesh::generateBoxOutlineTexCor(length);

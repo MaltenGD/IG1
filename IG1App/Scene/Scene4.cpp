@@ -19,7 +19,7 @@ Scene4::init() // ESCENA VAC�A
 	//gObjects.push_back(new Ground(400.0, "../assets/images/baldosaC.png"));
 	//gObjects.push_back(new Ground(400.0, tex));
 	//gObjects.push_back(new BoxOutline(200,"../assets/images/papelE.png", "../assets/images/container.jpg"));
-	gObjects.push_back(new GlassParapet(200, "../assets/images/windowC.png"));
+	gObjects.push_back(new GlassParapet(200, "../assets/images/windowC.png", 128));
 }
 
 void Scene4::update()

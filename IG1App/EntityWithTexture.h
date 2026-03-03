@@ -10,7 +10,7 @@ protected:
 public:
 
 	EntityWithTexture(const char* texture,const char* shader = "texture");
-	EntityWithTexture(const char* texture,GLint alpha,const char* shader = "texture");
+	EntityWithTexture(const char* texture, GLubyte alpha,const char* shader = "texture");
 	EntityWithTexture(Texture* texture,const char* shader = "texture");
 	~EntityWithTexture();
 	void setTexture(Texture* tex);

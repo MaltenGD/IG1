@@ -10,7 +10,7 @@ EntityWithTexture::EntityWithTexture(const char* texture,const char* shader) :
 	mShader = Shader::get(shader);
 }
 
-EntityWithTexture::EntityWithTexture(const char* texture, GLint alpha, const char* shader):
+EntityWithTexture::EntityWithTexture(const char* texture, GLubyte alpha, const char* shader):
 mModulate(false),
 mTexture(new Texture())
 {
