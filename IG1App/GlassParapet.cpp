@@ -1,9 +1,10 @@
 #include "GlassParapet.h"
 #include "Mesh.h"
 using namespace glm;
-GlassParapet::GlassParapet(GLdouble length, const char* texture, GLubyte alpha = 255) : EntityWithTexture(alpha)
+GlassParapet::GlassParapet(GLdouble length, const char* texture, GLubyte alpha = 255) : EntityWithTexture(texture, alpha)
 {
 	mMesh = Mesh::generateBoxOutlineTexCor(length);
+	mModelMat = glm::scale(mModelMat, glm::vec3(1, 0.25f, 1));
 
 }
 
@@ -21,7 +22,6 @@ void GlassParapet::render(const glm::mat4& modelViewMat) const
 
 		if (mTexture != nullptr)
 		{
-			glEnable(GL_DEPTH_TEST); //Primero
 			glDepthMask(GL_FALSE);
 
 			glEnable(GL_BLEND);
@@ -37,7 +37,6 @@ void GlassParapet::render(const glm::mat4& modelViewMat) const
 			mTexture->unbind();
 			glDisable(GL_BLEND);
 			glDepthMask(GL_TRUE);
-			glDisable(GL_DEPTH_TEST);
 		}
 		else mMesh->render();
 	}

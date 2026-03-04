@@ -11,6 +11,11 @@ Abs_Entity::upload(const mat4& modelViewMat) const
 	mShader->setUniform("modelView", modelViewMat);
 }
 
+void Abs_Entity::moveTo(glm::vec3& coordinates)
+{
+	mModelMat = glm::translate(mModelMat, coordinates);
+}
+
 Abs_Entity::~Abs_Entity()
 {
 	delete mMesh;

@@ -38,6 +38,7 @@ protected:
 
 	// transfers modelViewMat to the GPU
 	virtual void upload(const glm::mat4& mModelViewMat) const;
+	void moveTo(glm::vec3& coordinates);
 };
 
 class EntityWithColors : public Abs_Entity
