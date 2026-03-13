@@ -14,11 +14,18 @@ Star3D::Star3D(GLdouble radioExterior, GLuint numPuntas, GLdouble altura, const 
 
 void Star3D::update()
 {
-    mAngle += 1.0f;
+    /*mAngle += 1.0f;
     glm::mat4 T = glm::translate(glm::mat4(1.0f), mCoordinates);
     glm::mat4 R = glm::rotate(glm::mat4(1.0f), glm::radians(mAngle), glm::vec3(0, 1, 0)) * glm::rotate(glm::mat4(1.0f), glm::radians(mAngle), glm::vec3(0, 0, 1));
     mModelMat = T * R;
-    mModelMat180X = T * R * glm::rotate(glm::mat4(1.0f), glm::pi<float>(), glm::vec3(1, 0, 0));
+    mModelMat180X = T * R * glm::rotate(glm::mat4(1.0f), glm::pi<float>(), glm::vec3(-1, 0, 0));*/
+
+    mAngle += 1.0f;
+    glm::mat4 T = glm::translate(glm::mat4(1.0f), mCoordinates);
+    glm::mat4 R = glm::rotate(glm::mat4(1.0f), glm::radians(mAngle), glm::vec3(0, 1, 0)) * glm::rotate(glm::mat4(1.0f), glm::radians(mAngle), glm::vec3(0, 0, 1));
+    glm::mat4 R180x = glm::rotate(glm::mat4(1.0f), glm::radians(mAngle), glm::vec3(0, 1, 0)) * glm::rotate(glm::mat4(1.0f), glm::radians(-mAngle), glm::vec3(0, 0, 1)) * glm::rotate(glm::mat4(1.0f), glm::pi<float>(), glm::vec3(1, 0, 0));
+    mModelMat = T * R;
+    mModelMat180X = T * R180x;
 }
 
 void Star3D::render(const glm::mat4& modelViewMat) const
