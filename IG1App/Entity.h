@@ -27,6 +27,10 @@ public:
 	glm::mat4 const& modelMat() const { return mModelMat; };
 	void setModelMat(glm::mat4 const& aMat) { mModelMat = aMat; };
 
+	//Movimiento afín.
+	void moveTo(const glm::vec3& coordinates);
+	void rotate(const glm::vec3& scale);
+
 	// load or unload entity data into the GPU
 	void load();
 	void unload();
@@ -38,7 +42,7 @@ protected:
 
 	// transfers modelViewMat to the GPU
 	virtual void upload(const glm::mat4& mModelViewMat) const;
-	void moveTo(glm::vec3& coordinates);
+	
 };
 
 class EntityWithColors : public Abs_Entity

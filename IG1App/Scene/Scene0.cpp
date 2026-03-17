@@ -10,6 +10,6 @@ Scene0::init() // ESCENA VACÍA
 	// Textures
 
 	// Graphics objects (entities) of the scene
-	gObjects.push_back(new RGBAxes(400.0));
+	opaque_gObjects.push_back(new RGBAxes(400.0));
 
 }

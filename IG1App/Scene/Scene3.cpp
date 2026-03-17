@@ -6,8 +6,8 @@ Scene3::init()
 {
 	setGL(); // OpenGL settings
 
-	gObjects.push_back(new RGBAxes(400.0));
-	gObjects.push_back(new RGBCube(100));
+	opaque_gObjects.push_back(new RGBAxes(400.0));
+	opaque_gObjects.push_back(new RGBCube(100));
 
 	
 

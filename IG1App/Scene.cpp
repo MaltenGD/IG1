@@ -14,23 +14,34 @@ void
 Scene::destroy()
 { // release memory and resources
 
-	for (Abs_Entity* el : gObjects)
+	for (Abs_Entity* el : opaque_gObjects)
 		delete el;
 
-	gObjects.clear();
+	opaque_gObjects.clear();
+
+	for (Abs_Entity* el : translucid_gObjects)
+		delete el;
+
+	translucid_gObjects.clear();
 }
 
 void
 Scene::load()
 {
-	for (Abs_Entity* obj : gObjects)
+	for (Abs_Entity* obj : opaque_gObjects)
+		obj->load();
+
+	for (Abs_Entity* obj : translucid_gObjects)
 		obj->load();
 }
 
 void
 Scene::unload()
 {
-	for (Abs_Entity* obj : gObjects)
+	for (Abs_Entity* obj : opaque_gObjects)
+		obj->unload();
+
+	for (Abs_Entity* obj : translucid_gObjects)
 		obj->unload();
 }
 
@@ -49,7 +60,11 @@ Scene::resetGL()
 }
 
 void Scene::update() {
-	for (Abs_Entity* entity : gObjects)
+	for (Abs_Entity* entity : opaque_gObjects)
+	{
+		entity->update();
+	}
+	for (Abs_Entity* entity : translucid_gObjects)
 	{
 		entity->update();
 	}
@@ -61,6 +76,9 @@ Scene::render(Camera const& cam) const
 {
 	cam.upload();
 
-	for (Abs_Entity* el : gObjects)
+	for (Abs_Entity* el : opaque_gObjects)
+		el->render(cam.viewMat());
+
+	for (Abs_Entity* el : translucid_gObjects)
 		el->render(cam.viewMat());
 }

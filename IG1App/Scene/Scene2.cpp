@@ -23,9 +23,9 @@ Scene2::init()
 	const GLfloat circleDiameter = squareSideLenth * glm::sqrt(2.0f);
 
 	// Graphics objects (entities) of the scene
-	gObjects.push_back(new RGBAxes(400.0));
-	gObjects.push_back(new RGBTriangle(TriangleRadius, TriangleX, TriangleY, circleDiameter)); //Est?en la posición {R,0} siendo R el diámetro del
-	gObjects.push_back(new RGBRectangle(squareSideLenth, squareSideLenth));
-	gObjects.push_back(new RegularPolygon(60, circleDiameter, {1,0,1,1}));
+	opaque_gObjects.push_back(new RGBAxes(400.0));
+	opaque_gObjects.push_back(new RGBTriangle(TriangleRadius, TriangleX, TriangleY, circleDiameter)); //Est?en la posición {R,0} siendo R el diámetro del
+	opaque_gObjects.push_back(new RGBRectangle(squareSideLenth, squareSideLenth));
+	opaque_gObjects.push_back(new RegularPolygon(60, circleDiameter, {1,0,1,1}));
 
 }

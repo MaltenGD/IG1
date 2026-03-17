@@ -13,10 +13,10 @@ protected:
 	bool mModulate = false;
 public:
 
-	EntityWithTexture(const char* texture,const char* shader = "texture");
-	EntityWithTexture(const char* texture, GLubyte alpha,const char* shader = "texture");
-	EntityWithTexture(Texture* texture, GLubyte alpha = 255,const char* shader = "texture");
-	EntityWithTexture(GLubyte alpha = 255, const char* shader = "texture");
+	EntityWithTexture(const char* texture);
+	EntityWithTexture(const char* texture, GLubyte alpha);
+	EntityWithTexture(Texture* texture, GLubyte alpha = 255);
+	EntityWithTexture(GLubyte alpha = 255);
 	~EntityWithTexture();
 	void setTexture(Texture* tex);
 	virtual void render(const glm::mat4& modelViewMat) const override;

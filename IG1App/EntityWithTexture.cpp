@@ -3,34 +3,34 @@
 #include <string>
 using namespace glm;
 
-EntityWithTexture::EntityWithTexture(const char* texture,const char* shader) :
+EntityWithTexture::EntityWithTexture(const char* texture) :
     mModulate(false),
     mTexture(new Texture())
 {
     mTexture->load(texture);
-	mShader = Shader::get(shader);
+	mShader = Shader::get("texture");
 }
 
-EntityWithTexture::EntityWithTexture(const char* texture, GLubyte alpha, const char* shader):
+EntityWithTexture::EntityWithTexture(const char* texture, GLubyte alpha):
 mModulate(false),
 mTexture(new Texture())
 {
     mTexture->load(texture,alpha);
-    mShader = Shader::get(shader);
+    mShader = Shader::get("texture");
 }
 
-EntityWithTexture::EntityWithTexture(Texture* texture, GLubyte alpha, const char* shader):
+EntityWithTexture::EntityWithTexture(Texture* texture, GLubyte alpha):
     mModulate(false),
     mTexture(texture)
 {
-    mShader = Shader::get(shader);
+    mShader = Shader::get("texture");
 }
 
-EntityWithTexture::EntityWithTexture(GLubyte alpha, const char* shader) :
+EntityWithTexture::EntityWithTexture(GLubyte alpha) :
     mModulate(false),
     mTexture(new Texture())
 {
-    mShader = Shader::get(shader);
+    mShader = Shader::get("texture");
 }
 
 EntityWithTexture::~EntityWithTexture()

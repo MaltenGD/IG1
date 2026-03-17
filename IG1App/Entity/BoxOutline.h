@@ -15,7 +15,7 @@ public:
 	void render(const glm::mat4& modelViewMat) const override;
 
 private:
-	glm::vec3 mCoordinates{ 300, 10, -200 };
+	glm::vec3 mCoordinates{ 150, 10, -100 };
 };
 
 #endif // BOX_OUTLINE_H

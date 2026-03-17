@@ -11,9 +11,14 @@ Abs_Entity::upload(const mat4& modelViewMat) const
 	mShader->setUniform("modelView", modelViewMat);
 }
 
-void Abs_Entity::moveTo(glm::vec3& coordinates)
+void Abs_Entity::moveTo(const glm::vec3& coordinates)
 {
 	mModelMat = glm::translate(mModelMat, coordinates);
+}
+
+void Abs_Entity::rotate(const glm::vec3& scale)
+{
+	mModelMat = glm::scale(mModelMat, scale);
 }
 
 Abs_Entity::~Abs_Entity()
