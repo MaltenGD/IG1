@@ -79,6 +79,14 @@ Scene::render(Camera const& cam) const
 	for (Abs_Entity* el : opaque_gObjects)
 		el->render(cam.viewMat());
 
+	glDepthMask(GL_FALSE);
+
+	glEnable(GL_BLEND);
+	glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA); // De momento los objetos traslucidos comparte la misma funcion de blending, si alguien utiliza algo especial con que lo cambie en su render basta
+
 	for (Abs_Entity* el : translucid_gObjects)
 		el->render(cam.viewMat());
+
+	glDisable(GL_BLEND);
+	glDepthMask(GL_TRUE);
 }
