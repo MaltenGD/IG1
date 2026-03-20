@@ -3,6 +3,7 @@
 
 #include <glm/gtc/matrix_transform.hpp>
 #include <glm/gtc/type_ptr.hpp>
+#include <glm/gtc/matrix_access.hpp>
 
 using namespace glm;
 
@@ -37,6 +38,7 @@ Camera::set2D()
 	mLook = {0, 0, 0};
 	mUp = {0, 1, 0};
 	setVM();
+	setAxes();
 }
 
 void
@@ -46,6 +48,8 @@ Camera::set3D()
 	mLook = {0, 10, 0};
 	mUp = {0, 1, 0};
 	setVM();
+	setAxes();
+	changePrj();
 }
 
 void
@@ -53,6 +57,7 @@ Camera::pitch(GLfloat a)
 {
 	mViewMat = rotate(mViewMat, glm::radians(a), glm::vec3(1.0, 0, 0));
 	// glm::rotate returns mViewMat * rotationMatrix
+	setAxes();
 }
 
 void
@@ -60,6 +65,7 @@ Camera::yaw(GLfloat a)
 {
 	mViewMat = rotate(mViewMat, glm::radians(a), glm::vec3(0, 1.0, 0));
 	// glm::rotate returns mViewMat * rotationMatrix
+	setAxes();
 }
 
 void
@@ -67,6 +73,7 @@ Camera::roll(GLfloat a)
 {
 	mViewMat = rotate(mViewMat, glm::radians(a), glm::vec3(0, 0, 1.0));
 	// glm::rotate returns mViewMat * rotationMatrix
+	setAxes();
 }
 
 void
@@ -114,4 +121,38 @@ Camera::upload() const
 	mViewPort->upload();
 	uploadVM();
 	uploadPM();
+}
+
+void Camera::setAxes()
+{
+	mRight = row(mViewMat,0);
+	mUpward = row(mViewMat, 1);
+	mFront = -row(mViewMat, 2);
+	
+}
+
+void Camera::moveLR(GLfloat cs)
+{
+	mEye += mRight * cs;
+	mLook += mRight * cs;
+	setVM();
+}
+
+void Camera::moveFB(GLfloat cs)
+{
+	mEye += mFront* cs;
+	mLook += mFront * cs;
+	setVM();
+}
+
+void Camera::moveUD(GLfloat cs)
+{
+	mEye += mUpward* cs;
+	mLook += mUpward* cs;
+	setVM();
+}
+
+void Camera::changePrj()
+{
+	mProjMat = frustum<float>(-500,500,-250,250,mNearVal,10000);
 }

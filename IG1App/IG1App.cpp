@@ -42,42 +42,6 @@ IG1App::close()
 void
 IG1App::run() // enters the main event processing loop
 {
-	//if (mWindow == 0) // if not intilialized
-	//	init();
-
-	//// IG1App main loop
-	//while (!glfwWindowShouldClose(mWindow))
-	//{
-
-	//	if (mUpdateEnabled)
-	//	{
-	//		if (glfwGetTime() >= mNextUpdate)
-	//		{
-	//			//std::cout << glfwGetTime() << std::endl;
-	//			mScenes[mCurrentScene]->update();
-	//			mNextUpdate += FRAME_DURATION;
-	//			mNeedsRedisplay = true; // fuk
-	//		}
-	//	}
-	//	// Redisplay the window if needed
-	//	if (mNeedsRedisplay)
-	//	{
-	//		display();
-	//		mNeedsRedisplay = false;
-	//	}
-
-	//	// Stop and wait for new events
-	//	if (mUpdateEnabled)
-	//	{
-	//		double care = mNextUpdate - glfwGetTime();
-	//		if (care < 0) care = 0;
-	//		glfwWaitEventsTimeout(care);
-	//	}
-	//	else glfwWaitEvents();
-
-	//}
-
-	//destroy();
 
 	if (mWindow == 0) // if not intilialized
 		init();
@@ -254,6 +218,24 @@ IG1App::key(unsigned int key)
 			break;
 		case 'U':
 			mToogleUpdate = !mToogleUpdate;
+			break;
+		case 'a':
+			mCamera->moveLR(-100);
+			break;
+		case 'd':
+			mCamera->moveLR(100);
+			break;
+		case 'w':
+			mCamera->moveUD(100);
+			break;
+		case 's':
+			mCamera->moveUD(-100);
+			break;
+		case 'W':
+			mCamera->moveFB(100);
+			break;
+		case 'S':
+			mCamera->moveFB(-100);
 			break;
 		default:
 			if (key >= '0' && key <= '9') {
