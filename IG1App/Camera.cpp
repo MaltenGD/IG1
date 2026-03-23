@@ -75,6 +75,34 @@ Camera::roll(GLfloat a)
 	setAxes();
 }
 
+void Camera::pitchReal(GLfloat cs)
+{
+	// Rotata mLook alrededor del eje de mRight (sin cambiar mEye)
+	glm::vec3 dir = mLook - mEye;
+	dir = glm::rotate(glm::mat4(1.0f), glm::radians(cs), mRight) * glm::vec4(dir, 0.0f);
+	mLook = mEye + dir;
+	setVM();
+	setAxes();
+}
+
+void Camera::yawReal(GLfloat cs)
+{
+	// Rota mLook alrededor del eje de mUpg (sin cambiar mEye)
+	glm::vec3 dir = mLook - mEye;
+	dir = glm::rotate(glm::mat4(1.0f), glm::radians(cs), mUpward) * glm::vec4(dir, 0.0f);
+	mLook = mEye + dir;
+	setVM();
+	setAxes();
+}
+
+void Camera::rollReal(GLfloat cs)
+{
+	// Rota mUp alrededor del eje de mFront (sin cambiar mEye)
+	mUp = glm::rotate(glm::mat4(1.0f), glm::radians(cs), mFront) * glm::vec4(mUp, 0.0f);
+	setVM();
+	setAxes();
+}
+
 void
 Camera::setSize(GLdouble xw, GLdouble yh)
 {
