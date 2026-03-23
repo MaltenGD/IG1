@@ -10,9 +10,11 @@ void
 Scene4::init()
 {
 	setGL(); // OpenGL settings
-
-	opaque_gObjects.push_back(new Photo(50.0,50.0));
 	opaque_gObjects.push_back(new RGBAxes(400.0));
+
+	Photo* foto = new Photo(50.0, 50.0);
+	foto->moveTo({ 0, 10, 0 });
+	opaque_gObjects.push_back(foto);
 	opaque_gObjects.push_back(new Ground(250, "../assets/images/baldosaC.png"));
 	opaque_gObjects.push_back(new BoxOutline(100,"../assets/images/papelE.png", "../assets/images/container.jpg"));
 	GlassParapet* glassParapet = new GlassParapet(500, "../assets/images/windowC.png", 128);

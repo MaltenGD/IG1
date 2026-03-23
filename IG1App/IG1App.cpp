@@ -237,6 +237,9 @@ IG1App::key(unsigned int key)
 		case 'S':
 			mCamera->moveFB(-100);
 			break;
+		case 'p':
+			mCamera->changePrj();
+			break;
 		default:
 			if (key >= '0' && key <= '9') {
 				if (changeScene(key - '0')) break;

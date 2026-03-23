@@ -8,13 +8,13 @@
 using namespace glm;
 
 Camera::Camera(Viewport* vp)
-  : mViewMat(1.0)
-  , mProjMat(1.0)
-  , xRight(vp->width() / 2.0)
-  , xLeft(-xRight)
-  , yTop(vp->height() / 2.0)
-  , yBot(-yTop)
-  , mViewPort(vp)
+	: mViewMat(1.0)
+	, mProjMat(1.0)
+	, xRight(vp->width() / 2.0)
+	, xLeft(-xRight)
+	, yTop(vp->height() / 2.0)
+	, yBot(-yTop)
+	, mViewPort(vp)
 {
 	setPM();
 }
@@ -34,9 +34,9 @@ Camera::setVM()
 void
 Camera::set2D()
 {
-	mEye = {0, 0, 500};
-	mLook = {0, 0, 0};
-	mUp = {0, 1, 0};
+	mEye = { 0, 0, 500 };
+	mLook = { 0, 0, 0 };
+	mUp = { 0, 1, 0 };
 	setVM();
 	setAxes();
 }
@@ -44,12 +44,11 @@ Camera::set2D()
 void
 Camera::set3D()
 {
-	mEye = {500, 500, 500};
-	mLook = {0, 10, 0};
-	mUp = {0, 1, 0};
+	mEye = { 500, 500, 500 };
+	mLook = { 0, 10, 0 };
+	mUp = { 0, 1, 0 };
 	setVM();
 	setAxes();
-	changePrj();
 }
 
 void
@@ -100,12 +99,22 @@ Camera::setPM()
 {
 	if (bOrto) { //  if orthogonal projection
 		mProjMat = ortho(xLeft * mScaleFact,
-		                 xRight * mScaleFact,
-		                 yBot * mScaleFact,
-		                 yTop * mScaleFact,
-		                 mNearVal,
-		                 mFarVal);
+			xRight * mScaleFact,
+			yBot * mScaleFact,
+			yTop * mScaleFact,
+			mNearVal,
+			mFarVal);
 		// glm::ortho defines the orthogonal projection matrix
+	}
+	else {
+		// Se usa mScaleFact para que el zoom funcione en ambos modos
+		mProjMat = frustum<float>(
+			-PERSP_HALF_W * mScaleFact,
+			PERSP_HALF_W * mScaleFact,
+			-PERSP_HALF_H * mScaleFact,
+			PERSP_HALF_H * mScaleFact,
+			mNearVal,
+			mFarVal);
 	}
 }
 
@@ -125,10 +134,10 @@ Camera::upload() const
 
 void Camera::setAxes()
 {
-	mRight = row(mViewMat,0);
+	mRight = row(mViewMat, 0);
 	mUpward = row(mViewMat, 1);
 	mFront = -row(mViewMat, 2);
-	
+
 }
 
 void Camera::moveLR(GLfloat cs)
@@ -140,19 +149,20 @@ void Camera::moveLR(GLfloat cs)
 
 void Camera::moveFB(GLfloat cs)
 {
-	mEye += mFront* cs;
+	mEye += mFront * cs;
 	mLook += mFront * cs;
 	setVM();
 }
 
 void Camera::moveUD(GLfloat cs)
 {
-	mEye += mUpward* cs;
-	mLook += mUpward* cs;
+	mEye += mUpward * cs;
+	mLook += mUpward * cs;
 	setVM();
 }
 
 void Camera::changePrj()
 {
-	mProjMat = frustum<float>(-500,500,-250,250,mNearVal,10000);
+	bOrto = !bOrto;
+	setPM();
 }

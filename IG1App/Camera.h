@@ -52,10 +52,11 @@ public:
 protected:
 
 	glm::vec3 mRight, mUpward, mFront;
+	bool isOrtogonal = true;
 
-	glm::vec3 mEye = {0.0, 0.0, 500.0}; // camera's position
-	glm::vec3 mLook = {0.0, 0.0, 0.0};  // target's position
-	glm::vec3 mUp = {0.0, 1.0, 0.0};    // the up vector
+	glm::vec3 mEye = { 0.0, 0.0, 500.0 }; // camera's position
+	glm::vec3 mLook = { 0.0, 0.0, 0.0 };  // target's position
+	glm::vec3 mUp = { 0.0, 1.0, 0.0 };    // the up vector
 
 	glm::mat4 mViewMat;   // view matrix = inverse of modeling matrix
 	void uploadVM() const; // transfers viewMat to the GPU
@@ -64,9 +65,12 @@ protected:
 	void uploadPM() const; // transfers projMat to the GPU
 
 	GLfloat xRight, xLeft, yTop, yBot;     // size of scene visible area
-	GLfloat mNearVal = 20, mFarVal = 10000; // view volume
-	GLfloat mScaleFact = 1;                // scale factor
-	bool bOrto = true;                      // orthogonal or perspective projection
+	GLfloat mNearVal = 1, mFarVal = 10000; // view volume
+	GLfloat mScaleFact = 1;                 // scale factor
+	bool bOrto = true;                       // orthogonal or perspective projection
+
+	static constexpr GLfloat PERSP_HALF_W = 0.7002f;
+	static constexpr GLfloat PERSP_HALF_H = 0.3501f;
 
 	Viewport* mViewPort; // the viewport
 
