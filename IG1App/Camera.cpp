@@ -37,6 +37,8 @@ Camera::set2D()
 	mEye = { 0, 0, 500 };
 	mLook = { 0, 0, 0 };
 	mUp = { 0, 1, 0 };
+	mAng = 90.0f;
+	mRadio = 500;
 	setVM();
 	setAxes();
 }
@@ -47,6 +49,10 @@ Camera::set3D()
 	mEye = { 500, 500, 500 };
 	mLook = { 0, 10, 0 };
 	mUp = { 0, 1, 0 };
+	GLdouble dx = mEye.x - mLook.x;
+	GLdouble dz = mEye.z - mLook.z;
+	mRadio = sqrt(dx * dx + dz * dz);
+	mAng = glm::degrees(atan2(-dz, dx));
 	setVM();
 	setAxes();
 }
@@ -99,6 +105,27 @@ void Camera::rollReal(GLfloat cs)
 {
 	// Rota mUp alrededor del eje de mFront (sin cambiar mEye)
 	mUp = glm::rotate(glm::mat4(1.0f), glm::radians(cs), mFront) * glm::vec4(mUp, 0.0f);
+	setVM();
+	setAxes();
+}
+
+void Camera::orbit(GLfloat incAng, GLfloat incY)
+{
+	mAng += incAng;
+	mEye.x = mLook.x + cos(radians(mAng)) * mRadio;
+	mEye.z = mLook.z - sin(radians(mAng)) * mRadio;
+	mEye.y += incY;
+	setVM();
+	setAxes();
+}
+
+void Camera::setCenital()
+{
+	mEye = { 0, 500, 0 };
+	mLook = { 0, 10, 0 };
+	mUp = { 0, 0, -1 };
+	mAng = 0;
+	mRadio = 0;
 	setVM();
 	setAxes();
 }
@@ -164,7 +191,7 @@ void Camera::setAxes()
 {
 	mRight = row(mViewMat, 0);
 	mUpward = row(mViewMat, 1);
-	mFront = -row(mViewMat, 2);
+	mFront = -row(mViewMat, 2); // Por que narices OpenGL mira a -Z
 
 }
 

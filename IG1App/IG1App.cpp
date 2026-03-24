@@ -1,4 +1,4 @@
-#include "IG1App.h"
+ï»¿#include "IG1App.h"
 
 #include "Scene0.h"
 
@@ -63,7 +63,7 @@ IG1App::run() // enters the main event processing loop
 			//Se calcula el nuevo tiempo tras el computo anterior
 			GLdouble postUpdateTime = glfwGetTime();
 
-			//Si la variación de tiempo es menor que FrameDuration se hace un delay del resto, en caso contrario se continua con el bucle
+			//Si la variaciÃ³n de tiempo es menor que FrameDuration se hace un delay del resto, en caso contrario se continua con el bucle
 			mNextUpdate = postUpdateTime - preUpdateTime;
 
 			mUpdate = false; // Para la "u" MINUSCULA 
@@ -95,7 +95,8 @@ IG1App::init()
 	// allocate memory and resources
 	mViewPort = new Viewport(mWinW, mWinH);
 	mCamera = new Camera(mViewPort);
-	mScenes.push_back(new Scene0); // Escena vacía (solo tiene RGBAXES) que sirve para tener las escenas X en el indice X de mScenes
+	mCenitalCam = new Camera(mViewPort);
+	mScenes.push_back(new Scene0); // Escena vacÃ­a (solo tiene RGBAXES) que sirve para tener las escenas X en el indice X de mScenes
 	mScenes.push_back(new Scene1);
 	mScenes.push_back(new Scene2);
 	mScenes.push_back(new Scene3);
@@ -105,6 +106,9 @@ IG1App::init()
 
 
 	mCamera->set2D();
+	mCenitalCam->set3D();
+	mCenitalCam->setCenital();
+
 	for (Scene* escena : mScenes)
 	{
 		escena->init();
@@ -144,8 +148,13 @@ IG1App::iniWinOpenGL()
 	// Callback registration
 	glfwSetWindowSizeCallback(mWindow, s_resize);
 	glfwSetCharCallback(mWindow, s_key);
+	/*glfwSetCursorPosCallback(mWindow, s_mouse);*/
 	glfwSetKeyCallback(mWindow, s_specialkey);
 	glfwSetWindowRefreshCallback(mWindow, s_display);
+
+	glfwSetCursorPosCallback(mWindow, s_motion);
+	glfwSetMouseButtonCallback(mWindow, s_mouse);
+	glfwSetScrollCallback(mWindow, s_mouseWheel);
 
 	// Error message callback (all messages)
 	glEnable(GL_DEBUG_OUTPUT);
@@ -165,6 +174,10 @@ IG1App::destroy()
 
 	delete mCamera;
 	mCamera = nullptr;
+
+	delete mCenitalCam;
+	mCenitalCam = nullptr;
+
 	delete mViewPort;
 	mViewPort = nullptr;
 
@@ -173,13 +186,33 @@ IG1App::destroy()
 
 void
 IG1App::display() const
-{ // double buffering
+{
+	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
-	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT); // clears the back buffer
+	if (!m2Vistas) {
+		// Solo 1 camara, el viewport ocupa toda la ventana
+		mViewPort->setPos(0, 0);
+		mViewPort->setSize(mWinW, mWinH);
+		mCamera->setSize(mWinW, mWinH);
+		mScenes[mCurrentScene]->render(*mCamera);
+	}
+	else {
+		mViewPort->setPos(0, 0);
+		mViewPort->setSize(mWinW / 2, mWinH);
+		mCamera->setSize(mWinW / 2, mWinH);
+		mScenes[mCurrentScene]->render(*mCamera);
 
-	mScenes[mCurrentScene]->render(*mCamera); // uploads the viewport and camera to the GPU
+		mViewPort->setPos(mWinW / 2, 0);
+		mViewPort->setSize(mWinW / 2, mWinH);
+		mCenitalCam->setSize(mWinW / 2, mWinH);
+		mScenes[mCurrentScene]->render(*mCenitalCam);
 
-	glfwSwapBuffers(mWindow); // swaps the front and back buffer
+		mViewPort->setPos(0, 0);
+		mViewPort->setSize(mWinW, mWinH);
+		mCamera->setSize(mWinW, mWinH);
+	}
+
+	glfwSwapBuffers(mWindow);
 }
 
 void
@@ -240,6 +273,10 @@ IG1App::key(unsigned int key)
 		case 'p':
 			mCamera->changePrj();
 			break;
+		case 'k':
+			m2Vistas = !m2Vistas;
+			break;
+			
 		default:
 			if (key >= '0' && key <= '9') {
 				if (changeScene(key - '0')) break;
@@ -293,6 +330,51 @@ IG1App::specialkey(int key, int scancode, int action, int mods)
 
 	if (need_redisplay)
 		mNeedsRedisplay = true;
+}
+
+void IG1App::mouse(int button, int state, int mods)
+{
+	if (state == GLFW_PRESS) {
+		mMouseButt = button;
+		glfwGetCursorPos(mWindow, &mMouseCoord.x, &mMouseCoord.y);
+	}
+	else {
+		mMouseButt = -1;
+	}
+}
+
+void IG1App::motion(double x, double y)
+{
+	// Si no se pulsa el boton no se hace nada
+	if (mMouseButt == -1) return;
+
+	glm::dvec2 newCoord = { x, y };
+	glm::dvec2 delta = newCoord - mMouseCoord;
+	mMouseCoord = newCoord;
+
+	if (mMouseButt == GLFW_MOUSE_BUTTON_RIGHT) {
+		mCamera->moveLR((GLfloat)delta.x * 0.5f);
+		mCamera->moveUD(-(GLfloat)delta.y * 0.5f);
+	}
+	else if (mMouseButt == GLFW_MOUSE_BUTTON_LEFT) {
+		mCamera->orbit((GLfloat)delta.x * 0.3f,  -(GLfloat)delta.y * 0.3f);
+	}
+
+	mNeedsRedisplay = true;
+}
+
+void IG1App::mouseWheel(double dx, double dy)
+{
+	bool ctrlPressed = (glfwGetKey(mWindow, GLFW_KEY_LEFT_CONTROL) == GLFW_PRESS || glfwGetKey(mWindow, GLFW_KEY_RIGHT_CONTROL) == GLFW_PRESS);
+
+	if (ctrlPressed) {
+		mCamera->setScale((GLfloat)dy * -0.05f);
+	}
+	else {
+		mCamera->moveFB((GLfloat)dy * 20.0f);
+	}
+
+	mNeedsRedisplay = true;
 }
 
 bool

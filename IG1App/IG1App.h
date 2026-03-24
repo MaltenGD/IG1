@@ -46,16 +46,24 @@ protected:
 	void key(unsigned int codepoint);          // keypress event
 	void specialkey(int key, int scancode, int action, int mods); // special keypress event
 
+	void mouse(int button, int state, int mods);
+	void motion(double x, double y);
+	void mouseWheel(double dx, double dy);
+
 	// static callbacks
 	static void s_display(GLFWwindow*) { s_ig1app.display(); };
 	static void s_resize(GLFWwindow*, int newWidth, int newHeight) { s_ig1app.resize(newWidth, newHeight); };
 	static void s_key(GLFWwindow* win, unsigned int codepoint) { s_ig1app.key(codepoint); };
+	static void s_mouse(GLFWwindow* win, int button, int state, int mods) { s_ig1app.mouse(button,state,mods); };
+	static void s_motion(GLFWwindow* win, double x, double y) { s_ig1app.motion(x,y); };
+	static void s_mouseWheel(GLFWwindow* win, double dx, double dy) { s_ig1app.mouseWheel(dx,dy); };
 	static void s_specialkey(GLFWwindow* win, int key, int scancode, int action, int mods) { s_ig1app.specialkey(key, scancode, action, mods); };
 
 	// Viewport position and size
 	Viewport* mViewPort = nullptr;
 	// Camera position, view volume and projection
 	Camera* mCamera = nullptr;
+	Camera* mCenitalCam = nullptr;
 	// Graphics objects are in the scenes
 	std::vector<Scene*> mScenes;
 	size_t mCurrentScene = 0;
@@ -68,6 +76,11 @@ protected:
 	//const GLfloat FRAME_DURATION = 1;
 	bool mToogleUpdate = false;
 	bool mUpdate = false;
+	bool m2Vistas = false;
+
+	glm::dvec2 mMouseCoord = { 0.0, 0.0 }; // última posición del cursor
+	int mMouseButt = -1;
+
 	GLdouble mNextUpdate; // No necesita inicializarse ya que su valor varía cada frame
 };
 
