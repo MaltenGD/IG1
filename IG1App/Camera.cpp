@@ -6,6 +6,7 @@
 #include <glm/gtc/matrix_access.hpp>
 
 using namespace glm;
+#include <iostream>
 
 Camera::Camera(Viewport* vp)
   : mViewMat(1.0)
@@ -49,7 +50,7 @@ Camera::set3D()
 	mUp = {0, 1, 0};
 	setVM();
 	setAxes();
-	changePrj();
+	//changePrj();
 }
 
 void
@@ -74,6 +75,28 @@ Camera::roll(GLfloat a)
 	mViewMat = rotate(mViewMat, glm::radians(a), glm::vec3(0, 0, 1.0));
 	// glm::rotate returns mViewMat * rotationMatrix
 	setAxes();
+}
+
+void Camera::pitchReal(GLfloat cs)
+{
+	// rotar u (X)
+	// Up dand down	
+	mLook += mUpward * cs;
+	setVM();
+}
+
+void Camera::yawReal(GLfloat cs)
+{
+	// rotar v (Y)
+	// derecha izquierda?????????
+	mLook += mRight * cs;
+	setVM();
+}
+
+void Camera::rollReal(GLfloat cs)
+{
+	std::cout << glm::dot(mRight, mUpward) << std::endl;
+	setVM();
 }
 
 void
@@ -107,6 +130,15 @@ Camera::setPM()
 		                 mFarVal);
 		// glm::ortho defines the orthogonal projection matrix
 	}
+	else
+	{
+		mProjMat = frustum<float>(xLeft,
+			xRight,
+			yBot,
+			yTop,
+			mNearVal * mScaleFact,
+			mFarVal * mScaleFact); //quizas esto al reves
+	}
 }
 
 void
@@ -128,7 +160,6 @@ void Camera::setAxes()
 	mRight = row(mViewMat,0);
 	mUpward = row(mViewMat, 1);
 	mFront = -row(mViewMat, 2);
-	
 }
 
 void Camera::moveLR(GLfloat cs)
@@ -154,5 +185,19 @@ void Camera::moveUD(GLfloat cs)
 
 void Camera::changePrj()
 {
-	mProjMat = frustum<float>(-500,500,-250,250,mNearVal,10000);
+	bOrto = !bOrto;
+	int width = viewPort().width()/2;
+	int height = viewPort().height()/2;
+	if (bOrto)
+	{
+		mProjMat = ortho<float>(-width, width,
+			-height, height,100, 10000);
+	}
+	else
+	{
+		mNearVal = 500;
+		mFarVal = 10000;
+		mProjMat = frustum<float>(-width, width, -height, height, mNearVal, mFarVal);
+	}
+
 }
