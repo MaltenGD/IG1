@@ -147,6 +147,10 @@ IG1App::iniWinOpenGL()
 	glfwSetKeyCallback(mWindow, s_specialkey);
 	glfwSetWindowRefreshCallback(mWindow, s_display);
 
+	glfwSetMouseButtonCallback(mWindow, s_mouse);
+	glfwSetCursorPosCallback(mWindow, s_motion);
+	glfwSetScrollCallback(mWindow, s_mouseWheel);
+
 	// Error message callback (all messages)
 	glEnable(GL_DEBUG_OUTPUT);
 	glDebugMessageControl(GL_DONT_CARE, GL_DONT_CARE, GL_DONT_CARE, 0u, 0, GL_TRUE);
@@ -177,9 +181,35 @@ IG1App::display() const
 
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT); // clears the back buffer
 
-	mScenes[mCurrentScene]->render(*mCamera); // uploads the viewport and camera to the GPU
+	if (m2Vistas)
+	{
+		std::cout << "2 view rn" << std::endl;
+		display2V();
+	}
+	else
+		mScenes[mCurrentScene]->render(*mCamera); // uploads the viewport and camera to the GPU
 
 	glfwSwapBuffers(mWindow); // swaps the front and back buffer
+}
+
+void IG1App::display2V() const
+{
+	Camera auxCam = *mCamera;
+	Viewport auxVP = *mViewPort;
+
+	mViewPort->setSize(mWinW / 2, mWinH);
+	auxCam.setSize(mViewPort->width(), mViewPort->height());
+	auxCam.setScale(-0.5);
+
+	mViewPort->setPos(0,0);
+	auxCam.set3D();
+	mScenes[mCurrentScene]->render(auxCam);
+
+	mViewPort->setPos(mWinW / 2,0);
+	auxCam.setCenital();
+	mScenes[mCurrentScene]->render(auxCam);
+
+	*mViewPort = auxVP; // reset del viewport
 }
 
 void
@@ -240,6 +270,12 @@ IG1App::key(unsigned int key)
 		case 'p':
 			mCamera->changePrj();
 			break;
+		case 'k':
+			std::cout << "Changing view" << std::endl;
+			m2Vistas = !m2Vistas;
+			//mCamera->orbit(0, 500);
+			//mCamera->setCenital();
+			break;
 		default:
 			if (key >= '0' && key <= '9') {
 				if (changeScene(key - '0')) break;
@@ -293,6 +329,82 @@ IG1App::specialkey(int key, int scancode, int action, int mods)
 
 	if (need_redisplay)
 		mNeedsRedisplay = true;
+}
+
+void IG1App::s_mouse(GLFWwindow* win, int button, int action, int mods)
+{
+	std::cout << "Pressing some mouse button" << std::endl;
+	s_ig1app.mouse(button, action, mods);
+}
+
+void IG1App::s_motion(GLFWwindow* win, double x, double y)
+{
+
+	s_ig1app.motion(x,y);
+}
+
+void IG1App::s_mouseWheel(GLFWwindow* win, double dx, double dy)
+{
+	s_ig1app.mouseWheel(dx,dy);
+}
+
+void IG1App::mouse(int button, int state, int mods)
+{
+	if (state == GLFW_PRESS)
+	{
+		if (button == GLFW_MOUSE_BUTTON_RIGHT || button == GLFW_MOUSE_BUTTON_LEFT)
+		{
+			//std::cout << "Pressing right mouse button" << std::endl;
+			mMouseButt = button;
+			//mMouseCoord = { 0,0 };
+		}
+	}
+	else
+	{
+		mMouseButt = -1;
+	}
+}
+
+void IG1App::motion(double x, double y)
+{
+	//if (mMouseButt == -1) return;
+	//mMouseCoord = { 0,0 };
+
+	glm::dvec2 newPosition = { x,y };
+	//glm::dvec2 difference = newPosition - mMouseCoord;
+	glm::dvec2 difference = newPosition - mMouseCoord;
+	//difference = { difference.x / difference.length() * 0.5,difference.y / difference.length()* 0.5 };
+	//std::cout << mMouseCoord.x - x << std::endl;
+
+	mMouseCoord = newPosition;
+	//std::cout << "Moving the mouse" << std::endl;
+	if (mMouseButt == GLFW_MOUSE_BUTTON_RIGHT)
+	{
+		mCamera->moveLR(-difference.x*0.5);
+		mCamera->moveUD(difference.y*0.5);
+	}
+	else if (mMouseButt == GLFW_MOUSE_BUTTON_LEFT)
+	{
+		mCamera->orbit(difference.x * 0.5f, -difference.y * 0.5f);
+	}
+
+	mNeedsRedisplay = true;
+}
+
+void IG1App::mouseWheel(double dx, double dy)
+{
+	int crtl_state = glfwGetKey(mWindow, GLFW_KEY_LEFT_CONTROL);
+
+	if (!(crtl_state == GLFW_PRESS))
+	{
+		mCamera->moveFB(dy * 100);
+		std::cout << dy << std::endl;
+	}
+	else
+	{
+		mCamera->setScale(dy * 0.01);
+	}
+	mNeedsRedisplay = true;
 }
 
 bool

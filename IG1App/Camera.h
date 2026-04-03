@@ -29,6 +29,8 @@ public:
 	void yawReal(GLfloat cs);
 	void rollReal(GLfloat cs);
 
+    void orbit(float incAnG, float incY);
+
 	// projection matrix
 	glm::mat4 const& projMat() const { return mProjMat; };
 
@@ -51,7 +53,10 @@ public:
 	// Positivo:up
 	void moveUD(GLfloat cs);
 
+    void setCenital();
+
 	void changePrj();
+	float xAngle;
 
 protected:
 
@@ -73,6 +78,9 @@ protected:
 	bool bOrto = true;                      // orthogonal or perspective projection
 
 	Viewport* mViewPort; // the viewport
+    
+	GLdouble mRadio = 100; 
+	GLdouble mAng = -45.0f;
 
 	void setVM();
 	void setPM();

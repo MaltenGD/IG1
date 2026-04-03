@@ -38,6 +38,8 @@ Camera::set2D()
 	mEye = {0, 0, 500};
 	mLook = {0, 0, 0};
 	mUp = {0, 1, 0};
+	mRadio = 100;
+	mAng = -45.0f;
 	setVM();
 	setAxes();
 }
@@ -48,6 +50,8 @@ Camera::set3D()
 	mEye = {500, 500, 500};
 	mLook = {0, 10, 0};
 	mUp = {0, 1, 0};
+	mRadio = 100;
+	mAng = -45.0f;
 	setVM();
 	setAxes();
 	//changePrj();
@@ -81,7 +85,19 @@ void Camera::pitchReal(GLfloat cs)
 {
 	// rotar u (X)
 	// Up dand down	
-	mLook += mUpward * cs;
+
+	mFront = glm::rotate(glm::mat4(1.0f), glm::radians(cs), mRight) * glm::vec4(mFront, 0.0f);
+	mLook = mEye + mFront;
+
+	//xAngle += cs;
+	//std::cout << xAngle << std::endl;
+	//glm::vec3 direction = mLook - mEye;
+	//std::cout << " " << direction.x <<  " " << direction.y << direction.z << " " << std::endl;
+	//std::cout << mLook.y << std::endl;
+	//mLook.y = mEye.y + direction.length() * glm::cos(glm::radians(xAngle));
+	//mLook.z = mEye.z + direction.length() * glm::cos(glm::radians(xAngle));
+	//std::cout << mLook.y << std::endl;
+	//mLook += mUpward * cs;
 	setVM();
 }
 
@@ -89,13 +105,20 @@ void Camera::yawReal(GLfloat cs)
 {
 	// rotar v (Y)
 	// derecha izquierda?????????
-	mLook += mRight * cs;
+	mFront = glm::rotate(glm::mat4(1.0f), glm::radians(cs), mUpward) * glm::vec4(mFront, 0.0f);
+	mLook = mEye + mFront;
+	//mLook += mRight * cs;
 	setVM();
 }
 
 void Camera::rollReal(GLfloat cs)
 {
-	std::cout << glm::dot(mRight, mUpward) << std::endl;
+	//float angle = glm::dot(mRight, mUpward);
+	//float value = glm::sin(glm::radians(angle - cs));
+	//mUp = mUp + glm::vec3(value, value,value);
+	//std::cout << glm::dot(mRight, mUpward) << std::endl;
+	mUp = glm::rotate(glm::mat4(1.0f), glm::radians(cs), mFront) * glm::vec4(mUp, 0.0f);
+	//mLook = mEye + mFront;
 	setVM();
 }
 
@@ -195,9 +218,30 @@ void Camera::changePrj()
 	}
 	else
 	{
-		mNearVal = 500;
+		mNearVal = 200;
 		mFarVal = 10000;
 		mProjMat = frustum<float>(-width, width, -height, height, mNearVal, mFarVal);
 	}
 
+}
+
+void Camera::orbit(float incAng, float incY)
+{
+    mAng += incAng;
+    mEye.x = mLook.x + cos(radians(mAng)) * mRadio;
+    mEye.z = mLook.z - sin(radians(mAng)) * mRadio;
+    mEye.y += incY;
+    setVM(); 
+	setAxes();
+}
+
+void Camera::setCenital()
+{
+    mEye = glm::vec3{0,500,0};
+    mLook = glm::vec3{0,0,0};
+	mUp = { 0, 0, -1 };
+	mRadio = 0;
+	mAng = 0;
+	setVM();
+	setAxes();
 }
