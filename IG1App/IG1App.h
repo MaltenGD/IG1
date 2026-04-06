@@ -78,6 +78,8 @@ protected:
 	bool mUpdate = false;
 	bool m2Vistas = false;
 
+
+
 	glm::dvec2 mMouseCoord = { 0.0, 0.0 }; // última posición del cursor
 	int mMouseButt = -1;
 

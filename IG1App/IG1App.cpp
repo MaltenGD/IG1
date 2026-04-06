@@ -274,6 +274,7 @@ IG1App::key(unsigned int key)
 			mCamera->changePrj();
 			break;
 		case 'k':
+			mCamera->set3D();
 			m2Vistas = !m2Vistas;
 			break;
 			
@@ -368,7 +369,7 @@ void IG1App::mouseWheel(double dx, double dy)
 	bool ctrlPressed = (glfwGetKey(mWindow, GLFW_KEY_LEFT_CONTROL) == GLFW_PRESS || glfwGetKey(mWindow, GLFW_KEY_RIGHT_CONTROL) == GLFW_PRESS);
 
 	if (ctrlPressed) {
-		mCamera->setScale((GLfloat)dy * -0.05f);
+		mCamera->setScale((GLfloat)dy * 0.05f);
 	}
 	else {
 		mCamera->moveFB((GLfloat)dy * 20.0f);
