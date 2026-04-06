@@ -8,6 +8,9 @@
 using namespace glm;
 #include <iostream>
 
+constexpr float ASPECT_RATIO = 16.0 / 9.0;
+constexpr float FOV = 60;
+
 Camera::Camera(Viewport* vp)
   : mViewMat(1.0)
   , mProjMat(1.0)
@@ -99,6 +102,7 @@ void Camera::pitchReal(GLfloat cs)
 	//std::cout << mLook.y << std::endl;
 	//mLook += mUpward * cs;
 	setVM();
+	setAxes();
 }
 
 void Camera::yawReal(GLfloat cs)
@@ -109,6 +113,7 @@ void Camera::yawReal(GLfloat cs)
 	mLook = mEye + mFront;
 	//mLook += mRight * cs;
 	setVM();
+	setAxes(); // aunque solo modifica uno de los componentes
 }
 
 void Camera::rollReal(GLfloat cs)
@@ -120,6 +125,7 @@ void Camera::rollReal(GLfloat cs)
 	mUp = glm::rotate(glm::mat4(1.0f), glm::radians(cs), mFront) * glm::vec4(mUp, 0.0f);
 	//mLook = mEye + mFront;
 	setVM();
+	setAxes();
 }
 
 void
@@ -155,12 +161,23 @@ Camera::setPM()
 	}
 	else
 	{
-		mProjMat = frustum<float>(xLeft,
-			xRight,
-			yBot,
-			yTop,
-			mNearVal * mScaleFact,
-			mFarVal * mScaleFact); //quizas esto al reves
+		float tan = glm::tan(glm::radians(FOV / 2));
+		float top = mNearVal * tan;
+		float bot = -top;
+		float right = top * ASPECT_RATIO;
+		float left = -right;
+		//mProjMat = frustum<float>(xLeft * mScaleFact,
+		//	xRight * mScaleFact,
+		//	yBot * mScaleFact,
+		//	yTop * mScaleFact,
+		//	mNearVal,
+		//	mFarVal); //quizas esto al reves
+		mProjMat = frustum<float>(left * mScaleFact,
+			right * mScaleFact,
+			bot * mScaleFact,
+			top * mScaleFact,
+			mNearVal,
+			mFarVal); //quizas esto al reves
 	}
 }
 
@@ -209,19 +226,20 @@ void Camera::moveUD(GLfloat cs)
 void Camera::changePrj()
 {
 	bOrto = !bOrto;
-	int width = viewPort().width()/2;
-	int height = viewPort().height()/2;
-	if (bOrto)
-	{
-		mProjMat = ortho<float>(-width, width,
-			-height, height,100, 10000);
-	}
-	else
-	{
-		mNearVal = 200;
-		mFarVal = 10000;
-		mProjMat = frustum<float>(-width, width, -height, height, mNearVal, mFarVal);
-	}
+	//int width = viewPort().width()/2;
+	//int height = viewPort().height()/2;
+	//if (bOrto)
+	//{
+	//	mProjMat = ortho<float>(-width, width,
+	//		-height, height,100, 10000);
+	//}
+	//else
+	//{
+	//	//mNearVal = 1;
+	//	//mFarVal = 10000;
+	//	//mProjMat = frustum<float>(-width, width, -height, height, mNearVal, mFarVal);
+	//}
+	setPM();
 
 }
 

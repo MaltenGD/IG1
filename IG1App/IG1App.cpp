@@ -339,7 +339,6 @@ void IG1App::s_mouse(GLFWwindow* win, int button, int action, int mods)
 
 void IG1App::s_motion(GLFWwindow* win, double x, double y)
 {
-
 	s_ig1app.motion(x,y);
 }
 
@@ -352,10 +351,10 @@ void IG1App::mouse(int button, int state, int mods)
 {
 	if (state == GLFW_PRESS)
 	{
+		mMouseButt = button;
 		if (button == GLFW_MOUSE_BUTTON_RIGHT || button == GLFW_MOUSE_BUTTON_LEFT)
 		{
 			//std::cout << "Pressing right mouse button" << std::endl;
-			mMouseButt = button;
 			//mMouseCoord = { 0,0 };
 		}
 	}
