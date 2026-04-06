@@ -164,14 +164,18 @@ Camera::setPM()
 		// glm::ortho defines the orthogonal projection matrix
 	}
 	else {
-		// Se usa mScaleFact para que el zoom funcione en ambos modos
-		mProjMat = frustum<float>(
-			-PERSP_HALF_W * mScaleFact,
-			PERSP_HALF_W * mScaleFact,
-			-PERSP_HALF_H * mScaleFact,
-			PERSP_HALF_H * mScaleFact,
+		float tan = glm::tan(glm::radians(FOV / 2));
+		float top = mNearVal * tan;
+		float bot = -top;
+		float right = top * ASPECT_RATIO;
+		float left = -right;
+
+		mProjMat = frustum<float>(left * mScaleFact,
+			right * mScaleFact,
+			bot * mScaleFact,
+			top * mScaleFact,
 			mNearVal,
-			mFarVal);
+			mFarVal); //quizas esto al reves
 	}
 }
 
