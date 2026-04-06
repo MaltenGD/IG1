@@ -78,8 +78,8 @@ protected:
 	GLdouble mRadio, mAng;
 	bool bOrto = true;                       // orthogonal or perspective projection
 
-	static constexpr GLfloat PERSP_HALF_W = 0.7002f;
-	static constexpr GLfloat PERSP_HALF_H = 0.3501f;
+	static constexpr GLfloat PERSP_HALF_W = 0.7000f;
+	static constexpr GLfloat PERSP_HALF_H = 0.3500f;
 
 	Viewport* mViewPort; // the viewport
 

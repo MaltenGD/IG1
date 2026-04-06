@@ -83,10 +83,9 @@ Camera::roll(GLfloat a)
 
 void Camera::pitchReal(GLfloat cs)
 {
-	// Rotata mLook alrededor del eje de mRight (sin cambiar mEye)
-	glm::vec3 dir = mLook - mEye;
-	dir = glm::rotate(glm::mat4(1.0f), glm::radians(cs), mRight) * glm::vec4(dir, 0.0f);
-	mLook = mEye + dir;
+	// Rota mLook alrededor del eje de mRight (sin cambiar mEye)
+	mFront = glm::rotate(glm::mat4(1.0f), glm::radians(cs), mRight) * glm::vec4(mFront, 0.0f);
+	mLook = mEye + mFront;
 	setVM();
 	setAxes();
 }
@@ -94,9 +93,8 @@ void Camera::pitchReal(GLfloat cs)
 void Camera::yawReal(GLfloat cs)
 {
 	// Rota mLook alrededor del eje de mUpg (sin cambiar mEye)
-	glm::vec3 dir = mLook - mEye;
-	dir = glm::rotate(glm::mat4(1.0f), glm::radians(cs), mUpward) * glm::vec4(dir, 0.0f);
-	mLook = mEye + dir;
+	mFront = glm::rotate(glm::mat4(1.0f), glm::radians(cs), mUpward) * glm::vec4(mFront, 0.0f);
+	mLook = mEye + mFront;
 	setVM();
 	setAxes();
 }
@@ -122,7 +120,7 @@ void Camera::orbit(GLfloat incAng, GLfloat incY)
 void Camera::setCenital()
 {
 	mEye = { 0, 500, 0 };
-	mLook = { 0, 10, 0 };
+	mLook = { 0, 0, 0 };
 	mUp = { 0, 0, -1 };
 	mAng = 0;
 	mRadio = 0;
