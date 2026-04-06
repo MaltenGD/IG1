@@ -58,6 +58,7 @@ public:
 	void moveUD(GLfloat cs);
 
 	void changePrj();
+	float xAngle;
 
 protected:
 
@@ -77,13 +78,15 @@ protected:
 	GLfloat xRight, xLeft, yTop, yBot;     // size of scene visible area
 	GLfloat mNearVal = 1, mFarVal = 10000; // view volume
 	GLfloat mScaleFact = 1;                 // scale factor
-	GLdouble mRadio, mAng;
 	bool bOrto = true;                       // orthogonal or perspective projection
 
 	static constexpr GLfloat PERSP_HALF_W = 0.7000f;
 	static constexpr GLfloat PERSP_HALF_H = 0.3500f;
 
 	Viewport* mViewPort; // the viewport
+    
+	GLdouble mRadio = 100; 
+	GLdouble mAng = -45.0f;
 
 	void setVM();
 	void setPM();

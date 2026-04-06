@@ -42,6 +42,7 @@ protected:
 	void destroy();
 
 	void display() const;                      // the scene
+	void display2V() const;                    // 
 	void resize(int newWidth, int newHeight);  // the viewport (without changing the scale)
 	void key(unsigned int codepoint);          // keypress event
 	void specialkey(int key, int scancode, int action, int mods); // special keypress event
@@ -80,10 +81,11 @@ protected:
 
 
 
-	glm::dvec2 mMouseCoord = { 0.0, 0.0 }; // última posición del cursor
 	int mMouseButt = -1;
 
-	GLdouble mNextUpdate; // No necesita inicializarse ya que su valor varía cada frame
+	GLdouble mNextUpdate; // No necesita inicializarse ya que su valor varía cada fram
+
+	glm::dvec2 mMouseCoord = { mWinW / 2,mWinH / 2};
 };
 
 inline Viewport const&

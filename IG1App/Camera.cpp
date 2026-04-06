@@ -6,6 +6,10 @@
 #include <glm/gtc/matrix_access.hpp>
 
 using namespace glm;
+#include <iostream>
+
+constexpr float ASPECT_RATIO = 16.0 / 9.0;
+constexpr float FOV = 60;
 
 Camera::Camera(Viewport* vp)
 	: mViewMat(1.0)

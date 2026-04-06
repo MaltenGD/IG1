@@ -1,4 +1,4 @@
-﻿#include "IG1App.h"
+#include "IG1App.h"
 
 #include "Scene0.h"
 
@@ -196,7 +196,8 @@ IG1App::display() const
 		mCamera->setSize(mWinW, mWinH);
 		mScenes[mCurrentScene]->render(*mCamera);
 	}
-	else {
+	else
+	{
 		mViewPort->setPos(0, 0);
 		mViewPort->setSize(mWinW / 2, mWinH);
 		mCamera->setSize(mWinW / 2, mWinH);
@@ -206,13 +207,41 @@ IG1App::display() const
 		mViewPort->setSize(mWinW / 2, mWinH);
 		mCenitalCam->setSize(mWinW / 2, mWinH);
 		mScenes[mCurrentScene]->render(*mCenitalCam);
-
-		mViewPort->setPos(0, 0);
-		mViewPort->setSize(mWinW, mWinH);
-		mCamera->setSize(mWinW, mWinH);
 	}
+	//if (m2Vistas)
+	//{
+	//	std::cout << "2 view rn" << std::endl;
+	//	display2V();
+	//}
+	//else
+	//	mScenes[mCurrentScene]->render(*mCamera); // uploads the viewport and camera to the GPU
+
+	//	mViewPort->setPos(0, 0);
+	//	mViewPort->setSize(mWinW, mWinH);
+	//	mCamera->setSize(mWinW, mWinH);
+	//}
 
 	glfwSwapBuffers(mWindow);
+}
+
+void IG1App::display2V() const
+{
+	Camera auxCam = *mCamera;
+	Viewport auxVP = *mViewPort;
+
+	mViewPort->setSize(mWinW / 2, mWinH);
+	auxCam.setSize(mViewPort->width(), mViewPort->height());
+	auxCam.setScale(-0.5);
+
+	mViewPort->setPos(0,0);
+	auxCam.set3D();
+	mScenes[mCurrentScene]->render(auxCam);
+
+	mViewPort->setPos(mWinW / 2,0);
+	auxCam.setCenital();
+	mScenes[mCurrentScene]->render(auxCam);
+
+	*mViewPort = auxVP; // reset del viewport
 }
 
 void
@@ -358,7 +387,7 @@ void IG1App::motion(double x, double y)
 		mCamera->moveUD(-(GLfloat)delta.y * 0.5f);
 	}
 	else if (mMouseButt == GLFW_MOUSE_BUTTON_LEFT) {
-		mCamera->orbit((GLfloat)delta.x * 0.3f,  -(GLfloat)delta.y * 0.3f);
+		mCamera->orbit(-(GLfloat)delta.x * 0.4f,  (GLfloat)delta.y*2);
 	}
 
 	mNeedsRedisplay = true;
