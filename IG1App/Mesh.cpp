@@ -470,17 +470,17 @@ Mesh* Mesh::generateBoxOutlineTexCor(GLdouble length)
 {
 	Mesh* ret = generateBoxOutline(length);
 
-	// TODO: Comprobar si esta acorde a las coordenadas de generateBoxOutline;
-	ret->vTexCoords.emplace_back(0,0);
-	ret->vTexCoords.emplace_back(0,1);
-	ret->vTexCoords.emplace_back(1,0);
-	ret->vTexCoords.emplace_back(1,1);
-	ret->vTexCoords.emplace_back(0,0);
-	ret->vTexCoords.emplace_back(0,1);
-	ret->vTexCoords.emplace_back(1,0);
-	ret->vTexCoords.emplace_back(1,1);
+  ret->vTexCoords.reserve(ret->mNumVertices);
 	ret->vTexCoords.emplace_back(0, 0);
 	ret->vTexCoords.emplace_back(0, 1);
+	ret->vTexCoords.emplace_back(1, 0);
+	ret->vTexCoords.emplace_back(1, 1);
+	ret->vTexCoords.emplace_back(2, 0);
+	ret->vTexCoords.emplace_back(2, 1);
+	ret->vTexCoords.emplace_back(3, 0);
+	ret->vTexCoords.emplace_back(3, 1);
+	ret->vTexCoords.emplace_back(4, 0);
+	ret->vTexCoords.emplace_back(4, 1);
 	return ret;
 }
 

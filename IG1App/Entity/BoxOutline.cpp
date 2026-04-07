@@ -8,9 +8,6 @@ BoxOutline::BoxOutline(GLfloat length, const char* outside_texture, const char* 
 	mMesh = Mesh::generateBoxOutlineTexCor(length);
 	_inside = new Texture();
 	_inside->load(inside_texture);
-
-	mModelMat = glm::translate(mModelMat, glm::vec3(0, (length / 2), 0)) * glm::translate(mModelMat, glm::vec3(-5,0,3));
-	moveTo(mCoordinates);
 }
 
 BoxOutline::~BoxOutline()

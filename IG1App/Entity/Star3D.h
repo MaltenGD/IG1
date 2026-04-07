@@ -10,12 +10,13 @@ public:
 	Star3D(GLdouble radioExterior, GLuint numPuntas, GLdouble altura, const char* texture);
 	void render(const glm::mat4& modelViewMat) const override;
 	void update() override;
+	void setPosition(const glm::vec3& position);
 
 private:
 
 	glm::mat4 mModelMat180X;
 	GLfloat mAngle = 0.0f;
-	glm::vec3 mCoordinates = { 150,20,-100 };
+   glm::vec3 mCoordinates = { 0.0f, 0.0f, 0.0f };
 };
 
 #endif // _H_Star3D_H_

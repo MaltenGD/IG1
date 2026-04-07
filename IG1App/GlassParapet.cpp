@@ -5,8 +5,6 @@ using namespace glm;
 GlassParapet::GlassParapet(GLdouble length, const char* texture, GLubyte alpha = 255) : EntityWithTexture(texture, alpha)
 {
 	mMesh = Mesh::generateBoxOutlineTexCor(length);
-	mModelMat = glm::scale(mModelMat, glm::vec3(1, 0.25f, 1));
-
 }
 
 GlassParapet::~GlassParapet() {
