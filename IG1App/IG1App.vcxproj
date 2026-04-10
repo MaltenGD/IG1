@@ -135,6 +135,7 @@
     <ClInclude Include="GlassParapet.h" />
     <ClInclude Include="Grass.h" />
     <ClInclude Include="IG1App.h" />
+    <ClInclude Include="IndexMesh.h" />
     <ClInclude Include="Mesh.h" />
     <ClInclude Include="Image.h" />
     <ClInclude Include="Entity\RegularPolygon.h" />
@@ -164,6 +165,7 @@
     <ClCompile Include="GlassParapet.cpp" />
     <ClCompile Include="Grass.cpp" />
     <ClCompile Include="IG1App.cpp" />
+    <ClCompile Include="IndexMesh.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="Mesh.cpp" />
     <ClCompile Include="Image.cpp" />

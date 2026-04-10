@@ -117,6 +117,7 @@ void Camera::orbit(GLfloat incAng, GLfloat incY)
 	mEye.x = mLook.x + cos(radians(mAng)) * mRadio;
 	mEye.z = mLook.z - sin(radians(mAng)) * mRadio;
 	mEye.y += incY;
+	std::cout << mEye.y << std::endl;
 	setVM();
 	setAxes();
 }

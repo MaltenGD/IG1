@@ -50,8 +50,8 @@ public:
 
 	void rotateDeg(GLdouble radius,GLint degrees);
 
-	void load();
-	void unload();
+	virtual void load();
+	virtual void unload();
 
 protected:
 	GLuint mPrimitive =
@@ -66,7 +66,7 @@ protected:
 
 	
 
-private:
+protected:
 	GLuint mVBO;  // vertex buffer object
 	GLuint mCBO;  // color buffer object
 	GLuint mVAO;  // vertex array object
