@@ -126,6 +126,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="ColorMaterialEntity.h" />
     <ClInclude Include="Entity\BoxOutline.h" />
     <ClInclude Include="Camera.h" />
     <ClInclude Include="EntityWithTexture.h" />
@@ -149,13 +150,19 @@
     <ClInclude Include="Scene\Scene1.h" />
     <ClInclude Include="Scene\Scene2.h" />
     <ClInclude Include="Scene\Scene3.h" />
+    <ClInclude Include="Scene\Scene5.h">
+      <SubType>
+      </SubType>
+    </ClInclude>
     <ClInclude Include="Shader.h" />
     <ClInclude Include="SingleColorEntity.h" />
     <ClInclude Include="Entity\Star3D.h" />
     <ClInclude Include="Texture.h" />
+    <ClInclude Include="Entity\Torus.h" />
     <ClInclude Include="Viewport.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="ColorMaterialEntity.cpp" />
     <ClCompile Include="Entity\BoxOutline.cpp" />
     <ClCompile Include="Camera.cpp" />
     <ClCompile Include="EntityWithTexture.cpp" />
@@ -180,10 +187,15 @@
     <ClCompile Include="Scene\Scene1.cpp" />
     <ClCompile Include="Scene\Scene2.cpp" />
     <ClCompile Include="Scene\Scene3.cpp" />
+    <ClCompile Include="Scene\Scene5.cpp">
+      <SubType>
+      </SubType>
+    </ClCompile>
     <ClCompile Include="Shader.cpp" />
     <ClCompile Include="SingleColorEntity.cpp" />
     <ClCompile Include="Entity\Star3D.cpp" />
     <ClCompile Include="Texture.cpp" />
+    <ClCompile Include="Entity\Torus.cpp" />
     <ClCompile Include="Viewport.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
