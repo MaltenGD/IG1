@@ -86,7 +86,13 @@ Camera::roll(GLfloat a)
 }
 
 void Camera::pitchReal(GLfloat cs)
-{
+{ 
+	// No se modifica la posicion del la camara directamente, sino modificando el Up, el look y luego ya modificar 
+	// El orden deberia ser:
+	// 1. Cambiar la posicion del look o del Up para la rotacion
+	// 2. Actualizar la matriz de vista con lookAt, ya que se ha cambiado de algunos de los componentes.
+	// 3. Con el viewMat actualizado, actualizar de nuevo la posicion de la camara con setAxes.
+	
 	// Rota mLook alrededor del eje de mRight (sin cambiar mEye)
 	mFront = glm::rotate(glm::mat4(1.0f), glm::radians(cs), mRight) * glm::vec4(mFront, 0.0f);
 	mLook = mEye + mFront;
