@@ -1,7 +1,8 @@
-#pragma once
 #include "Mesh.h"
 #include <vector>
 #include <numbers>
+#include <glm/gtc/constants.hpp>
+
 class IndexMesh : public Mesh
 {
 private:

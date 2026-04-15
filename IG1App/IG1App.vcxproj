@@ -143,7 +143,8 @@
     <ClInclude Include="Entity\RGBRectangle.h" />
     <ClInclude Include="Entity\RGBTriangle.h" />
     <ClInclude Include="Photo.h" />
-    <ClInclude Include="Scene.h" />
+    <ClInclude Include="Scene\Scene.h" />
+    <ClInclude Include="Scene\Scene5.h" />
     <ClInclude Include="Scene\Scene4.h" />
     <ClInclude Include="Scene\Scene0.h" />
     <ClInclude Include="Scene\Scene1.h" />
@@ -153,6 +154,7 @@
     <ClInclude Include="SingleColorEntity.h" />
     <ClInclude Include="Entity\Star3D.h" />
     <ClInclude Include="Texture.h" />
+    <ClInclude Include="Entity\Torus.h" />
     <ClInclude Include="Viewport.h" />
   </ItemGroup>
   <ItemGroup>
@@ -174,7 +176,8 @@
     <ClCompile Include="Entity\RGBRectangle.cpp" />
     <ClCompile Include="Entity\RGBTriangle.cpp" />
     <ClCompile Include="Photo.cpp" />
-    <ClCompile Include="Scene.cpp" />
+    <ClCompile Include="Scene\Scene.cpp" />
+    <ClCompile Include="Scene\Scene5.cpp" />
     <ClCompile Include="Scene\Scene4.cpp" />
     <ClCompile Include="Scene\Scene0.cpp" />
     <ClCompile Include="Scene\Scene1.cpp" />
@@ -184,6 +187,7 @@
     <ClCompile Include="SingleColorEntity.cpp" />
     <ClCompile Include="Entity\Star3D.cpp" />
     <ClCompile Include="Texture.cpp" />
+    <ClCompile Include="Entity\Torus.cpp" />
     <ClCompile Include="Viewport.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
