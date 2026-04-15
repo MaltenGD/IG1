@@ -62,6 +62,9 @@ protected:
 	std::vector<glm::vec2> vTexCoords; // vector de coordenadas
 	// de textura
 
+	// Normal vector vector
+	std::vector<glm::vec3> vNormals;
+
 	virtual void draw() const;
 
 	
@@ -71,6 +74,8 @@ protected:
 	GLuint mCBO;  // color buffer object
 	GLuint mVAO;  // vertex array object
 	GLuint mTCO;
+	GLuint mNBO;
+
 };
 
 #endif //_H_Scene_H_
