@@ -41,29 +41,27 @@ void IndexMesh::unload()
 IndexMesh* IndexMesh::generateByRevolution(const std::vector<glm::vec2>& profile, GLuint nSamples, GLfloat angleMax)
 {
     IndexMesh* mesh = new IndexMesh;
+
     mesh->mPrimitive = GL_TRIANGLES;
     int tamPerfil = profile.size();
     mesh->vVertices.reserve(nSamples * tamPerfil);
 
-    // Genera los v¨¦rtices de las muestras
     GLdouble theta1 = angleMax / nSamples;
-    for (int i = 0; i <= nSamples; ++i)
-    { // muestra i-¨¦sima
+    for (int i = 0; i <= nSamples; ++i) { // muestra i-¨¦sima
         GLdouble c = cos(i * theta1), s = sin(i * theta1);
         for (auto p : profile) // rota el perfil
             mesh->vVertices.emplace_back(p.x * c, p.y, -p.x * s);
-
-        for (int i = 0; i < nSamples; ++i) // caras i a i + 1
-            for (int j = 0; j < tamPerfil - 1; ++j)
-            { // una cara
-                if (profile[j].x != 0.0) // tri¨¢ngulo inferior
-                    for (auto [s, t] : { std::pair{i, j}, {i, j + 1}, {i + 1, j} })
-                        mesh->vIndexes.push_back(s * tamPerfil + t);
-                if (profile[j + 1].x != 0.0) // tri¨¢ngulo superior
-                    for (auto [s, t] : { std::pair{i, j + 1}, {i + 1, j + 1}, {i + 1, j} })
-                        mesh->vIndexes.push_back(s * tamPerfil + t);
-            }
-        mesh->mNumVertices = mesh->vVertices.size();
-        return mesh;
     }
+
+    for (int i = 0; i < nSamples; ++i) // caras i a i + 1
+        for (int j = 0; j < tamPerfil - 1; ++j) { // una cara
+            if (profile[j].x != 0.0) // tri¨¢ngulo inferior
+                for (auto [s, t] : { std::pair{i, j}, {i, j + 1}, {i + 1, j} })
+                    mesh->vIndexes.push_back(s * tamPerfil + t);
+            if (profile[j + 1].x != 0.0) // tri¨¢ngulo superior
+                for (auto [s, t] : { std::pair{i, j + 1}, {i + 1, j + 1}, {i + 1, j} })
+                    mesh->vIndexes.push_back(s * tamPerfil + t);
+        }
+    mesh->mNumVertices = mesh->vVertices.size();
+    return mesh;
 }

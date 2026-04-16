@@ -309,6 +309,9 @@ IG1App::key(unsigned int key)
 			mCamera->set3D();
 			m2Vistas = !m2Vistas;
 			break;
+		case 'c':
+			mCamera->setCenital();
+			break;
 			
 		default:
 			if (key >= '0' && key <= '9') {
