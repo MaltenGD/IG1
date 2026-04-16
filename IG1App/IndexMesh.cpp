@@ -1,5 +1,10 @@
 #include "IndexMesh.h"
 
+using namespace std;
+using namespace glm;
+
+constexpr GLuint NONE = numeric_limits<GLuint>::max();
+
 void IndexMesh::draw() const
 {
     glDrawElements(
