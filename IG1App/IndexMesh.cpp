@@ -29,7 +29,13 @@ void IndexMesh::load()
 
 void IndexMesh::unload()
 {
+    Mesh::unload();
 
+    if (mIBO != NONE)
+    {
+        glDeleteBuffers(1, &mIBO);
+        mIBO = NONE;
+    }
 }
 
 IndexMesh* IndexMesh::generateByRevolution(const std::vector<glm::vec2>& profile, GLuint nSamples, GLfloat angleMax)
