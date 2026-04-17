@@ -111,6 +111,7 @@ void
 Shader::setUniform(const string& name, const glm::vec4& value)
 {
 	glUniform4f(glGetUniformLocation(mProgram, name.c_str()), value.r, value.g, value.b, value.a);
+
 }
 
 void
@@ -135,6 +136,14 @@ Shader::get(const string& name)
 
 void
 Shader::setUniform4All(const string& name, const glm::mat4& value)
+{
+	for (const auto& [_, shader] : shaders) {
+		shader->use();
+		shader->setUniform(name, value);
+	}
+}
+
+void Shader::setUniform4All(const string& name, const glm::vec4& value)
 {
 	for (const auto& [_, shader] : shaders) {
 		shader->use();

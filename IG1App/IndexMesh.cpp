@@ -1,9 +1,15 @@
 #include "IndexMesh.h"
+#include <algorithm>
 
 using namespace std;
 using namespace glm;
 
 constexpr GLuint NONE = numeric_limits<GLuint>::max();
+
+IndexMesh::IndexMesh()
+{
+
+}
 
 void IndexMesh::draw() const
 {
@@ -25,6 +31,31 @@ void IndexMesh::load()
         vIndexes.size() * sizeof(GLuint),
         vIndexes.data(), GL_STATIC_DRAW);
     glBindVertexArray(0);
+}
+
+void IndexMesh::buildNormalVectors()
+{
+    // Se inicializa vNormals
+    vNormals.assign(vVertices.size(), glm::vec3(0.0f, 0.0f, 0.0f));
+
+    // Se recorre cada triangulo
+    for (size_t i = 0; i < vIndexes.size(); i += 3)
+    {
+        GLuint i0 = vIndexes[i];
+        GLuint i1 = vIndexes[i + 1];
+        GLuint i2 = vIndexes[i + 2];
+
+        // Normal de la cara
+        glm::vec3 normal = normalize(cross(vVertices[i1] - vVertices[i0], vVertices[i2] - vVertices[i0]));
+
+        // Se suma la normal de la cara a las normales de los vértices que forman la cara
+        vNormals[i0] += normal;
+        vNormals[i0] = normalize(vNormals[i0]);
+        vNormals[i1] += normal;
+        vNormals[i1] = normalize(vNormals[i1]);
+        vNormals[i2] += normal;
+        vNormals[i2] = normalize(vNormals[i2]);
+    }
 }
 
 void IndexMesh::unload()
@@ -63,5 +94,7 @@ IndexMesh* IndexMesh::generateByRevolution(const std::vector<glm::vec2>& profile
                     mesh->vIndexes.push_back(s * tamPerfil + t);
         }
     mesh->mNumVertices = mesh->vVertices.size();
+
+    mesh->buildNormalVectors();
     return mesh;
 }

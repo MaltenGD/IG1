@@ -195,12 +195,12 @@ Camera::uploadPM() const
 void
 Camera::upload() const
 {
-	// En la camara no hay un metodo uniform, solamente lo hay en el shader pero no es estatico
+	glm::vec4 lightDirWorld = glm::vec4(-1.0f, 1.5f, -1.25f, 0.0f);
+	glm::vec4 lightDirView = glm::vec4(mViewMat * lightDirWorld);
 
-	//const glm::vec4 dir = glm::vec4(-1,1.5f,-1.25f,0) * mViewMat;
-	//Shader::setUniform("lightDir",dir);
-	//const glm::mat4 dir = mViewMat * glm::vec4(-1, 1.5f, -1.25f, 0);
-	//Shader::setUniform4All("lightDir",dir);
+	Shader* lightShader = Shader::get("simple_light");
+	lightShader->use();
+	lightShader->setUniform("lightDir", lightDirView);
 
 	mViewPort->upload();
 	uploadVM();

@@ -26,6 +26,8 @@ public:
 	static Shader* get(const std::string& name);
 
 	static void setUniform4All(const std::string& name, const glm::mat4& value);
+	//Para las luces
+	static void setUniform4All(const std::string& name, const glm::vec4& value);
 
 protected:
 	GLuint mProgram;
