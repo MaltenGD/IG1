@@ -1,5 +1,7 @@
-#include "Torus.h"
+﻿#include "Torus.h"
 #include "IndexMesh.h"
+#include "IG1App.h"
+#include "Camera.h"
 Torus::Torus(GLdouble R, GLdouble r, GLuint nPoints, GLuint nSamples)
 {
     std::vector<glm::vec2> profiles;
@@ -11,7 +13,7 @@ Torus::Torus(GLdouble R, GLdouble r, GLuint nPoints, GLuint nSamples)
 
     GLdouble actualRotation = PI * 3/4;
 
-    for (size_t i = 0; i < nPoints; ++i)
+    for (size_t i = 0; i <= nPoints; ++i)
     {
         glm::vec2 point(r * glm::cos(actualRotation) + R, r * glm::sin(actualRotation));
 

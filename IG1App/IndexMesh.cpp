@@ -50,11 +50,13 @@ void IndexMesh::buildNormalVectors()
 
         // Se suma la normal de la cara a las normales de los vértices que forman la cara
         vNormals[i0] += normal;
-        vNormals[i0] = normalize(vNormals[i0]);
         vNormals[i1] += normal;
-        vNormals[i1] = normalize(vNormals[i1]);
         vNormals[i2] += normal;
-        vNormals[i2] = normalize(vNormals[i2]);
+    }
+
+    for (size_t i = 0; i < vNormals.size();++i)
+    {
+        vNormals[i] = normalize(vNormals[i]);
     }
 }
 
@@ -96,5 +98,6 @@ IndexMesh* IndexMesh::generateByRevolution(const std::vector<glm::vec2>& profile
     mesh->mNumVertices = mesh->vVertices.size();
 
     mesh->buildNormalVectors();
+
     return mesh;
 }
