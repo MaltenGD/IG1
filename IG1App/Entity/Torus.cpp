@@ -2,7 +2,8 @@
 #include "IndexMesh.h"
 Torus::Torus(GLdouble R, GLdouble r, GLuint nPoints, GLuint nSamples)
 {
-    std::vector<glm::vec2> profiles(nPoints);
+    std::vector<glm::vec2> profiles;
+    profiles.reserve(nPoints);
 
     constexpr GLdouble PI = glm::pi<GLdouble>();
 
