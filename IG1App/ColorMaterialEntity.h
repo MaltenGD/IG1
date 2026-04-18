@@ -6,8 +6,6 @@ class ColorMaterialEntity : public SingleColorEntity
 {
 private:
     static bool mShowNormals;
-protected:
-    glm::vec4 lightDir;
 public:
     ColorMaterialEntity();
     static void toggleShowNormals();

@@ -27,6 +27,10 @@ void
 Camera::uploadVM() const
 {
 	Shader::setUniform4All("modelView", mViewMat);
+
+	const glm::vec4 lightDirWorld = glm::vec4(glm::normalize(glm::vec3(-1.0f, -1.5f, -1.25f)), 0.0f); // invierto la luz (el toroide se veia rotado sobre la z 180deg)
+	const glm::vec4 lightDirView = glm::vec4(glm::normalize(glm::vec3(mViewMat * lightDirWorld)), 0.0f);
+	Shader::setUniform4All("lightDir", lightDirView);
 }
 
 void
@@ -195,13 +199,6 @@ Camera::uploadPM() const
 void
 Camera::upload() const
 {
-	glm::vec4 lightDirWorld = glm::vec4(-1.0f, 1.5f, -1.25f, 0.0f);
-	glm::vec4 lightDirView = glm::vec4(mViewMat * lightDirWorld);
-
-	Shader* lightShader = Shader::get("simple_light");
-	lightShader->use();
-	lightShader->setUniform("lightDir", lightDirView);
-
 	mViewPort->upload();
 	uploadVM();
 	uploadPM();
