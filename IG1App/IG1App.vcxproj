@@ -136,6 +136,7 @@
     <ClInclude Include="GlassParapet.h" />
     <ClInclude Include="Grass.h" />
     <ClInclude Include="IG1App.h" />
+    <ClInclude Include="Entity\IndexedBox.h" />
     <ClInclude Include="IndexMesh.h" />
     <ClInclude Include="Mesh.h" />
     <ClInclude Include="Image.h" />
@@ -145,6 +146,7 @@
     <ClInclude Include="Entity\RGBTriangle.h" />
     <ClInclude Include="Photo.h" />
     <ClInclude Include="Scene.h" />
+    <ClInclude Include="Scene\Scene6.h" />
     <ClInclude Include="Scene\Scene4.h" />
     <ClInclude Include="Scene\Scene0.h" />
     <ClInclude Include="Scene\Scene1.h" />
@@ -172,7 +174,8 @@
     <ClCompile Include="GlassParapet.cpp" />
     <ClCompile Include="Grass.cpp" />
     <ClCompile Include="IG1App.cpp" />
-    <ClCompile Include="IndexMesh.cpp" />
+    <ClCompile Include="IndexedBox.cpp" />
+    <ClCompile Include="Entity\IndexMesh.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="Mesh.cpp" />
     <ClCompile Include="Image.cpp" />
@@ -182,6 +185,7 @@
     <ClCompile Include="Entity\RGBTriangle.cpp" />
     <ClCompile Include="Photo.cpp" />
     <ClCompile Include="Scene.cpp" />
+    <ClCompile Include="Scene\Scene6.cpp" />
     <ClCompile Include="Scene\Scene4.cpp" />
     <ClCompile Include="Scene\Scene0.cpp" />
     <ClCompile Include="Scene\Scene1.cpp" />

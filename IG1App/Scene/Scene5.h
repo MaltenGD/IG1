@@ -2,10 +2,10 @@
 #include "Scene.h"
 class Scene5 : public Scene
 {
-	public:
-		Scene5() = default;
-		~Scene5() = default;
+public:
+	Scene5() = default;
+	~Scene5() = default;
 
-		void init() override;
+	void init() override;
 };
 
