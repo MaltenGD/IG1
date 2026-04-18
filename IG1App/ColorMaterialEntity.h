@@ -1,4 +1,3 @@
-#pragma once
 #ifndef _COLOR_MATERIAL_ENTITY_H
 #define _COLOR_MATERIAL_ENTITY_H
 

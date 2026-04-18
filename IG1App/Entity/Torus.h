@@ -1,4 +1,3 @@
-#pragma once
 #include "ColorMaterialEntity.h"
 class Torus : public ColorMaterialEntity
 {
