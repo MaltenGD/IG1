@@ -11,7 +11,12 @@
 #include "Scene4.h"
 
 #include "Scene5.h"
+
+#include "ColorMaterialEntity.h"
+
 #include "Scene6.h"
+#include "Scene7.h"
+
 
 #include <iostream>
 
@@ -73,7 +78,14 @@ IG1App::run() // enters the main event processing loop
 		}
 
 		if (mNeedsRedisplay) {
-			display();
+			if (mWireFrameMode)
+			{
+				glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);  // Modo wireframe ; 
+				display();
+				glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
+			}
+			else display();
+			
 			mNeedsRedisplay = false;
 		}
 
@@ -106,6 +118,7 @@ IG1App::init()
 	mScenes.push_back(new Scene4);
 	mScenes.push_back(new Scene5);
 	mScenes.push_back(new Scene6);
+	mScenes.push_back(new Scene7);
 
 
 
@@ -313,6 +326,12 @@ IG1App::key(unsigned int key)
 			break;
 		case 'c':
 			mCamera->setCenital();
+			break;
+		case 'N':
+			ColorMaterialEntity::toggleShowNormals();
+			break;
+		case 'f':
+			mWireFrameMode = !mWireFrameMode;
 			break;
 			
 		default:

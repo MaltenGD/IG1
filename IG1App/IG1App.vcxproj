@@ -130,9 +130,12 @@
     <ClInclude Include="Entity\BoxOutline.h" />
     <ClInclude Include="Camera.h" />
     <ClInclude Include="EntityWithTexture.h" />
+    <ClInclude Include="Entity\Cone.h" />
     <ClInclude Include="Entity\Cube.h" />
     <ClInclude Include="Entity.h" />
+    <ClInclude Include="Entity\Disk.h" />
     <ClInclude Include="Entity\Ground.h" />
+    <ClInclude Include="Entity\Sphere.h" />
     <ClInclude Include="GlassParapet.h" />
     <ClInclude Include="Grass.h" />
     <ClInclude Include="IG1App.h" />
@@ -156,6 +159,7 @@
       <SubType>
       </SubType>
     </ClInclude>
+    <ClInclude Include="Scene\Scene7.h" />
     <ClInclude Include="Shader.h" />
     <ClInclude Include="SingleColorEntity.h" />
     <ClInclude Include="Entity\Star3D.h" />
@@ -195,6 +199,7 @@
       <SubType>
       </SubType>
     </ClCompile>
+    <ClCompile Include="Scene\Scene7.cpp" />
     <ClCompile Include="Shader.cpp" />
     <ClCompile Include="SingleColorEntity.cpp" />
     <ClCompile Include="Entity\Star3D.cpp" />

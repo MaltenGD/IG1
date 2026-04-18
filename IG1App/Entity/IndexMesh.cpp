@@ -123,19 +123,78 @@ IndexMesh* IndexMesh::generateIndexedBox8(GLdouble l)
 	mesh->vVertices.emplace_back(-len, len, -len);
 	mesh->vVertices.emplace_back(-len, -len, -len);
 
-	//mesh->vIndexes.push_back();
+	mesh->createTriangleWithIndex(mesh->vIndexes, {0, 2, 1});
+	mesh->createTriangleWithIndex(mesh->vIndexes, {2, 3, 1});
+	mesh->createTriangleWithIndex(mesh->vIndexes, {2, 4, 3});
+	mesh->createTriangleWithIndex(mesh->vIndexes, {4, 5, 3});
+	mesh->createTriangleWithIndex(mesh->vIndexes, {6, 7, 4});
+	mesh->createTriangleWithIndex(mesh->vIndexes, {4, 7, 5});
+	mesh->createTriangleWithIndex(mesh->vIndexes, {6, 0, 7});
+	mesh->createTriangleWithIndex(mesh->vIndexes, {0, 1, 7});
+	mesh->createTriangleWithIndex(mesh->vIndexes, {6, 4, 0});
+	mesh->createTriangleWithIndex(mesh->vIndexes, {4, 2, 0});
+	mesh->createTriangleWithIndex(mesh->vIndexes, {1, 3, 7});
+	mesh->createTriangleWithIndex(mesh->vIndexes, {3, 5, 7});
+
+	mesh->mNumVertices = mesh->vVertices.size();
+
+	mesh->buildNormalVectors();
+
+	return mesh;
+}
+
+IndexMesh* IndexMesh::generateIndexedBox(GLdouble l)
+{
+	IndexMesh* mesh = new IndexMesh;
+	mesh->mPrimitive = GL_TRIANGLES;
+
+	mesh->vVertices.reserve(24);
+	mesh->vIndexes.reserve(36);
+
+	GLdouble len = l / GLdouble(2);
+
+	mesh->vVertices.emplace_back(len, len, -len);   // 0
+	mesh->vVertices.emplace_back(len, len, len);    // 1
+	mesh->vVertices.emplace_back(len, -len, -len);  // 2
+	mesh->vVertices.emplace_back(len, -len, len);   // 3
+	mesh->vVertices.emplace_back(-len, len, -len);  // 4
+	mesh->vVertices.emplace_back(-len, -len, -len); // 5
+	mesh->vVertices.emplace_back(-len, len, len);   // 6
+	mesh->vVertices.emplace_back(-len, -len, len);  // 7
+	mesh->vVertices.emplace_back(-len, len, -len);  // 8
+	mesh->vVertices.emplace_back(len, len, -len);   // 9
+	mesh->vVertices.emplace_back(-len, len, len);   // 10
+	mesh->vVertices.emplace_back(len, len, len);    // 11
+	mesh->vVertices.emplace_back(-len, -len, -len); // 12
+	mesh->vVertices.emplace_back(-len, -len, len);  // 13
+	mesh->vVertices.emplace_back(len, -len, -len);  // 14
+	mesh->vVertices.emplace_back(len, -len, len);   // 15
+	mesh->vVertices.emplace_back(len, len, len);    // 16
+	mesh->vVertices.emplace_back(-len, len, len);   // 17
+	mesh->vVertices.emplace_back(len, -len, len);   // 18
+	mesh->vVertices.emplace_back(-len, -len, len);  // 19
+	mesh->vVertices.emplace_back(len, len, -len);   // 20
+	mesh->vVertices.emplace_back(len, -len, -len);  // 21
+	mesh->vVertices.emplace_back(-len, len, -len);  // 22
+	mesh->vVertices.emplace_back(-len, -len, -len); // 23
+
 	mesh->createTriangleWithIndex(mesh->vIndexes, {0, 1, 2});
-	mesh->createTriangleWithIndex(mesh->vIndexes, {2, 1, 3});
-	mesh->createTriangleWithIndex(mesh->vIndexes, {2, 3, 4});
-	mesh->createTriangleWithIndex(mesh->vIndexes, {4, 3, 5});
+	mesh->createTriangleWithIndex(mesh->vIndexes, {1, 3, 2});
+
 	mesh->createTriangleWithIndex(mesh->vIndexes, {4, 5, 6});
 	mesh->createTriangleWithIndex(mesh->vIndexes, {6, 5, 7});
-	mesh->createTriangleWithIndex(mesh->vIndexes, {6, 7, 0});
-	mesh->createTriangleWithIndex(mesh->vIndexes, {0, 7, 1});
-	mesh->createTriangleWithIndex(mesh->vIndexes, {4, 6, 2});
-	mesh->createTriangleWithIndex(mesh->vIndexes, {2, 6, 0});
-	mesh->createTriangleWithIndex(mesh->vIndexes, {1, 7, 3});
-	mesh->createTriangleWithIndex(mesh->vIndexes, {3, 7, 5});
+
+	mesh->createTriangleWithIndex(mesh->vIndexes, {8, 10, 9});
+	mesh->createTriangleWithIndex(mesh->vIndexes, {10, 11, 9});
+
+	mesh->createTriangleWithIndex(mesh->vIndexes, {12, 14, 13});
+	mesh->createTriangleWithIndex(mesh->vIndexes, {13, 14, 15});
+
+	mesh->createTriangleWithIndex(mesh->vIndexes, {16, 17, 18});
+	mesh->createTriangleWithIndex(mesh->vIndexes, {17, 19, 18});
+
+	mesh->createTriangleWithIndex(mesh->vIndexes, {20, 21, 22});
+	mesh->createTriangleWithIndex(mesh->vIndexes, {22, 21, 23});
 
 	mesh->mNumVertices = mesh->vVertices.size();
 

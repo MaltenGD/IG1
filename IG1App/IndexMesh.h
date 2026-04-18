@@ -22,6 +22,7 @@ public:
 	
 	static IndexMesh* generateByRevolution(const std::vector<glm::vec2>& profile,GLuint nSamples,GLfloat angleMax = 2 * std::numbers::pi);
 	static IndexMesh* generateIndexedBox8(GLdouble l);
+	static IndexMesh* generateIndexedBox(GLdouble l);
 private:
 	void createTriangleWithIndex(std::vector<GLuint>& vIndexes, IndexedTriangle indexedTriangle);
 };

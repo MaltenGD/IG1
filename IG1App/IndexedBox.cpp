@@ -3,5 +3,5 @@
 
 IndexedBox::IndexedBox(GLdouble length)
 {
-	mMesh = IndexMesh::generateIndexedBox8(length);
+	mMesh = IndexMesh::generateIndexedBox(length);
 }

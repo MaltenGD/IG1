@@ -6,6 +6,7 @@ ColorMaterialEntity::ColorMaterialEntity()
 {
    /* glEnable(GL_LIGHTING);*/
     mShader = Shader::get("simple_light");
+    mNormalShader = Shader::get("normals");
 }
 
 void ColorMaterialEntity::toggleShowNormals()
@@ -24,8 +25,8 @@ void ColorMaterialEntity::render(const glm::mat4& modelViewMat) const
         mMesh->render();
 
         if (ColorMaterialEntity::mShowNormals) {
-
-
+            mNormalShader->use();
+            mMesh->render();
         }
     }
 }
