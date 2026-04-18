@@ -1,6 +1,6 @@
 ﻿#include "IndexMesh.h"
 #include <algorithm>
-
+#include <glm/gtc/constants.hpp>
 using namespace std;
 using namespace glm;
 
@@ -83,7 +83,7 @@ IndexMesh* IndexMesh::generateByRevolution(const std::vector<glm::vec2>& profile
 	GLdouble theta1 = angleMax / nSamples;
 	for (int i = 0; i <= nSamples; ++i) { // muestra i-ésima
 		GLdouble c = cos(i * theta1), s = sin(i * theta1);
-		for (auto p : profile) // rota el perfil
+		for (auto& p : profile) // rota el perfil
 			mesh->vVertices.emplace_back(p.x * c, p.y, -p.x * s);
 	}
 
@@ -95,7 +95,11 @@ IndexMesh* IndexMesh::generateByRevolution(const std::vector<glm::vec2>& profile
 			if (profile[j + 1].x != 0.0) // triángulo superior
 				for (auto [s, t] : { std::pair{i, j + 1}, {i + 1, j + 1}, {i + 1, j} })
 					mesh->vIndexes.push_back(s * tamPerfil + t);
+
+			mesh->vTexCoords.emplace_back(float(i) / nSamples,
+				1.0 - j / (profile.size() - 1.0));
 		}
+
 	mesh->mNumVertices = mesh->vVertices.size();
 
 	mesh->buildNormalVectors();
@@ -199,6 +203,58 @@ IndexMesh* IndexMesh::generateIndexedBox(GLdouble l)
 	mesh->mNumVertices = mesh->vVertices.size();
 
 	mesh->buildNormalVectors();
+
+	return mesh;
+}
+
+IndexMesh* IndexMesh::generateSphere(GLdouble radius, GLuint nParallel, GLuint nMeridians)
+{
+	std::vector<glm::vec2> profile;
+	profile.reserve(nParallel);
+
+	constexpr GLdouble PI = glm::pi<GLdouble>();
+
+	const GLdouble rotationFactor = PI/nMeridians;
+
+	GLdouble actualRotation = PI/2;
+
+	for (size_t i = 0; i <= nParallel; ++i)
+	{
+		glm::vec2 point(radius * glm::cos(actualRotation), radius * glm::sin(actualRotation));
+
+		profile.push_back(point);
+
+		actualRotation -= rotationFactor;
+	}
+
+	IndexMesh* mesh = new IndexMesh;
+
+	mesh->mPrimitive = GL_TRIANGLES;
+	//int tamPerfil = profile.size();
+	mesh->vVertices.reserve(nMeridians * nParallel);
+
+	GLdouble theta1 = 2 * std::numbers::pi / nMeridians;
+	for (int i = 0; i <= nMeridians; ++i)
+	{ // muestra i-ésima
+		GLdouble c = cos(i * theta1), s = sin(i * theta1);
+		for (auto& p : profile) // rota el perfil
+			mesh->vVertices.emplace_back(p.x * c, p.y, -p.x * s);
+	}
+
+	for (int i = 0; i < nMeridians; ++i) // caras i a i + 1
+		for (int j = 0; j < profile.size() - 1; ++j)
+		{ // una cara
+			if (profile[j].x != 0.0) // triángulo inferior
+				for (auto [s, t] : { std::pair{i, j}, {i, j + 1}, {i + 1, j} })
+					mesh->vIndexes.push_back(s * profile.size() + t);
+			if (profile[j + 1].x != 0.0) // triángulo superior
+				for (auto [s, t] : { std::pair{i, j + 1}, {i + 1, j + 1}, {i + 1, j} })
+					mesh->vIndexes.push_back(s * profile.size() + t);
+
+			// Esto probablemente este mal
+			mesh->vTexCoords.emplace_back(float(i) / nMeridians,
+				1.0 - j / (profile.size() - 1.0f));
+		}
 
 	return mesh;
 }

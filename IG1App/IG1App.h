@@ -9,6 +9,8 @@
 #include "Scene.h"
 #include "Viewport.h"
 
+//#define DEBUG_LOG(x) std::cout << x << std::endl;
+
 constexpr GLdouble FRAME_DURATION = GLdouble(1)/GLdouble(120);
 
 class IG1App

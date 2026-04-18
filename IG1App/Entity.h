@@ -32,8 +32,8 @@ public:
 	void rotate(const glm::vec3& scale);
 
 	// load or unload entity data into the GPU
-	void load();
-	void unload();
+	virtual void load();
+	virtual void unload();
 
 protected:
 	Mesh* mMesh = nullptr; // the mesh

@@ -127,6 +127,10 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClInclude Include="ColorMaterialEntity.h" />
+    <ClInclude Include="CompoundEntity.h">
+      <SubType>
+      </SubType>
+    </ClInclude>
     <ClInclude Include="Entity\BoxOutline.h" />
     <ClInclude Include="Camera.h" />
     <ClInclude Include="EntityWithTexture.h" />
@@ -163,17 +167,27 @@
     <ClInclude Include="Shader.h" />
     <ClInclude Include="SingleColorEntity.h" />
     <ClInclude Include="Entity\Star3D.h" />
+    <ClInclude Include="SphereWithTexture.h">
+      <SubType>
+      </SubType>
+    </ClInclude>
     <ClInclude Include="Texture.h" />
     <ClInclude Include="Entity\Torus.h" />
     <ClInclude Include="Viewport.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="ColorMaterialEntity.cpp" />
+    <ClCompile Include="CompoundEntity.cpp">
+      <SubType>
+      </SubType>
+    </ClCompile>
     <ClCompile Include="Entity\BoxOutline.cpp" />
     <ClCompile Include="Camera.cpp" />
     <ClCompile Include="EntityWithTexture.cpp" />
+    <ClCompile Include="Entity\Cone.cpp" />
     <ClCompile Include="Entity\Cube.cpp" />
     <ClCompile Include="Entity.cpp" />
+    <ClCompile Include="Entity\Disk.cpp" />
     <ClCompile Include="Entity\Ground.cpp" />
     <ClCompile Include="GlassParapet.cpp" />
     <ClCompile Include="Grass.cpp" />
@@ -203,6 +217,10 @@
     <ClCompile Include="Shader.cpp" />
     <ClCompile Include="SingleColorEntity.cpp" />
     <ClCompile Include="Entity\Star3D.cpp" />
+    <ClCompile Include="SphereWithTexture.cpp">
+      <SubType>
+      </SubType>
+    </ClCompile>
     <ClCompile Include="Texture.cpp" />
     <ClCompile Include="Entity\Torus.cpp" />
     <ClCompile Include="Viewport.cpp" />
