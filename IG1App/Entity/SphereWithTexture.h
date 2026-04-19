@@ -2,7 +2,6 @@
 #define __SphereWithTexture_H__
 
 #include "EntityWithTexture.h"
-#include "ColorMaterialEntity.h"
 class SphereWithTexture : public EntityWithTexture
 {
 	private:

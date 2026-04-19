@@ -168,10 +168,14 @@
       </SubType>
     </ClInclude>
     <ClInclude Include="Scene\Scene7.h" />
+    <ClInclude Include="Scene\Scene8.h">
+      <SubType>
+      </SubType>
+    </ClInclude>
     <ClInclude Include="Shader.h" />
     <ClInclude Include="SingleColorEntity.h" />
     <ClInclude Include="Entity\Star3D.h" />
-    <ClInclude Include="SphereWithTexture.h">
+    <ClInclude Include="Entity\SphereWithTexture.h">
       <SubType>
       </SubType>
     </ClInclude>
@@ -197,6 +201,7 @@
       </SubType>
     </ClCompile>
     <ClCompile Include="Entity\Ground.cpp" />
+    <ClCompile Include="Entity\Sphere.cpp" />
     <ClCompile Include="GlassParapet.cpp" />
     <ClCompile Include="Grass.cpp" />
     <ClCompile Include="IG1App.cpp" />
@@ -222,10 +227,14 @@
       </SubType>
     </ClCompile>
     <ClCompile Include="Scene\Scene7.cpp" />
+    <ClCompile Include="Scene\Scene8.cpp">
+      <SubType>
+      </SubType>
+    </ClCompile>
     <ClCompile Include="Shader.cpp" />
     <ClCompile Include="SingleColorEntity.cpp" />
     <ClCompile Include="Entity\Star3D.cpp" />
-    <ClCompile Include="SphereWithTexture.cpp">
+    <ClCompile Include="Entity\SphereWithTexture.cpp">
       <SubType>
       </SubType>
     </ClCompile>

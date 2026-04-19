@@ -16,6 +16,7 @@
 
 #include "Scene6.h"
 #include "Scene7.h"
+#include "Scene8.h"
 
 
 #include <iostream>
@@ -119,6 +120,7 @@ IG1App::init()
 	mScenes.push_back(new Scene5);
 	mScenes.push_back(new Scene6);
 	mScenes.push_back(new Scene7);
+	mScenes.push_back(new Scene8);
 
 
 
@@ -447,6 +449,14 @@ IG1App::changeScene(size_t sceneNr) // sceneNr es el numero del teclado que se p
 		mScenes[mCurrentScene]->unload();
 		mCurrentScene = sceneNr;
 		mScenes[mCurrentScene]->load();
+		if (mCurrentScene == 8)
+		{
+			glClearColor(0, 0, 0, 1.0);
+		}
+		else
+		{
+			glClearColor(0.6, 0.7, 0.8, 1.0);
+		};
 	}
 
 	return true;

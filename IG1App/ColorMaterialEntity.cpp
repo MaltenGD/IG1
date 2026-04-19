@@ -1,5 +1,5 @@
 #include "ColorMaterialEntity.h"
-
+#include "IG1App.h"
 bool ColorMaterialEntity::mShowNormals = false;
 
 ColorMaterialEntity::ColorMaterialEntity()
@@ -20,13 +20,16 @@ void ColorMaterialEntity::render(const glm::mat4& modelViewMat) const
     {
         glm::mat4 aMat = modelViewMat * mModelMat;
         mShader->use();
+        //glm::mat4 viewMat = IG1App::s_ig1app.camera().viewMat();
+        //mShader->setUniform("lightDir", viewMat * glm::vec4(-1,-1.5,-1.25,0));
         mShader->setUniform("color", mColor);
         upload(aMat);
-        //mMesh->render();
+        mMesh->render();
 
         if (ColorMaterialEntity::mShowNormals) {
             mNormalShader->use();
+            mMesh->render();
         }
-        mMesh->render();
+
     }
 }
