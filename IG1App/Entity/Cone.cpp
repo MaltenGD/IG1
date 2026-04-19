@@ -4,8 +4,7 @@
 Cone::Cone(GLdouble h, GLdouble r, GLdouble R, GLuint nRings, GLuint nSamples) :ColorMaterialEntity()
 {
     std::vector<glm::vec2 > profile;
-    profile.reserve(nRings);
-
+    profile.reserve(nRings + 2);
 
     // r el base
     // R el de arriba
@@ -16,18 +15,23 @@ Cone::Cone(GLdouble h, GLdouble r, GLdouble R, GLuint nRings, GLuint nSamples) :
     GLdouble b = ((R * R) + (r * r)) / 2;
     GLdouble y = h / 2;
 
-    //for (int i = y; i >= -y; y -= chunk)
-    //{
-    //    std::cout << a * i + b << std::endl;
-    //    profile.push_back(glm::vec2(a * i + b, i));
-    //}
+    // La otra forma de hacer las tapas es con el disk y que el cono sea un compound entity
     int steps = 0;
-    for (int y = 0; y < h; y += yChunk)
+    profile.push_back(glm::vec2(0, -(h / 2)));
+    for (int y = -(h / 2); y <= (h / 2); y += yChunk)
     {
-        std::cout << r + steps * xChunk << std::endl;
         profile.push_back(glm::vec2(r + steps * xChunk, y));
         ++steps;
     }
+    profile.push_back(glm::vec2(0, h / 2));
+
+    // Esto es identico a lo de arriba excepto que parte desde la base, y va hacia arriba
+    //for (int y = 0; y < h; y += yChunk)
+    //{
+    //    std::cout << r + steps * xChunk << std::endl;
+    //    profile.push_back(glm::vec2(r + steps * xChunk, y));
+    //    ++steps;
+    //}
 
     mMesh = IndexMesh::generateByRevolution(profile,nSamples);
 }

@@ -22,11 +22,11 @@ void ColorMaterialEntity::render(const glm::mat4& modelViewMat) const
         mShader->use();
         mShader->setUniform("color", mColor);
         upload(aMat);
-        mMesh->render();
+        //mMesh->render();
 
         if (ColorMaterialEntity::mShowNormals) {
             mNormalShader->use();
-            mMesh->render();
         }
+        mMesh->render();
     }
 }

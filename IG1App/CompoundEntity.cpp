@@ -32,4 +32,12 @@ void CompoundEntity::unload()
 
 void CompoundEntity::render(const glm::mat4& modelViewMat) const
 {
+    if (!gObjects.empty())
+    {
+        glm::mat4 aMat = modelViewMat * mModelMat;
+        for (Abs_Entity* entity : gObjects)
+        {
+            entity->render(aMat);
+        }
+    }
 }
