@@ -21,7 +21,7 @@ void ColorMaterialEntity::render(const glm::mat4& modelViewMat) const
         glm::mat4 aMat = modelViewMat * mModelMat;
         mShader->use();
         //glm::mat4 viewMat = IG1App::s_ig1app.camera().viewMat();
-        //mShader->setUniform("lightDir", viewMat * glm::vec4(-1,-1.5,-1.25,0));
+       /* mShader->setUniform("lightDir", glm::normalize(viewMat * glm::vec4(-1,-1.5,-1.25,0));*/
         mShader->setUniform("color", mColor);
         upload(aMat);
         mMesh->render();

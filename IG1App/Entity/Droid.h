@@ -3,6 +3,7 @@
 #include "CompoundEntity.h"
 class Droid : public CompoundEntity
 {
+private: float view_angle = 0;
 	public:
 		Droid();
 		Droid(GLdouble radius);

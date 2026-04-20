@@ -332,8 +332,14 @@ IG1App::key(unsigned int key)
 		case 'N':
 			ColorMaterialEntity::toggleShowNormals();
 			break;
-		case 'f':
+		case 'm':
 			mWireFrameMode = !mWireFrameMode;
+			break;
+		case 'f':
+			mScenes[mCurrentScene]->rotate();
+			break;
+		case 'g':
+			mScenes[mCurrentScene]->orbit();
 			break;
 			
 		default:

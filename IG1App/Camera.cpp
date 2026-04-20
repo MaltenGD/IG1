@@ -30,6 +30,7 @@ Camera::uploadVM() const
 
 	const glm::vec4 lightDirWorld = glm::vec4(glm::normalize(glm::vec3(-1.0f, -1.5f, -1.25f)), 0.0f); // invierto la luz (el toroide se veia rotado sobre la z 180deg)
 	const glm::vec4 lightDirView = glm::vec4(glm::normalize(glm::vec3(mViewMat * lightDirWorld)), 0.0f);
+
 	Shader::setUniform4All("lightDir", lightDirView);
 }
 

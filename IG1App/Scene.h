@@ -26,8 +26,8 @@ public:
 	// load or unload scene data into the GPU
 	void load();
 	void unload();
-	void rotate();
-	void orbit();
+	virtual void rotate();
+	virtual void orbit();
 
 protected:
 	void destroy();

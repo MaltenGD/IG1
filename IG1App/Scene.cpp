@@ -70,6 +70,12 @@ void Scene::update() {
 	}
 }
 
+void Scene::rotate() {
+
+}
+void Scene::orbit() {
+
+}
 
 void
 Scene::render(Camera const& cam) const
