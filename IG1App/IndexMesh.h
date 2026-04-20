@@ -20,9 +20,9 @@ public:
 	void unload() override;
 	void buildNormalVectors();
 	
-	static IndexMesh* generateByRevolution(const std::vector<glm::vec2>& profile,GLuint nSamples,GLfloat angleMax = 2 * std::numbers::pi);
-	static IndexMesh* generateIndexedBox8(GLdouble l);
-	static IndexMesh* generateIndexedBox(GLdouble l);
+	static IndexMesh* generateByRevolution(const std::vector<glm::vec2>& profile,GLuint nSamples,GLfloat angleMax = 2 * std::numbers::pi, bool buildNormals = true);
+	static IndexMesh* generateIndexedBox8(GLdouble l, bool buildNormals = true);
+	static IndexMesh* generateIndexedBox(GLdouble l, bool buildNormals = true);
 
 	static IndexMesh* generateSphere(GLdouble radius,GLuint nParallel, GLuint nMeridians);
 

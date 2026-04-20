@@ -72,7 +72,7 @@ void IndexMesh::unload()
 	}
 }
 
-IndexMesh* IndexMesh::generateByRevolution(const std::vector<glm::vec2>& profile, GLuint nSamples, GLfloat angleMax)
+IndexMesh* IndexMesh::generateByRevolution(const std::vector<glm::vec2>& profile, GLuint nSamples, GLfloat angleMax, bool buildNormals)
 {
 	IndexMesh* mesh = new IndexMesh;
 
@@ -106,12 +106,12 @@ IndexMesh* IndexMesh::generateByRevolution(const std::vector<glm::vec2>& profile
 
 	mesh->mNumVertices = mesh->vVertices.size();
 
-	mesh->buildNormalVectors();
+	if (buildNormals) mesh->buildNormalVectors();
 
 	return mesh;
 }
 
-IndexMesh* IndexMesh::generateIndexedBox8(GLdouble l)
+IndexMesh* IndexMesh::generateIndexedBox8(GLdouble l, bool buildNormals)
 {
 	IndexMesh* mesh = new IndexMesh;
 	mesh->mPrimitive = GL_TRIANGLES;
@@ -146,12 +146,12 @@ IndexMesh* IndexMesh::generateIndexedBox8(GLdouble l)
 
 	mesh->mNumVertices = mesh->vVertices.size();
 
-	mesh->buildNormalVectors();
+	if (buildNormals) mesh->buildNormalVectors();
 
 	return mesh;
 }
 
-IndexMesh* IndexMesh::generateIndexedBox(GLdouble l)
+IndexMesh* IndexMesh::generateIndexedBox(GLdouble l, bool buildNormals)
 {
 	IndexMesh* mesh = new IndexMesh;
 	mesh->mPrimitive = GL_TRIANGLES;
@@ -206,7 +206,7 @@ IndexMesh* IndexMesh::generateIndexedBox(GLdouble l)
 
 	mesh->mNumVertices = mesh->vVertices.size();
 
-	mesh->buildNormalVectors();
+	if (buildNormals) mesh->buildNormalVectors();
 
 	return mesh;
 }
