@@ -1,6 +1,7 @@
 ﻿#include "IndexMesh.h"
 #include <algorithm>
 #include <glm/gtc/constants.hpp>
+#include <iostream>
 using namespace std;
 using namespace glm;
 
@@ -85,7 +86,7 @@ IndexMesh* IndexMesh::generateByRevolution(const std::vector<glm::vec2>& profile
 	for (int i = 0; i <= nSamples; ++i) { // muestra i-ésima
 		GLdouble c = cos(i * theta1), s = sin(i * theta1);
 		for (int j = 0; j < tamPerfil; ++j) { // rota el perfil
-			auto const& p = profile[j];
+			glm::vec2 p = profile[j];
 			mesh->vVertices.emplace_back(p.x * c, p.y, -p.x * s);
 			mesh->vTexCoords.emplace_back(
 				float(i) / nSamples,
@@ -96,7 +97,7 @@ IndexMesh* IndexMesh::generateByRevolution(const std::vector<glm::vec2>& profile
 
 	for (int i = 0; i < nSamples; ++i) // caras i a i + 1
 		for (int j = 0; j < tamPerfil - 1; ++j) { // una cara
-			if (profile[j].x != 0.0) // triángulo inferior
+			if (profile[j].x != 0.0) // triángulo inferior	
 				for (auto [s, t] : { std::pair{i, j}, {i, j + 1}, {i + 1, j} })
 					mesh->vIndexes.push_back(s * tamPerfil + t);
 			if (profile[j + 1].x != 0.0) // triángulo superior
@@ -218,15 +219,14 @@ IndexMesh* IndexMesh::generateSphere(GLdouble radius, GLuint nParallel, GLuint n
 
 	constexpr GLdouble PI = glm::pi<GLdouble>();
 	const GLdouble rotationFactor = PI / nParallel;
-
+	//GLdouble actuanRotation = PI / 2;
 	// Perfil de abajo a arriba: [-PI/2, +PI/2]
 	for (GLuint i = 0; i <= nParallel; ++i)
 	{
-		GLdouble theta = -PI / 2 + i * rotationFactor;
+		GLdouble theta = PI / 2 + i * rotationFactor;
+		//std::cout << theta << std::endl;
 		GLdouble x = radius * glm::cos(theta);
 		GLdouble y = radius * glm::sin(theta);
-
-
 
 		profile.emplace_back(x, y);
 	}
