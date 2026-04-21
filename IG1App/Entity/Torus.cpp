@@ -11,7 +11,7 @@ Torus::Torus(GLdouble R, GLdouble r, GLuint nPoints, GLuint nSamples)
 
     const GLdouble rotationFactor = 2 * PI / nPoints;
 
-    GLdouble actualRotation = PI * 3/4;
+    GLdouble actualRotation = -(PI / 2);
 
     for (size_t i = 0; i <= nPoints; ++i)
     {
@@ -19,7 +19,7 @@ Torus::Torus(GLdouble R, GLdouble r, GLuint nPoints, GLuint nSamples)
 
         profiles.push_back(point);
 
-        actualRotation -= rotationFactor;
+        actualRotation += rotationFactor;
     }
 
     // Una cosa es la figura de revolucion, otra cosa es la figura de revolucion pero con mallas indexadas

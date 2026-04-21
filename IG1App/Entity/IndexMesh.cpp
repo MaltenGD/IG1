@@ -98,10 +98,10 @@ IndexMesh* IndexMesh::generateByRevolution(const std::vector<glm::vec2>& profile
 	for (int i = 0; i < nSamples; ++i) // caras i a i + 1
 		for (int j = 0; j < tamPerfil - 1; ++j) { // una cara
 			if (profile[j].x != 0.0) // triángulo inferior	
-				for (auto [s, t] : { std::pair{i, j}, {i, j + 1}, {i + 1, j} })
+				for (auto [s, t] : { std::pair{i, j}, {i + 1, j} ,{i, j + 1}})
 					mesh->vIndexes.push_back(s * tamPerfil + t);
 			if (profile[j + 1].x != 0.0) // triángulo superior
-				for (auto [s, t] : { std::pair{i, j + 1}, {i + 1, j + 1}, {i + 1, j} })
+				for (auto [s, t] : { std::pair{i, j + 1}, {i + 1, j} ,{i + 1, j + 1}})
 					mesh->vIndexes.push_back(s * tamPerfil + t);
 		}
 
@@ -223,7 +223,7 @@ IndexMesh* IndexMesh::generateSphere(GLdouble radius, GLuint nParallel, GLuint n
 	// Perfil de abajo a arriba: [-PI/2, +PI/2]
 	for (GLuint i = 0; i <= nParallel; ++i)
 	{
-		GLdouble theta = PI / 2 + i * rotationFactor;
+		GLdouble theta = -PI / 2 + i * rotationFactor;
 		//std::cout << theta << std::endl;
 		GLdouble x = radius * glm::cos(theta);
 		GLdouble y = radius * glm::sin(theta);
