@@ -3,13 +3,14 @@
 #include "Scene.h"
 
 class CompoundEntity;
+class Droid;
+
 class Scene8 : public Scene
 {
 
 private:
-	CompoundEntity* Orbit_node = nullptr;
-	CompoundEntity* Rotate_node = nullptr;
-	
+	CompoundEntity* node = nullptr;
+	Droid* droid;
 public:
 	Scene8() = default;
 	~Scene8() = default;

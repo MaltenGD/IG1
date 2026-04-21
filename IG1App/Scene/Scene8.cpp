@@ -13,34 +13,32 @@ void Scene8::init()
 	opaque_gObjects.push_back(new RGBAxes(400.0));
 	Sphere* sphere = new Sphere(SPHERE_RADIUS,30,30);
 	sphere->setColor(glm::vec4(171.0f/255, 33.0f / 255, 72.0f / 255, 1));
-	Droid* droid = new Droid(20);
+	droid = new Droid(DROID_RADIUS);
 	glm::mat4 m = droid->modelMat();
 	m = glm::translate<float>(m,glm::vec3(0, SPHERE_RADIUS + DROID_RADIUS,0));
 	droid->setModelMat(m);
+
 	
 
-	Orbit_node = new CompoundEntity();
+	node = new CompoundEntity();
+	node->addEntity(droid);
+	//glm::mat4 m = node->modelMat();
+	//m = glm::translate<float>(m, glm::vec3(0, SPHERE_RADIUS + DROID_RADIUS, 0));
+	//node->setModelMat(m);
 
-	Rotate_node = new CompoundEntity();
-
-	Orbit_node->addEntity(Rotate_node);
-
-	Rotate_node->addEntity(droid);
-	Orbit_node->addEntity(sphere);
-
-	opaque_gObjects.push_back(Orbit_node);
+	opaque_gObjects.push_back(node);
+	opaque_gObjects.push_back(sphere);
 }
 
 
 void Scene8::rotate() {
-	glm::mat4 modelMat = Rotate_node->modelMat();
-	Rotate_node->setModelMat(glm::rotate(modelMat, glm::radians<float>(2), glm::vec3(0, 1, 0)));
+	glm::mat4 modelMat = node->modelMat();
+	node->setModelMat(glm::rotate(modelMat, glm::radians<float>(2), glm::vec3(0, 1, 0)));
 
 }
 
 void Scene8::orbit() {
-	glm::mat4 modelMat = Orbit_node->modelMat();
-	Orbit_node->setModelMat(glm::rotate(modelMat, glm::radians<float>(2), glm::vec3(1, 0, 0)));
+	glm::mat4 modelMat = node->modelMat();
+	node->setModelMat(glm::rotate(modelMat, glm::radians<float>(2), glm::vec3(1, 0, 0)));
+	droid->rotate();
 }
-
-

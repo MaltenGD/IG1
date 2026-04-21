@@ -11,7 +11,7 @@ Droid::Droid(): CompoundEntity()
 
 Droid::Droid(GLdouble radius)
 {
-    SphereWithTexture* body = new SphereWithTexture(radius, 10, 10, "../assets/images/container.jpg");
+    body = new SphereWithTexture(radius, 10, 10, "../assets/images/container.jpg");
 
     float EYE_X_POS = radius/2;
     float EYE_Y_POS = radius;
@@ -45,6 +45,11 @@ Droid::Droid(GLdouble radius)
     right->setModelMat(m);
 
     addEntity(body, head, left, right);
+}
+
+void Droid::rotate() 
+{
+    body->setModelMat(glm::rotate<float>(body->modelMat(), glm::radians<float>(5), glm::vec3(1, 0, 0)));
 }
 
 Droid::~Droid()
