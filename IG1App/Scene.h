@@ -6,6 +6,7 @@
 
 #include "Camera.h"
 #include "Entity.h"
+#include "Light.h"
 
 #include <vector>
 
@@ -25,6 +26,7 @@ public:
 
 	// load or unload scene data into the GPU
 	void load();
+	void uploadLights(Camera const& cam) const;
 	void unload();
 	virtual void rotate();
 	virtual void orbit();
@@ -35,7 +37,10 @@ protected:
 	void resetGL();
 
 	std::vector<Abs_Entity*> opaque_gObjects; // Entities (graphic objects) of the scene
+	
 	std::vector<Abs_Entity*> translucid_gObjects; // Entities (graphic objects) of the scene
+	std::vector<Light*> gLights
 };
+
 
 #endif //_H_Scene_H_

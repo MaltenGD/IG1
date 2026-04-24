@@ -33,3 +33,8 @@ void ColorMaterialEntity::render(const glm::mat4& modelViewMat) const
 
     }
 }
+
+void ColorMaterialEntity::setColor(glm::vec4 color)
+{
+
+}

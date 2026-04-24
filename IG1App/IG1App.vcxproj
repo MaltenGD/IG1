@@ -131,6 +131,7 @@
       <SubType>
       </SubType>
     </ClInclude>
+    <ClInclude Include="EntityWithMaterial.h" />
     <ClInclude Include="Entity\BoxOutline.h" />
     <ClInclude Include="Camera.h" />
     <ClInclude Include="EntityWithTexture.h" />
@@ -149,6 +150,8 @@
     <ClInclude Include="IG1App.h" />
     <ClInclude Include="Entity\IndexedBox.h" />
     <ClInclude Include="IndexMesh.h" />
+    <ClInclude Include="Light.h" />
+    <ClInclude Include="Material.h" />
     <ClInclude Include="Mesh.h" />
     <ClInclude Include="Image.h" />
     <ClInclude Include="Entity\RegularPolygon.h" />
@@ -157,6 +160,7 @@
     <ClInclude Include="Entity\RGBTriangle.h" />
     <ClInclude Include="Photo.h" />
     <ClInclude Include="Scene.h" />
+    <ClInclude Include="Scene\Scene10.h" />
     <ClInclude Include="Scene\Scene6.h" />
     <ClInclude Include="Scene\Scene4.h" />
     <ClInclude Include="Scene\Scene0.h" />
@@ -190,6 +194,7 @@
       <SubType>
       </SubType>
     </ClCompile>
+    <ClCompile Include="EntityWithMaterial.cpp" />
     <ClCompile Include="Entity\BoxOutline.cpp" />
     <ClCompile Include="Camera.cpp" />
     <ClCompile Include="EntityWithTexture.cpp" />
@@ -208,7 +213,9 @@
     <ClCompile Include="IG1App.cpp" />
     <ClCompile Include="IndexedBox.cpp" />
     <ClCompile Include="Entity\IndexMesh.cpp" />
+    <ClCompile Include="Light.cpp" />
     <ClCompile Include="main.cpp" />
+    <ClCompile Include="Material.cpp" />
     <ClCompile Include="Mesh.cpp" />
     <ClCompile Include="Image.cpp" />
     <ClCompile Include="Entity\RegularPolygon.cpp" />
@@ -217,6 +224,7 @@
     <ClCompile Include="Entity\RGBTriangle.cpp" />
     <ClCompile Include="Photo.cpp" />
     <ClCompile Include="Scene.cpp" />
+    <ClCompile Include="Scene\Scene10.cpp" />
     <ClCompile Include="Scene\Scene6.cpp" />
     <ClCompile Include="Scene\Scene4.cpp" />
     <ClCompile Include="Scene\Scene0.cpp" />

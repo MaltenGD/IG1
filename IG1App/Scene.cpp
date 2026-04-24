@@ -1,5 +1,6 @@
 #include "Scene.h"
 
+#include "Light.h"
 #include <glm/gtc/matrix_transform.hpp>
 #include <glm/gtc/type_ptr.hpp>
 
@@ -28,16 +29,30 @@ Scene::destroy()
 void
 Scene::load()
 {
+
 	for (Abs_Entity* obj : opaque_gObjects)
 		obj->load();
 
 	for (Abs_Entity* obj : translucid_gObjects)
 		obj->load();
+
+}
+
+void Scene::uploadLights(Camera const& cam) const
+{
+	for (Light* light : gLights)
+	{
+		light->upload(*(Shader::get("simple_light")), cam.viewMat());
+	}
 }
 
 void
 Scene::unload()
 {
+	for (Light* light : gLights)
+	{
+		light->unload(*(Shader::get("simple_light"));
+	}
 	for (Abs_Entity* obj : opaque_gObjects)
 		obj->unload();
 
@@ -81,6 +96,8 @@ void
 Scene::render(Camera const& cam) const
 {
 	cam.upload();
+
+	uploadLights(cam);
 
 	for (Abs_Entity* el : opaque_gObjects)
 		el->render(cam.viewMat());
