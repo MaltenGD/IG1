@@ -172,6 +172,7 @@
       <SubType>
       </SubType>
     </ClInclude>
+    <ClInclude Include="Scene\Scene9.h" />
     <ClInclude Include="Shader.h" />
     <ClInclude Include="SingleColorEntity.h" />
     <ClInclude Include="Entity\Star3D.h" />
@@ -231,6 +232,7 @@
       <SubType>
       </SubType>
     </ClCompile>
+    <ClCompile Include="Scene\Scene9.cpp" />
     <ClCompile Include="Shader.cpp" />
     <ClCompile Include="SingleColorEntity.cpp" />
     <ClCompile Include="Entity\Star3D.cpp" />

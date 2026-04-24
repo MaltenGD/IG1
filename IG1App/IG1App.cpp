@@ -17,6 +17,7 @@
 #include "Scene6.h"
 #include "Scene7.h"
 #include "Scene8.h"
+#include "Scene9.h"
 
 
 #include <iostream>
@@ -121,6 +122,7 @@ IG1App::init()
 	mScenes.push_back(new Scene6);
 	mScenes.push_back(new Scene7);
 	mScenes.push_back(new Scene8);
+	mScenes.push_back(new Scene9);
 
 
 

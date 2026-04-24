@@ -8,7 +8,7 @@ using namespace glm;
 constexpr GLuint NONE = numeric_limits<GLuint>::max();
 
 // Inicializar mIBO;
-IndexMesh::IndexMesh()
+IndexMesh::IndexMesh() : mIBO(NONE)
 {
 
 }
@@ -26,7 +26,8 @@ void IndexMesh::draw() const
 
 void IndexMesh::load()
 {
-	Mesh::load(); glBindVertexArray(mVAO);
+	Mesh::load(); 
+	glBindVertexArray(mVAO);
 	glGenBuffers(1, &mIBO);
 	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, mIBO);
 	glBufferData(GL_ELEMENT_ARRAY_BUFFER,
