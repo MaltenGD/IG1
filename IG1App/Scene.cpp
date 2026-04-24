@@ -42,7 +42,11 @@ void Scene::uploadLights(Camera const& cam) const
 {
 	for (Light* light : gLights)
 	{
-		light->upload(*(Shader::get("simple_light")), cam.viewMat());
+		for (Abs_Entity* obj : opaque_gObjects)
+		{
+			light->upload(*obj->shader(), cam.viewMat());
+		}
+
 	}
 }
 
@@ -51,7 +55,7 @@ Scene::unload()
 {
 	for (Light* light : gLights)
 	{
-		light->unload(*(Shader::get("simple_light"));
+		light->unload(*(Shader::get("simple_light")));
 	}
 	for (Abs_Entity* obj : opaque_gObjects)
 		obj->unload();
@@ -112,4 +116,13 @@ Scene::render(Camera const& cam) const
 
 	glDisable(GL_BLEND);
 	glDepthMask(GL_TRUE);
+}
+
+void Scene::init()
+{
+	DirLight* dirLight = new DirLight();
+	dirLight->setAmb(glm::vec3(0.25, 0.25, 0.25));
+	dirLight->setDiff(glm::vec3(.6, .6, .6));
+	dirLight->setSpec(glm::vec3(0, 0.2, 0));
+	gLights.push_back(dirLight);
 }

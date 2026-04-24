@@ -27,6 +27,9 @@ public:
 	glm::mat4 const& modelMat() const { return mModelMat; };
 	void setModelMat(glm::mat4 const& aMat) { mModelMat = aMat; };
 
+	// Para la practica 5
+	Shader* shader() { return mShader; };
+
 	//Movimiento afín.
 	void moveTo(const glm::vec3& coordinates);
 	void rotate(const glm::vec3& scale);

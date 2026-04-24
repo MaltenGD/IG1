@@ -52,6 +52,7 @@ Light::setSpec(const glm::vec3& ind)
 DirLight::DirLight(int id)
  : Light("dirLights", id)
 {
+
 }
 
 void DirLight::upload(Shader& shader, glm::mat4 const& modelViewMat) const

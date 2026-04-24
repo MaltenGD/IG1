@@ -453,10 +453,17 @@ IG1App::changeScene(size_t sceneNr) // sceneNr es el numero del teclado que se p
 	if (sceneNr >= mScenes.size())
 		return false;
 
+	int intermediate = sceneNr;
+	if (sceneNr == 0)
+	{
+		intermediate = 10;
+	}
 	// Change only if a different scene
-	if (sceneNr != mCurrentScene) {
+	if (intermediate != mCurrentScene) {
+
 		mScenes[mCurrentScene]->unload();
-		mCurrentScene = sceneNr;
+		mCurrentScene = intermediate;
+		//mCurrentScene = sceneNr;
 		mScenes[mCurrentScene]->load();
 		if (mCurrentScene == 8)
 		{

@@ -9,32 +9,41 @@ ColorMaterialEntity::ColorMaterialEntity()
     mNormalShader = Shader::get("normals");
 }
 
+ColorMaterialEntity::ColorMaterialEntity(glm::vec3 colour):EntityWithMaterial()
+{
+    mShader = Shader::get("simple_light");
+    mNormalShader = Shader::get("normals");
+    Material m(colour);
+    setMaterial(m);
+}
+
 void ColorMaterialEntity::toggleShowNormals()
 {
     ColorMaterialEntity::mShowNormals = !ColorMaterialEntity::mShowNormals;
 }
 
-void ColorMaterialEntity::render(const glm::mat4& modelViewMat) const
+//void ColorMaterialEntity::render(const glm::mat4& modelViewMat) const
+//{
+//    if (mMesh != nullptr)
+//    {
+//        glm::mat4 aMat = modelViewMat * mModelMat;
+//        mShader->use();
+//        //glm::mat4 viewMat = IG1App::s_ig1app.camera().viewMat();
+//       /* mShader->setUniform("lightDir", glm::normalize(viewMat * glm::vec4(-1,-1.5,-1.25,0));*/
+//        //mShader->setUniform("color", mColor);
+//        upload(aMat);
+//        mMesh->render();
+//
+//        if (ColorMaterialEntity::mShowNormals) {
+//            mNormalShader->use();
+//            mMesh->render();
+//        }
+//
+//    }
+//}
+
+void ColorMaterialEntity::setColor(glm::vec3 color)
 {
-    if (mMesh != nullptr)
-    {
-        glm::mat4 aMat = modelViewMat * mModelMat;
-        mShader->use();
-        //glm::mat4 viewMat = IG1App::s_ig1app.camera().viewMat();
-       /* mShader->setUniform("lightDir", glm::normalize(viewMat * glm::vec4(-1,-1.5,-1.25,0));*/
-        mShader->setUniform("color", mColor);
-        upload(aMat);
-        mMesh->render();
-
-        if (ColorMaterialEntity::mShowNormals) {
-            mNormalShader->use();
-            mMesh->render();
-        }
-
-    }
-}
-
-void ColorMaterialEntity::setColor(glm::vec4 color)
-{
-
+    Material mat(color);
+    setMaterial(mat);
 }

@@ -19,7 +19,7 @@ public:
 	Scene(const Scene& s) = delete;            // no copy constructor
 	Scene& operator=(const Scene& s) = delete; // no copy assignment
 
-	virtual void init() = 0; 
+	virtual void init();
 
 	virtual void update();
 	void render(Camera const& cam) const;
@@ -39,7 +39,7 @@ protected:
 	std::vector<Abs_Entity*> opaque_gObjects; // Entities (graphic objects) of the scene
 	
 	std::vector<Abs_Entity*> translucid_gObjects; // Entities (graphic objects) of the scene
-	std::vector<Light*> gLights
+	std::vector<Light*> gLights;
 };
 
 

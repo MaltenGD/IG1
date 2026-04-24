@@ -7,8 +7,6 @@ class CompoundEntity;
 
 class Scene10 : public Scene
 {
-private:
-	CompoundEntity* node = nullptr;
 
 public:
 	Scene10() = default;
