@@ -7,7 +7,7 @@
 using namespace glm;
 Scene::Scene()
 {
-	auto* dirLight = new DirLight(0);
+	DirLight* dirLight = new DirLight(0);
 	dirLight->setDirection({ -1.0f, -1.5f, -1.25f });
 	dirLight->setAmb({ 0.25f, 0.25f, 0.25f });
 	dirLight->setDiff({ 0.6f, 0.6f, 0.6f });

@@ -32,6 +32,7 @@ public:
 	void toggleLight(int lightIndex);
 	virtual void rotate();
 	virtual void orbit();
+	virtual void handleInput(unsigned int key) {};
 
 protected:
 	void destroy();

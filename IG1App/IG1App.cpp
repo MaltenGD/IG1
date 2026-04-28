@@ -361,6 +361,12 @@ IG1App::key(unsigned int key)
 			break;
 	} // switch
 
+	if (mCurrentScene == 8)
+	{
+		mScenes[mCurrentScene]->handleInput(key);
+		mNeedsRedisplay = true;
+	}
+
 	if (need_redisplay)
 		mNeedsRedisplay = true;
 }

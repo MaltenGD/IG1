@@ -59,6 +59,7 @@ public:
 
 	void setPosition(const glm::fvec3& dir);
 	void setAttenuation(GLfloat kc, GLfloat kl, GLfloat kq);
+	glm::vec4 getPosition() const { return position; }
 
 protected:
 	glm::vec4 position = {0, 0, 0, 1};
