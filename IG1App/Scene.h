@@ -29,6 +29,7 @@ public:
 	void uploadLights(Camera const& cam) const;
 	void unload();
 	void toggleMainLight();
+	void toggleLight(int lightIndex);
 	virtual void rotate();
 	virtual void orbit();
 

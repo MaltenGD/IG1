@@ -1,14 +1,21 @@
 #include "Scene8.h"
 #include "Entity/Sphere.h"
 #include "Droid.h"
+#include "Light.h"
+
 void Scene8::init()
 {
 	//// OpenGL basic setting
 	//glClearColor(0, 0, 0, 1.0); // background color (alpha=1 -> opaque)
 	//glEnable(GL_DEPTH_TEST);          // enable Depth test
 
-	float SPHERE_RADIUS = 200;
-	float DROID_RADIUS = 20;
+	constexpr float SPHERE_RADIUS = 200.0f;
+	constexpr float DROID_RADIUS = 20.0f;
+	
+	// Apartado 77
+	constexpr float POSLIGHT_X = 0.0f;
+	constexpr float POSLIGHT_Y = 280.0f;
+	constexpr float POSLIGHT_Z = 0.0f;
 
 	opaque_gObjects.push_back(new RGBAxes(400.0));
 	Sphere* sphere = new Sphere(SPHERE_RADIUS,30,30);
@@ -18,16 +25,20 @@ void Scene8::init()
 	m = glm::translate<float>(m,glm::vec3(0, SPHERE_RADIUS + DROID_RADIUS,0));
 	droid->setModelMat(m);
 
-	
-
 	node = new CompoundEntity();
 	node->addEntity(droid);
-	//glm::mat4 m = node->modelMat();
-	//m = glm::translate<float>(m, glm::vec3(0, SPHERE_RADIUS + DROID_RADIUS, 0));
-	//node->setModelMat(m);
 
 	opaque_gObjects.push_back(node);
 	opaque_gObjects.push_back(sphere);
+
+	// Apartado 77
+	auto* posLight = new PosLight(0);
+	posLight->setPosition(glm::vec3(POSLIGHT_X, POSLIGHT_Y, POSLIGHT_Z));
+	posLight->setAmb(glm::vec3(0.25f, 0.25f, 0.25f));
+	posLight->setDiff(glm::vec3(0.6f, 0.6f, 0.6f));
+	posLight->setSpec(glm::vec3(0.0f, 0.2f, 0.0f));
+	posLight->setEnabled(false);
+	gLights.push_back(posLight);
 }
 
 

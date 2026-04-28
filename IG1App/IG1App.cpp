@@ -336,6 +336,9 @@ IG1App::key(unsigned int key)
 		case 'R':
 			mScenes[mCurrentScene]->toggleMainLight();
 			break;
+		case 't':
+			mScenes[mCurrentScene]->toggleLight(1);
+			break;
 		case 'N':
 			ColorMaterialEntity::toggleShowNormals();
 			break;

@@ -116,11 +116,19 @@ void Scene::toggleMainLight()
 		gLights[0]->setEnabled(!gLights[0]->enabled());
 }
 
+void Scene::toggleLight(int lightIndex)
+{
+	if (lightIndex >= 0 && lightIndex < gLights.size())
+	{
+		gLights[lightIndex]->setEnabled(!gLights[lightIndex]->enabled());
+	}
+		
+}
+
 void
 Scene::render(Camera const& cam) const
 {
 	uploadLights(cam);
-
 	cam.upload();
 
 	for (Abs_Entity* el : opaque_gObjects)
