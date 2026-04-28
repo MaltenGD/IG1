@@ -13,7 +13,7 @@
 class Scene
 {
 public:
-	Scene() = default;
+	Scene();
 	virtual ~Scene();
 
 	Scene(const Scene& s) = delete;            // no copy constructor
@@ -28,6 +28,7 @@ public:
 	void load();
 	void uploadLights(Camera const& cam) const;
 	void unload();
+	void toggleMainLight();
 	virtual void rotate();
 	virtual void orbit();
 
@@ -39,7 +40,7 @@ protected:
 	std::vector<Abs_Entity*> opaque_gObjects; // Entities (graphic objects) of the scene
 	
 	std::vector<Abs_Entity*> translucid_gObjects; // Entities (graphic objects) of the scene
-	std::vector<Light*> gLights
+	std::vector<Light*> gLights;
 };
 
 

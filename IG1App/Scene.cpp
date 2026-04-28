@@ -5,6 +5,17 @@
 #include <glm/gtc/type_ptr.hpp>
 
 using namespace glm;
+Scene::Scene()
+{
+	auto* dirLight = new DirLight(0);
+	dirLight->setDirection({ -1.0f, -1.5f, -1.25f });
+	dirLight->setAmb({ 0.25f, 0.25f, 0.25f });
+	dirLight->setDiff({ 0.6f, 0.6f, 0.6f });
+	dirLight->setSpec({ 0.0f, 0.2f, 0.0f });
+	dirLight->setEnabled(true);
+	gLights.push_back(dirLight);
+}
+
 Scene::~Scene()
 {
 	destroy();
@@ -24,6 +35,11 @@ Scene::destroy()
 		delete el;
 
 	translucid_gObjects.clear();
+
+	for (Light* light : gLights)
+		delete light;
+
+	gLights.clear();
 }
 
 void
@@ -40,9 +56,11 @@ Scene::load()
 
 void Scene::uploadLights(Camera const& cam) const
 {
+	auto* shader = Shader::get("light");
+	shader->use();
 	for (Light* light : gLights)
 	{
-		light->upload(*(Shader::get("simple_light")), cam.viewMat());
+		light->upload(*shader, cam.viewMat());
 	}
 }
 
@@ -51,7 +69,7 @@ Scene::unload()
 {
 	for (Light* light : gLights)
 	{
-		light->unload(*(Shader::get("simple_light"));
+		light->unload(*(Shader::get("light")));
 	}
 	for (Abs_Entity* obj : opaque_gObjects)
 		obj->unload();
@@ -92,12 +110,18 @@ void Scene::orbit() {
 
 }
 
+void Scene::toggleMainLight()
+{
+	if (!gLights.empty())
+		gLights[0]->setEnabled(!gLights[0]->enabled());
+}
+
 void
 Scene::render(Camera const& cam) const
 {
-	cam.upload();
-
 	uploadLights(cam);
+
+	cam.upload();
 
 	for (Abs_Entity* el : opaque_gObjects)
 		el->render(cam.viewMat());

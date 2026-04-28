@@ -332,6 +332,10 @@ IG1App::key(unsigned int key)
 		case 'c':
 			mCamera->setCenital();
 			break;
+		case 'r':
+		case 'R':
+			mScenes[mCurrentScene]->toggleMainLight();
+			break;
 		case 'N':
 			ColorMaterialEntity::toggleShowNormals();
 			break;

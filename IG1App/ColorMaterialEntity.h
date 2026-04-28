@@ -9,8 +9,9 @@ class ColorMaterialEntity : public EntityWithMaterial
 private:
     static bool mShowNormals;
     Shader* mNormalShader;
+    glm::vec4 mColor = { 0, 1, 0, 1 };
 public:
-    ColorMaterialEntity() = default;
+    ColorMaterialEntity();
     static void toggleShowNormals();
     void render(const glm::mat4& modelViewMat) const override;
     void setColor(glm::vec4 color = glm::vec4(0, 1, 0, 1));
