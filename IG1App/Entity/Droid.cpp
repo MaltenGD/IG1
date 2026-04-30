@@ -2,13 +2,6 @@
 #include "SphereWithTexture.h"
 #include "Cone.h"
 
-Droid::Droid(): CompoundEntity()
-{
-    SphereWithTexture* body = new SphereWithTexture(200, 10, 10, "../assets/images/container.jpg");
-    addEntity(body);
-    //Cone* head = new Cone();
-}
-
 Droid::Droid(GLdouble radius)
 {
     body = new SphereWithTexture(radius, 10, 10, "../assets/images/container.jpg");
@@ -50,6 +43,24 @@ Droid::Droid(GLdouble radius)
 void Droid::rotate() 
 {
     body->setModelMat(glm::rotate<float>(body->modelMat(), glm::radians<float>(5), glm::vec3(1, 0, 0)));
+}
+
+void Droid::render(const glm::mat4& modelViewMat) const
+{
+    if (!gObjects.empty())
+    {
+        glm::mat4 aMat = modelViewMat * mModelMat;
+        for (Abs_Entity* entity : gObjects)
+        {
+            entity->render(aMat);
+            glm::vec4 lightPosition = aMat * light->getPosition();
+            //light->setPosition(glm::vec3(lightPosition.x, lightPosition.y, lightPosition.z));
+            light->setPosition(aMat * light->getPosition());
+            Shader* shader = Shader::get("light");
+            shader->use();
+            light->upload(*Shader::get("light"),aMat);
+        }
+    }
 }
 
 Droid::~Droid()

@@ -26,8 +26,7 @@ void Scene8::init()
 	constexpr float SPOTLIGHT_Z = 300.0f;
 
 	opaque_gObjects.push_back(new RGBAxes(400.0));
-	Sphere* sphere = new Sphere(SPHERE_RADIUS,30,30);
-	sphere->setColor(glm::vec4(171.0f/255, 33.0f / 255, 72.0f / 255, 1));
+
 	droid = new Droid(DROID_RADIUS);
 	glm::mat4 m = droid->modelMat();
 	m = glm::translate<float>(m,glm::vec3(0, SPHERE_RADIUS + DROID_RADIUS,0));
@@ -37,7 +36,7 @@ void Scene8::init()
 	node->addEntity(droid);
 
 	opaque_gObjects.push_back(node);
-	opaque_gObjects.push_back(sphere);
+	
 
 	// Apartado 77
 	PosLight* posLight = new PosLight(0);
@@ -65,25 +64,29 @@ void Scene8::init()
 	droidLight->setDirection(glm::vec3(0, -1, 0));
 	droidLight->setCutoff(20, 50);
 	droidLight->setEnabled(true);
+
+	droid->setLight(droidLight);
 	gLights.push_back(droidLight);
 
+	Sphere* sphere = new Sphere(SPHERE_RADIUS, 30, 30);
+	sphere->setColor(glm::vec4(171.0f / 255, 33.0f / 255, 72.0f / 255, 1));
+	opaque_gObjects.push_back(sphere);
 }
 
 
 void Scene8::rotate() {
 	glm::mat4 modelMat = node->modelMat();
-	glm::vec4 lightPosition = droidLight->getPosition();
 	node->setModelMat(glm::rotate(modelMat, glm::radians<float>(2), glm::vec3(0, 1, 0)));
-
-	glm::mat4 lightMat = glm::mat4(1.0f);
-	lightMat[0][0] = lightPosition[0]; lightMat[1][1] = lightPosition[1];lightMat[2][2] = lightPosition[2];
-	lightMat = glm::rotate(lightMat, glm::radians<float>(2), glm::vec3(0, 1, 0));
-	droidLight->setPosition(glm::vec3(lightMat[0][0], lightMat[1][1], lightMat[2][2]));
+	//glm::vec4 lightPosition = droidLight->getPosition() * modelMat;
+	//droidLight->setPosition(glm::vec3(lightPosition.x,lightPosition.y,lightPosition.z));
 }
 
 void Scene8::orbit() {
 	glm::mat4 modelMat = node->modelMat();
 	node->setModelMat(glm::rotate(modelMat, glm::radians<float>(2), glm::vec3(1, 0, 0)));
+
+	//glm::vec4 lightPosition = droidLight->getPosition() * modelMat;
+	//droidLight->setPosition(glm::vec3(lightPosition.x, lightPosition.y, lightPosition.z));
 	droid->rotate();
 }
 
@@ -95,6 +98,9 @@ void Scene8::handleInput(unsigned int key)
 		case 'y':
 			//std::cout << "pressing y" << std::endl;
 			spotLight->setEnabled(!spotLight->enabled());
+			//redisplay = true;
+			break;
+		case 'h':
 			break;
 	}
 }

@@ -357,6 +357,8 @@ IG1App::key(unsigned int key)
 				if (changeScene(key - '0')) break;
 				cout << "[NOTE] There is no scene " << char(key) << ".\n";
 			}
+
+			// poner aqui el handleInput de la escena concreta
 			need_redisplay = false;
 			break;
 	} // switch
