@@ -102,5 +102,11 @@ void Scene8::handleInput(unsigned int key)
 			break;
 		case 'h':
 			break;
+		case 'T':
+			if (droid && droid->getLight()) {
+				bool newState = !droid->getLight()->enabled();
+				droid->getLight()->setEnabled(newState);
+			}
+			break;
 	}
 }

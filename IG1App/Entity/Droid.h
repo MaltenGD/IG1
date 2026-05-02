@@ -14,6 +14,7 @@ public:
 	Droid(GLdouble radius);
 	void setLight(SpotLight* droidLight) { light = droidLight; };
 	~Droid();
+	SpotLight* getLight() const { return light; };
 
 	void rotate();
 	void render(const glm::mat4& modelViewMat) const override;

@@ -37,6 +37,18 @@ Droid::Droid(GLdouble radius)
     right->setColor(glm::vec4(0, 1, 0, 1));
     right->setModelMat(m);
 
+
+    glm::vec3 bellyPos = glm::vec3(0.0f, -radius * 0.9f, 0.0f);
+
+    light = new SpotLight(bellyPos, 0);
+    light->setDirection(glm::vec3(0, -1, 0));
+    light->setCutoff(30.0f, 45.0f); 
+    light->setAttenuation(1.0f, 0.09f, 0.032f);
+    light->setAmb(glm::vec3(0.1f, 0.1f, 0.1f));
+    light->setDiff(glm::vec3(1.0f, 1.0f, 1.0f));
+    light->setSpec(glm::vec3(1.0f, 1.0f, 1.0f));
+    light->setEnabled(false);
+
     addEntity(body, head, left, right);
 }
 
@@ -50,20 +62,30 @@ void Droid::render(const glm::mat4& modelViewMat) const
     if (!gObjects.empty())
     {
         glm::mat4 aMat = modelViewMat * mModelMat;
+
+      
+        glm::vec4 worldPos = mModelMat * glm::vec4(light->getPosition().x, light->getPosition().y, light->getPosition().z, 1.0f);
+        glm::vec3 worldDir = glm::normalize(-glm::vec3(worldPos)); // apunta al centro
+        glm::vec3 viewDir = glm::vec3(modelViewMat * glm::vec4(worldDir, 0.0f));
+        light->setDirection(viewDir);
+        glm::vec3 viewPos = glm::vec3(modelViewMat * worldPos);
+        light->setPosition(viewPos); 
+
+
+        if (light->enabled()) {
+            Shader* shader = Shader::get("light");
+            shader->use();
+            light->upload(*shader, glm::mat4(1.0f));
+        }
+
         for (Abs_Entity* entity : gObjects)
         {
             entity->render(aMat);
-            glm::vec4 lightPosition = aMat * light->getPosition();
-            //light->setPosition(glm::vec3(lightPosition.x, lightPosition.y, lightPosition.z));
-            light->setPosition(aMat * light->getPosition());
-            Shader* shader = Shader::get("light");
-            shader->use();
-            light->upload(*Shader::get("light"),aMat);
         }
     }
 }
 
 Droid::~Droid()
 {
-
+    delete light;
 }
