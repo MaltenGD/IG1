@@ -59,30 +59,42 @@ void Droid::rotate()
 
 void Droid::render(const glm::mat4& modelViewMat) const
 {
-    if (!gObjects.empty())
-    {
-        glm::mat4 aMat = modelViewMat * mModelMat;
 
-      
-        glm::vec4 worldPos = mModelMat * glm::vec4(light->getPosition().x, light->getPosition().y, light->getPosition().z, 1.0f);
-        glm::vec3 worldDir = glm::normalize(-glm::vec3(worldPos)); // apunta al centro
-        glm::vec3 viewDir = glm::vec3(modelViewMat * glm::vec4(worldDir, 0.0f));
-        light->setDirection(viewDir);
-        glm::vec3 viewPos = glm::vec3(modelViewMat * worldPos);
-        light->setPosition(viewPos); 
+    Shader* shader = Shader::get("light");
+    shader->use();
+    glm::mat4 aMat = modelViewMat * mModelMat;
+    //light->setPosition(aMat * glm::vec4(1,1,1,1));
+    //light->setDirection(glm::normalize(-light->getPosition()));
+    light->upload(*shader,aMat);
+    
+    //if (!gObjects.empty())
+    //{
+    //    glm::mat4 aMat = modelViewMat * mModelMat;
+    //    for (Abs_Entity* entity : gObjects)
+    //    {
+    //        entity->render(aMat);
+    //        glm::vec4 lightPosition = aMat * light->getPosition();
+    //        //light->setPosition(glm::vec3(lightPosition.x, lightPosition.y, lightPosition.z));
+    //        light->setPosition(aMat * light->getPosition());
+    //        Shader* shader = Shader::get("light");
 
+    //        light->upload(*Shader::get("light"),aMat);
+    //    }
+    //}
 
-        if (light->enabled()) {
-            Shader* shader = Shader::get("light");
-            shader->use();
-            light->upload(*shader, glm::mat4(1.0f));
-        }
+    CompoundEntity::render(modelViewMat);
+     
+    
+    // Calculamos la matriz de modelado absoluta del androide (mModelMat es relativa a la de su padre, el nodo fantasma, 
+    // por lo que necesitamos la modelViewMat que nos pasa el render y deshacer la multiplicaci��n de la viewMat)
+    //glm::mat4 aMat = glm::inverse(IG1App::s_ig1app.camera().viewMat()) * modelViewMat * mModelMat;
 
-        for (Abs_Entity* entity : gObjects)
-        {
-            entity->render(aMat);
-        }
-    }
+    // Utilizamos la posici��n del androide para settear la posici��n de la luz ({0, 0, 0} es su posici��n inicial)
+    //droidLight->setPosition(aMat * glm::vec4(0, 0, 0, 1));
+    // Utilizamos la orientaci��n del androide para settear la direcci��n de la luz ({0, -1, 0} es su direcci��n inicial)
+    //droidLight->setDirection(aMat * glm::vec4(0, -1, 0, 0));
+
+    //CompoundEntity::render(modelViewMat);
 }
 
 Droid::~Droid()
