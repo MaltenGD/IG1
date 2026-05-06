@@ -62,7 +62,7 @@ void Scene8::init()
 	droidLight->setDiff({ 0.6f, 0.6f, 0.6f });
 	droidLight->setSpec({ 0.0f, 0.2f, 0.0f });
 	droidLight->setDirection(glm::vec3(0, -1, 0));
-	droidLight->setCutoff(20, 50);
+	droidLight->setCutoff(5, 10);
 	droidLight->setEnabled(true);
 
 	droid->setLight(droidLight);
@@ -92,7 +92,6 @@ void Scene8::orbit() {
 
 void Scene8::handleInput(unsigned int key)
 {
-	//Scene::handleInput(key);
 	switch (key)
 	{
 		case 'y':
@@ -101,9 +100,8 @@ void Scene8::handleInput(unsigned int key)
 			//redisplay = true;
 			break;
 		case 'h':
-			break;
-		case 'T':
-			if (droid && droid->getLight()) {
+			if (droid && droid->getLight()) 
+			{
 				bool newState = !droid->getLight()->enabled();
 				droid->getLight()->setEnabled(newState);
 			}

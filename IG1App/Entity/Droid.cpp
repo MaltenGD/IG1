@@ -1,4 +1,4 @@
-#include "Droid.h"
+﻿#include "Droid.h"
 #include "SphereWithTexture.h"
 #include "Cone.h"
 
@@ -38,16 +38,16 @@ Droid::Droid(GLdouble radius)
     right->setModelMat(m);
 
 
-    glm::vec3 bellyPos = glm::vec3(0.0f, -radius * 0.9f, 0.0f);
+    //glm::vec3 bellyPos = glm::vec3(0.0f, -radius * 0.9f, 0.0f);
 
-    light = new SpotLight(bellyPos, 0);
-    light->setDirection(glm::vec3(0, -1, 0));
-    light->setCutoff(30.0f, 45.0f); 
-    light->setAttenuation(1.0f, 0.09f, 0.032f);
-    light->setAmb(glm::vec3(0.1f, 0.1f, 0.1f));
-    light->setDiff(glm::vec3(1.0f, 1.0f, 1.0f));
-    light->setSpec(glm::vec3(1.0f, 1.0f, 1.0f));
-    light->setEnabled(false);
+    //light = new SpotLight(bellyPos, 0);
+    //light->setDirection(glm::vec3(0, -1, 0));
+    //light->setCutoff(30.0f, 45.0f); 
+    //light->setAttenuation(1.0f, 0.09f, 0.032f);
+    //light->setAmb(glm::vec3(0.1f, 0.1f, 0.1f));
+    //light->setDiff(glm::vec3(1.0f, 1.0f, 1.0f));
+    //light->setSpec(glm::vec3(1.0f, 1.0f, 1.0f));
+    //light->setEnabled(false);
 
     addEntity(body, head, left, right);
 }
@@ -99,5 +99,5 @@ void Droid::render(const glm::mat4& modelViewMat) const
 
 Droid::~Droid()
 {
-    delete light;
+
 }
