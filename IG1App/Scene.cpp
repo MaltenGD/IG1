@@ -1,4 +1,4 @@
-#include "Scene.h"
+﻿#include "Scene.h"
 
 #include "Light.h"
 #include <glm/gtc/matrix_transform.hpp>
@@ -67,6 +67,9 @@ void Scene::uploadLights(Camera const& cam) const
 void
 Scene::unload()
 {
+	Shader* shader = Shader::get("light");
+	shader->use();
+
 	for (Light* light : gLights)
 	{
 		light->unload(*(Shader::get("light")));
@@ -120,6 +123,8 @@ void Scene::TurnOffAllLights()
 {
 	for (Light* light : gLights)
 	{
+		Shader* shader = Shader::get("lights");
+		shader->use();
 		if (light != nullptr) light->setEnabled(false);
 	}
 }
