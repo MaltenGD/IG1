@@ -18,6 +18,7 @@ public:
 	~Scene8() = default;
 
 	void init() override;
+	void HandleKey(unsigned int key) override;
 
 	void orbit() override;
 	void rotate() override;

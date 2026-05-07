@@ -116,6 +116,14 @@ void Scene::toggleMainLight()
 		gLights[0]->setEnabled(!gLights[0]->enabled());
 }
 
+void Scene::TurnOffAllLights()
+{
+	for (Light* light : gLights)
+	{
+		if (light != nullptr) light->setEnabled(false);
+	}
+}
+
 void Scene::toggleLight(int lightIndex)
 {
 	if (lightIndex >= 0 && lightIndex < gLights.size())

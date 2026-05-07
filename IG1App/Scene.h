@@ -21,6 +21,8 @@ public:
 
 	virtual void init() = 0; 
 
+	virtual void HandleKey(unsigned int key) {};
+
 	virtual void update();
 	void render(Camera const& cam) const;
 
@@ -29,6 +31,7 @@ public:
 	void uploadLights(Camera const& cam) const;
 	void unload();
 	void toggleMainLight();
+	void TurnOffAllLights();
 	void toggleLight(int lightIndex);
 	virtual void rotate();
 	virtual void orbit();

@@ -353,6 +353,9 @@ IG1App::key(unsigned int key)
 			break;
 			
 		default:
+
+			mScenes[mCurrentScene]->HandleKey(key); // Cada escena tiene un HandleKey
+
 			if (key >= '0' && key <= '9') {
 				if (changeScene(key - '0')) break;
 				cout << "[NOTE] There is no scene " << char(key) << ".\n";
@@ -482,6 +485,9 @@ IG1App::changeScene(size_t sceneNr) // sceneNr es el numero del teclado que se p
 			glClearColor(0.6, 0.7, 0.8, 1.0);
 		};
 	}
+
+	//Desactivar todas las luces al cambiar de escena
+	/*mScenes[mCurrentScene]->TurnOffAllLights();*/
 
 	return true;
 }

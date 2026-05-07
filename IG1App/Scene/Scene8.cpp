@@ -73,6 +73,19 @@ void Scene8::init()
 	opaque_gObjects.push_back(sphere);
 }
 
+void Scene8::HandleKey(unsigned int key)
+{
+	switch (key)
+	{
+	case 'f':
+		rotate();
+		break;
+	case 'g':
+		orbit();
+		break;
+	}
+}
+
 
 void Scene8::rotate() {
 	glm::mat4 modelMat = node->modelMat();

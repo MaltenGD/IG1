@@ -65,7 +65,7 @@ void Droid::render(const glm::mat4& modelViewMat) const
     glm::mat4 aMat = modelViewMat * mModelMat;
     //light->setPosition(aMat * glm::vec4(1,1,1,1));
     //light->setDirection(glm::normalize(-light->getPosition()));
-    light->upload(*shader,aMat);
+    if (light != nullptr) light->upload(*shader, aMat);
     
     //if (!gObjects.empty())
     //{

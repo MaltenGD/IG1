@@ -8,7 +8,7 @@ class Droid : public CompoundEntity
 {
 private:
 	SphereWithTexture* body;
-	SpotLight* light;
+	SpotLight* light = nullptr;
 public:
 	//Droid();
 	Droid(GLdouble radius);
