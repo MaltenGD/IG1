@@ -1,4 +1,4 @@
-#include "RGBTriangle.h"
+﻿#include "RGBTriangle.h"
 
 RGBTriangle::RGBTriangle(GLdouble radius, GLint Xpos, GLint Ypos ,GLfloat circleDiameter) : circleDiameter(circleDiameter)
 {
@@ -16,7 +16,7 @@ void RGBTriangle::update()
 
     mModelMat = glm::mat4(1.0f);  // Se resetea la matriz identidad
 
-    //Esto hace que el tri�ngulo rote alrededor de la circunferencia
+    //Esto hace que el tri醤gulo rote alrededor de la circunferencia
     mModelMat = glm::translate(mModelMat, glm::vec3(triangleXpos, triangleYpos, 0.0f));
 
     //Esto hace que rote sobre s?mismo (-angulo para que sea en sentido de las agujas del reloj)

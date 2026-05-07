@@ -1,4 +1,4 @@
-#include "RGBRectangle.h"
+﻿#include "RGBRectangle.h"
 using namespace glm;
 
 RGBRectangle::RGBRectangle(GLdouble w, GLdouble h)
@@ -23,7 +23,7 @@ void RGBRectangle::render(const glm::mat4& modelViewMat) const
         glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);  // Modo relleno
         mMesh->render();
 
-        // SEGUNDA PASADA: Se dibuja la cara frontal con l�neas
+        // SEGUNDA PASADA: Se dibuja la cara frontal con l韓eas
         glCullFace(GL_FRONT);   // Oculta la cara trasera para que los procesos que ocurran ahora solo afecten a la frontal
         glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);  // Modo wireframe
         mMesh->render();

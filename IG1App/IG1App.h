@@ -1,4 +1,4 @@
-#ifndef _H_IG1App_H_
+﻿#ifndef _H_IG1App_H_
 #define _H_IG1App_H_
 
 #include <GL/glew.h>     // OpenGL Extension Wrangler
@@ -86,7 +86,7 @@ protected:
 
 	int mMouseButt = -1;
 
-	GLdouble mNextUpdate; // No necesita inicializarse ya que su valor var�a cada fram
+	GLdouble mNextUpdate; // No necesita inicializarse ya que su valor var韆 cada fram
 
 	glm::dvec2 mMouseCoord = { mWinW / 2,mWinH / 2};
 };
